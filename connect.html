@@ -710,7 +710,7 @@ textarea.pf-input { resize:vertical; line-height:1.55; }
         <div class="alerts-sub">Get a weekly digest of new jobs from our listed agencies delivered to your inbox. Click any job in the email to come straight back here to apply.</div>
 
         <div class="setup-notice" id="emailjs-notice">
-          <strong>&#9881; Setup required:</strong> To enable email delivery, sign up free at <strong>emailjs.com</strong>, create a service and template, then replace <code>YOUR_SERVICE_ID</code>, <code>YOUR_TEMPLATE_ID</code> and <code>YOUR_PUBLIC_KEY</code> in this file. Until then, alerts are saved locally and previewed below.
+          <strong>&#9881; Setup required:</strong> To enable email delivery, sign up free at <strong>emailjs.com</strong>, create a service and template, then replace <code>service_ij3oepk</code>, <code>template_ddjkr2s</code> and <code>wLBe_7wXFrWK_4AyH</code> in this file. Until then, alerts are saved locally and previewed below.
         </div>
 
         <div class="alert-form">
@@ -1418,11 +1418,11 @@ function subscribeAlert() {
 function sendAlertEmail(alert) {
   // EmailJS integration
   // Replace these with your real EmailJS credentials from emailjs.com (free 200 emails/month)
-  var SERVICE_ID  = "YOUR_SERVICE_ID";
-  var TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-  var PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+  var SERVICE_ID  = "service_ij3oepk";
+  var TEMPLATE_ID = "template_ddjkr2s";
+  var PUBLIC_KEY  = "wLBe_7wXFrWK_4AyH";
 
-  if (SERVICE_ID === "YOUR_SERVICE_ID") {
+  if (SERVICE_ID === "service_ij3oepk") {
     showStatus("Email sent locally. Configure EmailJS for live delivery.","warn");
     return;
   }
