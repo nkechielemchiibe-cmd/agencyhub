@@ -1421,12 +1421,6 @@ function sendAlertEmail(alert) {
   var SERVICE_ID  = "service_ij3oepk";
   var TEMPLATE_ID = "template_ddjkr2s";
   var PUBLIC_KEY  = "wLBe_7wXFrWK_4AyH";
-
-  if (SERVICE_ID === "service_ij3oepk") {
-    showStatus("Email sent locally. Configure EmailJS for live delivery.","warn");
-    return;
-  }
-
   var fieldLabel = alert.field || "All Fields";
   var countryLabel = alert.country==="canada"?"Canada":alert.country==="uk"?"United Kingdom":"Canada & UK";
   var jobLinks = buildJobLinks(alert.country, alert.field);
