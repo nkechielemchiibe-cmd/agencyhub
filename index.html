@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="AgencyPortal - Canada and UK premier job agency directory. Browse 46 verified recruitment agencies, search live jobs, and connect with recruiters.">
+<meta property="og:title" content="AgencyPortal | Canada & UK Job Agency Directory">
+<meta property="og:description" content="Browse 46 verified recruitment agencies. Live jobs, real recruiter chat, and free career tools.">
+<meta property="og:url" content="https://agencyportal.ca/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgencyPortal | Canada & UK Job Agency Directory</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e1724;
+  --ink2: #2c3a50;
+  --cream: #f7f4ee;
+  --parch: #ede9e0;
+  --gold: #b8902a;
+  --gold2: #d4a93a;
+  --gold-pale: #faf0d7;
+  --white: #ffffff;
+  --border: #ddd8cc;
+  --muted: #7a8499;
+  --ca: #c8102e;
+  --ca-pale: #fdf0f2;
+  --uk: #012169;
+  --uk-pale: #edf0fb;
+  --green: #0a7c4e;
+  --green-pale: #e8f7f1;
+  --blue-pale: #e0f2fe;
+  --blue: #0369a1;
+  --r: 10px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Outfit',sans-serif; background:var(--cream); color:var(--ink); }
+
+/* HEADER */
+header {
+  background:var(--ink); height:58px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 24px; position:sticky; top:0; z-index:300;
+}
+.logo { display:flex; align-items:center; gap:9px; text-decoration:none; }
+.logo-mark {
+  width:32px; height:32px; border-radius:7px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-weight:700; font-size:17px; color:var(--ink);
+}
+.logo-name { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; color:#fff; }
+.logo-name span { color:var(--gold2); }
+.header-right { display:flex; align-items:center; gap:12px; }
+.header-right a {
+  color:rgba(255,255,255,0.55); font-size:13px; text-decoration:none; transition:color .2s;
+}
+.header-right a:hover { color:var(--gold2); }
+.btn-list {
+  background:var(--gold); color:var(--ink) !important;
+  padding:6px 14px; border-radius:6px; font-weight:600 !important;
+  font-size:12px !important;
+}
+
+/* HERO */
+.hero {
+  background:var(--ink); padding:48px 24px 0;
+  text-align:center; position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 700px 350px at 65% -5%,rgba(184,144,42,.14) 0%,transparent 60%),
+             radial-gradient(ellipse 500px 400px at 5% 110%,rgba(1,33,105,.2) 0%,transparent 55%);
+}
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+  border-radius:20px; padding:4px 14px;
+  font-size:11px; font-weight:600; color:var(--gold2);
+  letter-spacing:1px; text-transform:uppercase;
+  margin-bottom:18px; position:relative;
+}
+.hero h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(32px,6vw,58px); font-weight:700; line-height:1.1;
+  color:#fff; margin-bottom:14px; position:relative;
+}
+.hero h1 em { color:var(--gold2); font-style:italic; }
+.hero-sub {
+  color:rgba(255,255,255,.5); font-size:15px; line-height:1.7;
+  max-width:480px; margin:0 auto 32px; position:relative; font-weight:300;
+}
+
+/* SEARCH BOX - prominent, in hero */
+.search-hero {
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px 12px 0 0;
+  padding:20px; max-width:760px; margin:0 auto;
+  position:relative;
+}
+.search-hero-title {
+  font-size:12px; font-weight:600; color:rgba(255,255,255,.4);
+  text-transform:uppercase; letter-spacing:.8px;
+  margin-bottom:12px; text-align:left;
+}
+.search-row { display:flex; gap:10px; flex-wrap:wrap; }
+.search-main {
+  flex:2; min-width:180px;
+  height:44px; border-radius:8px;
+  border:1.5px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.08);
+  padding:0 16px; font-family:'Outfit',sans-serif;
+  font-size:14px; color:#fff; outline:none;
+  transition:border-color .2s;
+}
+.search-main::placeholder { color:rgba(255,255,255,.35); }
+.search-main:focus { border-color:var(--gold); }
+.search-select {
+  flex:1; min-width:130px;
+  height:44px; border-radius:8px;
+  border:1.5px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.08);
+  padding:0 12px; font-family:'Outfit',sans-serif;
+  font-size:13px; color:#fff; outline:none;
+  appearance:none; cursor:pointer;
+  transition:border-color .2s;
+}
+.search-select option { background:var(--ink); color:#fff; }
+.search-select:focus { border-color:var(--gold); }
+.btn-go {
+  height:44px; padding:0 22px;
+  background:var(--gold); color:var(--ink);
+  border:none; border-radius:8px;
+  font-family:'Outfit',sans-serif; font-size:14px; font-weight:700;
+  cursor:pointer; transition:background .2s; white-space:nowrap;
+}
+.btn-go:hover { background:var(--gold2); }
+.btn-clear-search {
+  height:44px; padding:0 16px;
+  background:transparent; color:rgba(255,255,255,.4);
+  border:1.5px solid rgba(255,255,255,.12); border-radius:8px;
+  font-family:'Outfit',sans-serif; font-size:13px;
+  cursor:pointer; transition:all .2s; white-space:nowrap;
+}
+.btn-clear-search:hover { color:#fff; border-color:rgba(255,255,255,.3); }
+
+/* COUNTRY TABS */
+.tabs-wrap { background:var(--ink); padding:0 24px; }
+.country-tabs {
+  max-width:760px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr;
+}
+.ctab {
+  display:flex; align-items:center; gap:10px;
+  padding:14px 20px; cursor:pointer;
+  border:1px solid transparent;
+  border-top:none; border-bottom:3px solid transparent;
+  transition:all .22s; user-select:none;
+  color:rgba(255,255,255,.4);
+}
+.ctab:first-child { border-radius:0 0 0 0; }
+.ctab .tab-flag { font-size:20px; }
+.ctab .tab-info { text-align:left; }
+.ctab .tab-name { font-size:14px; font-weight:600; display:block; }
+.ctab .tab-sub { font-size:11px; opacity:.6; display:block; margin-top:1px; }
+.ctab.active { color:#fff; }
+.ctab.ca.active { border-bottom-color:var(--ca); background:rgba(200,16,46,.1); }
+.ctab.uk.active { border-bottom-color:var(--uk); background:rgba(1,33,105,.15); }
+
+/* STATS BAR */
+.stats-bar {
+  background:var(--ink2); display:flex;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.sbar-item {
+  flex:1; text-align:center; padding:14px 10px;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+.sbar-item:last-child { border-right:none; }
+.sbar-num {
+  display:block; font-family:'Cormorant Garamond',serif;
+  font-size:24px; font-weight:700; color:var(--gold2);
+}
+.sbar-label { font-size:10.5px; color:rgba(255,255,255,.35); margin-top:1px; }
+
+/* TRUST */
+.trust-bar {
+  background:var(--parch); border-bottom:1px solid var(--border);
+  padding:10px 24px; display:flex; flex-wrap:wrap; gap:18px;
+  align-items:center;
+}
+.trust-item { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); }
+.ti { font-size:14px; }
+
+/* SECTION */
+.country-section { display:none; }
+.country-section.active { display:block; }
+
+/* BANNER */
+.country-banner {
+  padding:24px 24px 0;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+.banner-flag { font-size:40px; }
+.banner-info h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px; font-weight:700; color:var(--ink);
+}
+.banner-info p { font-size:13px; color:var(--muted); margin-top:2px; }
+.banner-pills { margin-left:auto; display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+.pill {
+  padding:4px 12px; border-radius:16px; font-size:11.5px; font-weight:500;
+  border:1px solid; cursor:pointer; transition:all .18s; white-space:nowrap;
+}
+.pill.ca-pill { border-color:rgba(200,16,46,.2); background:var(--ca-pale); color:var(--ca); }
+.pill.ca-pill:hover,.pill.ca-pill.on { background:var(--ca); color:#fff; border-color:var(--ca); }
+.pill.uk-pill { border-color:rgba(1,33,105,.2); background:var(--uk-pale); color:var(--uk); }
+.pill.uk-pill:hover,.pill.uk-pill.on { background:var(--uk); color:#fff; border-color:var(--uk); }
+
+/* GRID */
+.results-wrap { padding:16px 24px 60px; }
+.results-meta {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--border);
+}
+.rcount { font-size:13px; color:var(--muted); }
+.rcount strong { color:var(--ink); }
+.sort-sel {
+  border:1.5px solid var(--border); border-radius:7px;
+  padding:5px 10px; font-family:'Outfit',sans-serif;
+  font-size:12px; color:var(--ink); background:var(--white); cursor:pointer;
+}
+
+.agency-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:16px;
+}
+
+/* CARD */
+.card {
+  background:var(--white); border:1.5px solid var(--border);
+  border-radius:var(--r); padding:20px;
+  transition:border-color .2s, box-shadow .2s, transform .2s;
+  animation:cardUp .3s ease both;
+  position:relative;
+}
+.card::after {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+  border-radius:10px 0 0 10px; background:transparent; transition:background .2s;
+}
+.card:hover { border-color:var(--gold); box-shadow:0 6px 28px rgba(184,144,42,.13); transform:translateY(-2px); }
+.card:hover::after { background:var(--gold); }
+
+@keyframes cardUp {
+  from { opacity:0; transform:translateY(12px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.card-head { display:flex; gap:12px; align-items:flex-start; margin-bottom:10px; }
+.card-logo {
+  width:48px; height:48px; flex-shrink:0; border-radius:9px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-weight:700; font-size:19px; color:#fff;
+}
+.card-meta { flex:1; min-width:0; }
+.card-name {
+  font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700;
+  color:var(--ink); line-height:1.2; margin-bottom:2px;
+}
+.card-city { font-size:12px; color:var(--muted); }
+.card-rating {
+  display:flex; align-items:center; gap:3px;
+  flex-shrink:0;
+}
+.star { color:var(--gold); font-size:12px; }
+.score { font-size:13px; font-weight:700; color:var(--ink); }
+.rcount2 { font-size:10px; color:var(--muted); }
+
+.card-desc {
+  font-size:13px; color:var(--ink2); line-height:1.6; margin-bottom:12px;
+}
+.card-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px; }
+.tag {
+  padding:2px 9px; border-radius:10px; font-size:11px; font-weight:500;
+}
+.t-perm { background:#d1fae5; color:#065f46; }
+.t-temp { background:#fef3c7; color:#92400e; }
+.t-exec { background:#ede9fe; color:#5b21b6; }
+.t-ind { background:var(--parch); color:var(--ink2); }
+/* Primary = the agency's core specialism (used for filtering) */
+.t-prim { background:#dbeafe; color:#1e40af; font-weight:600; }
+/* Secondary = also covers but not their main focus */
+.t-sec { background:var(--parch); color:var(--muted); font-style:italic; font-size:10.5px; }
+
+.card-footer {
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding-top:10px; border-top:1px solid var(--parch);
+}
+.card-badges { display:flex; gap:5px; flex-wrap:wrap; flex:1; }
+.badge {
+  display:inline-flex; align-items:center; gap:3px;
+  padding:2px 8px; border-radius:8px; font-size:10.5px; font-weight:600;
+}
+.b-new { background:var(--green-pale); color:var(--green); }
+.b-free { background:var(--blue-pale); color:var(--blue); }
+.b-remote { background:var(--gold-pale); color:var(--gold); }
+
+.card-btns { display:flex; gap:6px; flex-shrink:0; }
+.btn-detail {
+  height:30px; padding:0 12px;
+  background:transparent; border:1.5px solid var(--border);
+  border-radius:6px; color:var(--muted); font-family:'Outfit',sans-serif;
+  font-size:11.5px; font-weight:500; cursor:pointer; transition:all .18s;
+}
+.btn-detail:hover { border-color:var(--ink); color:var(--ink); }
+
+/* VISIT BUTTON - opens in new tab */
+.btn-visit {
+  height:30px; padding:0 14px;
+  background:var(--ink); color:#fff;
+  border:none; border-radius:6px;
+  font-family:'Outfit',sans-serif; font-size:11.5px; font-weight:600;
+  cursor:pointer; text-decoration:none;
+  display:inline-flex; align-items:center; gap:5px;
+  transition:background .18s;
+}
+.btn-visit:hover { background:#1e3352; }
+.btn-visit .ext-icon { font-size:10px; opacity:.7; }
+
+/* NO RESULTS */
+.no-results {
+  text-align:center; padding:60px 20px;
+  color:var(--muted);
+}
+.no-results h3 { font-size:18px; margin-bottom:6px; color:var(--ink2); }
+
+/* MODAL */
+.overlay {
+  position:fixed; inset:0; z-index:500;
+  background:rgba(14,23,36,.75); backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center; padding:20px;
+  opacity:0; pointer-events:none; transition:opacity .25s;
+}
+.overlay.open { opacity:1; pointer-events:all; }
+
+.modal {
+  background:var(--white); border-radius:14px;
+  width:100%; max-width:600px; max-height:90vh; overflow-y:auto;
+  box-shadow:0 24px 64px rgba(14,23,36,.22);
+  transform:translateY(18px) scale(.98); transition:transform .28s;
+}
+.overlay.open .modal { transform:none; }
+
+.modal-head {
+  padding:24px 24px 18px;
+  border-bottom:1px solid var(--parch);
+  display:flex; gap:16px; align-items:flex-start;
+}
+.m-logo {
+  width:62px; height:62px; flex-shrink:0; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-weight:700; font-size:26px; color:#fff;
+}
+.m-title { flex:1; }
+.m-name { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:700; color:var(--ink); }
+.m-loc { font-size:12.5px; color:var(--muted); margin-top:2px; }
+.m-rating { display:flex; align-items:center; gap:5px; margin-top:6px; }
+.m-stars { color:var(--gold); font-size:13px; }
+.m-score { font-size:14px; font-weight:700; }
+.m-reviews { font-size:12px; color:var(--muted); }
+.m-close {
+  width:30px; height:30px; background:var(--parch);
+  border:none; border-radius:7px; cursor:pointer;
+  font-size:16px; color:var(--muted); display:flex;
+  align-items:center; justify-content:center; transition:all .15s; flex-shrink:0;
+}
+.m-close:hover { background:var(--border); color:var(--ink); }
+
+.modal-body { padding:20px 24px; }
+.m-section { margin-bottom:18px; }
+.m-section-title {
+  font-size:10.5px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.9px; color:var(--muted); margin-bottom:8px;
+}
+.m-desc { font-size:14px; color:var(--ink2); line-height:1.7; }
+.m-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.m-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.m-detail {
+  background:var(--cream); border-radius:8px; padding:11px 13px;
+}
+.m-detail .dl { font-size:10px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:3px; }
+.m-detail .dv { font-size:13.5px; font-weight:600; color:var(--ink); }
+.m-badges { display:flex; flex-wrap:wrap; gap:6px; }
+
+/* IMPORTANT: Modal visit note */
+.visit-note {
+  background:var(--gold-pale); border:1px solid rgba(184,144,42,.2);
+  border-radius:8px; padding:10px 14px;
+  font-size:12.5px; color:var(--ink2); margin-bottom:16px;
+  display:flex; align-items:center; gap:8px;
+}
+
+.modal-foot {
+  padding:16px 24px 20px; border-top:1px solid var(--parch);
+  display:flex; gap:10px;
+}
+.btn-m-visit {
+  flex:1; height:42px;
+  background:var(--ink); color:#fff;
+  border:none; border-radius:8px;
+  font-family:'Outfit',sans-serif; font-size:14px; font-weight:600;
+  cursor:pointer; text-decoration:none;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  transition:background .2s;
+}
+.btn-m-visit:hover { background:#1e3352; }
+.btn-m-close {
+  height:42px; padding:0 20px;
+  background:transparent; border:1.5px solid var(--border);
+  border-radius:8px; font-family:'Outfit',sans-serif;
+  font-size:14px; color:var(--muted); cursor:pointer; transition:all .2s;
+}
+.btn-m-close:hover { border-color:var(--ink); color:var(--ink); }
+
+/* RESPONSIVE */
+@media(max-width:640px) {
+  .agency-grid { grid-template-columns:1fr; }
+  .search-row { flex-direction:column; }
+  .search-main,.search-select,.btn-go,.btn-clear-search { width:100%; }
+  .banner-pills { margin-left:0; }
+  .m-grid { grid-template-columns:1fr; }
+  .modal-foot { flex-direction:column; }
+  .stats-bar { flex-wrap:wrap; }
+  .sbar-item { min-width:50%; }
+}
+@media(max-width:480px) {
+  header { padding:0 16px; }
+  .header-right a:not(.btn-list) { display:none; }
+  .hero { padding:36px 16px 0; }
+  .results-wrap { padding:12px 16px 40px; }
+  .country-banner { padding:16px 16px 0; }
+  .trust-bar { padding:8px 16px; gap:12px; }
+}
+
+/* AI PROFILE PANEL */
+.ai-panel {
+  background: #0e1724; border-radius: 14px 14px 0 0;
+  padding: 24px 22px 20px; position: relative;
+}
+.ai-panel-header { display:flex; align-items:flex-start; gap:13px; margin-bottom:16px; }
+.ai-panel-logo {
+  width:52px; height:52px; flex-shrink:0; border-radius:11px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-weight:700; font-size:20px; color:#fff;
+}
+.ai-panel-title { flex:1; }
+.ai-panel-name { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; color:#fff; line-height:1.2; }
+.ai-panel-loc { font-size:11.5px; color:rgba(255,255,255,.4); margin-top:2px; }
+.ai-panel-rating { display:flex; align-items:center; gap:4px; margin-top:5px; }
+.ai-rt-star { color:#d4a93a; font-size:12px; }
+.ai-rt-score { font-size:13px; font-weight:700; color:#d4a93a; }
+.ai-rt-rev { font-size:11px; color:rgba(255,255,255,.3); }
+.ai-panel-close {
+  width:28px; height:28px; background:rgba(255,255,255,.08);
+  border:none; border-radius:7px; cursor:pointer; font-size:14px;
+  color:rgba(255,255,255,.45); display:flex; align-items:center;
+  justify-content:center; transition:all .15s; flex-shrink:0;
+}
+.ai-panel-close:hover { background:rgba(255,255,255,.15); color:#fff; }
+.ai-facts-row { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-bottom:14px; }
+.ai-fact { background:rgba(255,255,255,.05); border-radius:7px; padding:9px 11px; border:1px solid rgba(255,255,255,.07); }
+.ai-fact-lbl { font-size:9.5px; color:rgba(255,255,255,.3); text-transform:uppercase; letter-spacing:.7px; margin-bottom:2px; }
+.ai-fact-val { font-size:12.5px; font-weight:600; color:#fff; }
+.ai-tag-row { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px; }
+.ai-ptag { padding:3px 11px; border-radius:11px; font-size:11px; font-weight:600; background:rgba(184,144,42,.18); color:#d4a93a; border:1px solid rgba(184,144,42,.25); }
+.ai-ttype { padding:3px 11px; border-radius:11px; font-size:11px; font-weight:500; }
+.ai-perm { background:rgba(16,185,129,.14); color:#34d399; border:1px solid rgba(16,185,129,.2); }
+.ai-temp { background:rgba(245,158,11,.14); color:#fbbf24; border:1px solid rgba(245,158,11,.2); }
+.ai-exec { background:rgba(139,92,246,.14); color:#a78bfa; border:1px solid rgba(139,92,246,.2); }
+.ai-badge-row { display:flex; flex-wrap:wrap; gap:5px; }
+.ai-bdg { padding:2px 9px; border-radius:9px; font-size:10.5px; font-weight:600; }
+.ai-new { background:rgba(16,185,129,.12); color:#34d399; border:1px solid rgba(16,185,129,.18); }
+.ai-free { background:rgba(59,130,246,.12); color:#93c5fd; border:1px solid rgba(59,130,246,.18); }
+.ai-remote { background:rgba(184,144,42,.12); color:#d4a93a; border:1px solid rgba(184,144,42,.18); }
+.ai-content { background:#fff; padding:22px; min-height:180px; }
+.ai-loading { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:13px; padding:44px 20px; text-align:center; }
+.ai-spinner { width:34px; height:34px; border-radius:50%; border:3px solid #ede9e0; border-top-color:#b8902a; animation:spin .8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.ai-load-txt { font-size:13.5px; color:#7a8499; }
+.ai-load-sub { font-size:11px; color:#ddd8cc; margin-top:-6px; }
+.ai-section { margin-bottom:18px; }
+.ai-section:last-child { margin-bottom:0; }
+.ai-sh { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#7a8499; margin-bottom:7px; display:flex; align-items:center; gap:6px; }
+.ai-sh::after { content:''; flex:1; height:1px; background:#ede9e0; }
+.ai-body { font-size:13.5px; color:#2c3a50; line-height:1.75; }
+.ai-tips { list-style:none; display:flex; flex-direction:column; gap:7px; }
+.ai-tips li { display:flex; gap:9px; align-items:flex-start; font-size:13px; color:#2c3a50; line-height:1.6; }
+.ai-dot { width:5px; height:5px; border-radius:50%; background:#b8902a; flex-shrink:0; margin-top:8px; }
+.ai-ideal { background:#faf0d7; border:1px solid rgba(184,144,42,.2); border-radius:9px; padding:13px 15px; font-size:13px; color:#2c3a50; line-height:1.65; }
+.ai-err { background:#fef2f2; border:1px solid #fecaca; border-radius:9px; padding:14px; font-size:13px; color:#dc2626; line-height:1.6; }
+.modal-foot { padding:14px 22px 18px; border-top:1px solid #ede9e0; display:flex; gap:9px; align-items:center; background:#fff; border-radius:0 0 14px 14px; }
+.btn-m-visit { flex:1; height:42px; background:#0e1724; color:#fff; border:none; border-radius:8px; font-family:'Outfit',sans-serif; font-size:13.5px; font-weight:600; cursor:pointer; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:7px; transition:background .2s; }
+.btn-m-visit:hover { background:#1e3352; }
+.btn-m-regen { height:42px; padding:0 15px; background:transparent; border:1.5px solid #ddd8cc; border-radius:8px; font-family:'Outfit',sans-serif; font-size:12.5px; color:#7a8499; cursor:pointer; transition:all .2s; }
+.btn-m-regen:hover { border-color:#b8902a; color:#b8902a; }
+.ai-badge-gen { font-size:10px; color:#7a8499; display:inline-flex; align-items:center; gap:3px; white-space:nowrap; }
+
+/* CLICKABLE TAGS */
+.tag, .badge { cursor: pointer; transition: all .18s; }
+.tag:hover { opacity: .78; transform: scale(1.04); }
+.badge:hover { opacity: .78; transform: scale(1.04); }
+.tag.active-filter { box-shadow: 0 0 0 2px #b8902a; }
+.badge.active-filter { box-shadow: 0 0 0 2px #b8902a; }
+@keyframes toastIn { from { opacity:0; transform:translateX(-50%) translateY(8px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+
+/* NEW JOBS SINCE LAST VISIT */
+.new-visit-banner {
+  background: linear-gradient(135deg, #0e1724 0%, #1a2f4a 100%);
+  border-bottom: 1px solid rgba(184,144,42,.2);
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.nvb-left { display:flex; align-items:center; gap:12px; }
+.nvb-pulse {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34,197,94,.5);
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34,197,94,.5); }
+  70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+.nvb-text { color: rgba(255,255,255,.85); font-size: 13.5px; font-weight: 500; }
+.nvb-text strong { color: #22c55e; font-weight: 700; }
+.nvb-sub { color: rgba(255,255,255,.35); font-size: 11px; margin-top: 1px; }
+.nvb-right { display:flex; align-items:center; gap:10px; }
+.nvb-dismiss {
+  background: transparent; border: 1px solid rgba(255,255,255,.12);
+  border-radius: 6px; padding: 5px 12px;
+  color: rgba(255,255,255,.4); font-family: 'Outfit',sans-serif;
+  font-size: 11.5px; cursor: pointer; transition: all .2s;
+}
+.nvb-dismiss:hover { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.7); }
+
+/* NEW JOBS BADGE on cards */
+.new-jobs-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(34,197,94,.1);
+  border: 1px solid rgba(34,197,94,.25);
+  border-radius: 10px; padding: 3px 9px;
+  font-size: 11px; font-weight: 600; color: #16a34a;
+  margin-bottom: 8px;
+  animation: badgeFade .4s ease both;
+}
+.new-jobs-badge .njb-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #22c55e; flex-shrink: 0;
+}
+.new-jobs-badge.fresh {
+  background: rgba(245,158,11,.1);
+  border-color: rgba(245,158,11,.3);
+  color: #d97706;
+}
+.new-jobs-badge.fresh .njb-dot { background: #f59e0b; }
+@keyframes badgeFade {
+  from { opacity:0; transform: translateY(-4px); }
+  to { opacity:1; transform: translateY(0); }
+}
+.last-visit-note {
+  font-size: 11px; color: var(--muted);
+  text-align: right; padding: 6px 0 0;
+}
+
+.list-overlay,.tracker-overlay{position:fixed;inset:0;z-index:500;background:rgba(14,23,36,.8);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s;}
+.list-overlay.open,.tracker-overlay.open{opacity:1;pointer-events:all;}
+.list-modal,.tracker-modal{background:var(--white);border-radius:14px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(14,23,36,.25);transform:translateY(20px);transition:transform .28s;}
+.tracker-modal{max-width:640px;}
+.list-overlay.open .list-modal,.tracker-overlay.open .tracker-modal{transform:none;}
+.lm-head,.tm-head{background:var(--ink);padding:20px 22px;border-radius:14px 14px 0 0;display:flex;align-items:center;justify-content:space-between;}
+.lm-title,.tm-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;}
+.lm-close{width:28px;height:28px;background:rgba(255,255,255,.1);border:none;border-radius:7px;cursor:pointer;font-size:15px;color:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;}
+.lm-close:hover{background:rgba(255,255,255,.2);color:#fff;}
+.lm-body,.tm-body{padding:20px 22px 24px;}
+.lm-field{margin-bottom:12px;}
+.lm-field label{display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:5px;}
+.lm-field input,.lm-field select,.lm-field textarea{width:100%;border:1.5px solid var(--border);border-radius:7px;padding:9px 12px;font-family:'Outfit',sans-serif;font-size:13.5px;color:var(--ink);background:var(--cream);outline:none;}
+.lm-field input:focus,.lm-field select:focus,.lm-field textarea:focus{border-color:var(--gold);background:#fff;}
+.lm-field textarea{resize:vertical;}
+.lm-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.lm-note{background:var(--gold-pale);border:1px solid rgba(184,144,42,.2);border-radius:8px;padding:11px 13px;font-size:12.5px;color:var(--ink2);margin-bottom:14px;line-height:1.6;}
+.lm-success{text-align:center;padding:36px 20px;}
+.lm-success-icon{font-size:44px;margin-bottom:10px;}
+.lm-success h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:7px;}
+.lm-success p{font-size:13.5px;color:var(--muted);line-height:1.6;}
+.btn-save{height:30px;padding:0 10px;background:transparent;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;font-size:12px;color:var(--muted);font-family:'Outfit',sans-serif;transition:all .18s;}
+.btn-save:hover,.btn-save.saved{border-color:var(--gold);color:var(--gold);}
+.btn-save.saved{background:var(--gold-pale);}
+@media(max-width:480px){.lm-grid{grid-template-columns:1fr;}}
+
+/* ── LIVE JOBS CAROUSEL ───────────────────────────────────────────────────── */
+.jobs-section {
+  background: var(--ink);
+  padding: 52px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.jobs-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 800px 400px at 80% 50%, rgba(184,144,42,.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.jobs-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.jobs-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.jobs-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+.jobs-section-title span { color: var(--gold2); }
+.jobs-section-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,.4);
+  margin-top: 5px;
+  font-weight: 300;
+}
+.jobs-live-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16,185,129,.12);
+  border: 1px solid rgba(16,185,129,.25);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #34d399;
+  letter-spacing: .4px;
+}
+.jobs-live-dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  animation: livepulse 1.8s ease-in-out infinite;
+}
+@keyframes livepulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(.7); }
+}
+/* Country toggle */
+.jobs-tabs {
+  display: flex;
+  gap: 0;
+  background: rgba(255,255,255,.06);
+  border-radius: 9px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,.08);
+  width: fit-content;
+}
+.jobs-tab {
+  padding: 7px 18px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: rgba(255,255,255,.45);
+  transition: all .2s;
+  border: none;
+  background: transparent;
+  font-family: 'Outfit', sans-serif;
+}
+.jobs-tab.active {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  font-weight: 600;
+}
+/* Carousel track */
+.carousel-wrap {
+  position: relative;
+}
+.carousel-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  cursor: grab;
+}
+.carousel-track:active { cursor: grabbing; }
+.carousel-track::-webkit-scrollbar { display: none; }
+/* Job card */
+.jcard {
+  flex: 0 0 280px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 12px;
+  padding: 18px 18px 16px;
+  scroll-snap-align: start;
+  transition: border-color .2s, background .2s, transform .2s;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.jcard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s;
+}
+.jcard:hover {
+  border-color: rgba(184,144,42,.35);
+  background: rgba(255,255,255,.08);
+  transform: translateY(-2px);
+}
+.jcard:hover::before { transform: scaleX(1); }
+.jcard-agency {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.jcard-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.jcard-agency-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold2);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+}
+.jcard-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.jcard-company {
+  font-size: 12.5px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.jcard-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 13px;
+}
+.jcard-tag {
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.jcard-tag.salary {
+  background: rgba(16,185,129,.1);
+  color: #6ee7b7;
+  border-color: rgba(16,185,129,.18);
+}
+.jcard-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.jcard-date {
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+}
+.jcard-apply {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--gold2);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  transition: gap .15s;
+}
+.jcard:hover .jcard-apply { gap: 6px; }
+/* Nav arrows */
+.carousel-nav {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+  justify-content: flex-end;
+}
+.carousel-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.6);
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s;
+  font-family: 'Outfit', sans-serif;
+}
+.carousel-arrow:hover {
+  background: rgba(184,144,42,.2);
+  border-color: rgba(184,144,42,.4);
+  color: var(--gold2);
+}
+/* Loading / error states */
+.jobs-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 36px 0;
+  color: rgba(255,255,255,.4);
+  font-size: 13.5px;
+}
+.jobs-spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.1);
+  border-top-color: var(--gold);
+  animation: spin .8s linear infinite;
+}
+.jobs-error {
+  background: rgba(220,38,38,.08);
+  border: 1px solid rgba(220,38,38,.15);
+  border-radius: 10px;
+  padding: 16px 18px;
+  color: rgba(255,255,255,.5);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.jobs-count-badge {
+  background: rgba(184,144,42,.15);
+  border: 1px solid rgba(184,144,42,.25);
+  border-radius: 20px;
+  padding: 3px 11px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--gold2);
+}
+@media(max-width:640px){
+  .jobs-section{padding:40px 16px 48px;}
+  .jcard{flex:0 0 240px;}
+  .jobs-section-head{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-mark">A</div>
+    <div class="logo-name">Agency<span>Portal</span></div>
+  </a>
+  <div class="header-right">
+     <a href="https://agencyportal.ca/connect.html" style="color:var(--gold2);font-weight:600;">&#128172; Connect</a>
+    <a href="https://agencyportal.ca/tools.html" style="color:var(--gold2);font-weight:600;font-size:13px;">&#10024; Career Tools</a> <button onclick="openTracker()" style="background:transparent;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:6px 12px;color:rgba(255,255,255,.7);font-family:Outfit,sans-serif;font-size:12.5px;cursor:pointer;">&#128196; Tracker</button> <button onclick="toggleLang()" style="background:transparent;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:6px 12px;color:rgba(255,255,255,.7);font-family:Outfit,sans-serif;font-size:12.5px;cursor:pointer;">FR/EN</button> <button onclick="openListModal()" class="btn-list" style="border:none;cursor:pointer;height:auto;padding:7px 18px;">List Your Agency</button>
+  </div>
+</header>
+
+<!-- HERO + SEARCH -->
+<section class="hero">
+  <div class="hero-eyebrow">Canada &amp; United Kingdom</div>
+  <h1>Find a <em>Trusted Job Agency</em><br>in Seconds</h1>
+  <p class="hero-sub">One free directory for verified staffing and recruitment agencies across Canada and the UK. Newcomer-friendly options clearly marked.</p>
+
+  <!-- PROMINENT SEARCH -->
+  <div class="search-hero">
+    <div class="search-hero-title">Search &amp; Filter Agencies</div>
+    <div class="search-row">
+      <input class="search-main" type="text" id="kw" placeholder="Agency name, city, or keyword..." oninput="doFilter()">
+      <select class="search-select" id="indF" onchange="doFilter()">
+        <option value="">All Industries</option>
+        <option>Technology &amp; IT</option>
+        <option>Healthcare</option>
+        <option>Finance &amp; Accounting</option>
+        <option>Engineering</option>
+        <option>Trades &amp; Construction</option>
+        <option>Executive Search</option>
+        <option>Education</option>
+        <option>Legal</option>
+        <option>Creative &amp; Marketing</option>
+        <option>General Staffing</option>
+        <option>Science &amp; Pharma</option>
+        <option>Oil &amp; Gas</option>
+      </select>
+      <select class="search-select" id="typF" onchange="doFilter()">
+        <option value="">All Types</option>
+        <option value="perm">Permanent</option>
+        <option value="temp">Temp / Contract</option>
+        <option value="exec">Executive Search</option>
+      </select>
+      <select class="search-select" id="spF" onchange="doFilter()">
+        <option value="">No Filter</option>
+        <option value="newcomer">Newcomer Friendly</option>
+        <option value="remote">Remote Roles</option>
+      </select>
+      <button class="btn-go" onclick="doFilter()">Search</button>
+      <select class="search-select" id="levelF" onchange="doFilter()" style="max-width:150px;"><option value="">All Levels</option><option value="entry">Entry Level</option><option value="mid">Mid Level</option><option value="senior">Senior</option><option value="executive">Executive</option></select><select class="search-select" id="sectorF" onchange="doFilter()" style="max-width:150px;"><option value="">Any Sector</option><option value="private">Private Sector</option><option value="public">Public Sector</option><option value="nonprofit">Non-profit</option></select><select class="search-select" id="visaF" onchange="doFilter()" style="max-width:160px;"><option value="">All Candidates</option><option value="visa">Visa/Permit Friendly</option></select><button class="btn-clear-search" onclick="resetAll()">Clear</button>
+    </div>
+  </div>
+
+  <!-- COUNTRY TABS (attached to bottom of hero) -->
+  <div class="tabs-wrap" style="margin-top:0; background:transparent;">
+    <div class="country-tabs">
+      <div class="ctab ca active" onclick="switchTab('canada')">
+        <span class="tab-flag">&#127464;&#127462;</span>
+        <div class="tab-info">
+          <span class="tab-name">Canada</span>
+          <span class="tab-sub" id="ca-sub">18 agencies</span>
+        </div>
+      </div>
+      <div class="ctab uk" onclick="switchTab('uk')">
+        <span class="tab-flag">&#127468;&#127463;</span>
+        <div class="tab-info">
+          <span class="tab-name">United Kingdom</span>
+          <span class="tab-sub" id="uk-sub">18 agencies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="sbar-item"><span class="sbar-num" id="stat-total">36</span><div class="sbar-label">Verified Agencies</div></div>
+  <div class="sbar-item"><span class="sbar-num">2</span><div class="sbar-label">Countries</div></div>
+  <div class="sbar-item"><span class="sbar-num">12</span><div class="sbar-label">Industries</div></div>
+  <div class="sbar-item"><span class="sbar-num">Free</span><div class="sbar-label">For Candidates</div></div>
+</div>
+
+<!-- TRUST -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="ti">&#10003;</span> Verified agencies only</div>
+  <div class="trust-item"><span class="ti">&#128274;</span> Candidates never pay</div>
+  <div class="trust-item"><span class="ti">&#127968;</span> Newcomer options marked</div>
+  <div class="trust-item"><span class="ti">&#8599;</span> Links open agency websites directly</div>
+</div>
+
+
+<!-- NEW JOBS SINCE LAST VISIT BANNER -->
+<div class="new-visit-banner" id="nvb" style="display:none;">
+  <div class="nvb-left">
+    <div class="nvb-pulse"></div>
+    <div>
+      <div class="nvb-text">Approximately <strong id="nvb-count">0</strong> new jobs added across all agencies since your last visit</div>
+      <div class="nvb-sub" id="nvb-sub">Calculating...</div>
+    </div>
+  </div>
+  <div class="nvb-right">
+    <button class="nvb-dismiss" onclick="dismissBanner()">Dismiss</button>
+  </div>
+</div>
+
+<!-- CANADA -->
+<div class="country-section active" id="sec-canada">
+  <div class="country-banner">
+    <span class="banner-flag">&#127464;&#127462;</span>
+    <div class="banner-info">
+      <h2>Canadian Recruitment Agencies</h2>
+      <p>Established agencies placing candidates across all provinces</p>
+    </div>
+    <div class="banner-pills" id="pills-canada"></div>
+  </div>
+  <div class="results-wrap">
+    <div class="results-meta">
+      <div class="rcount">Showing <strong id="ca-ct">0</strong> agencies</div>
+      <select class="sort-sel" onchange="doFilter()"><option>Featured</option><option>Rating (High)</option><option>A &ndash; Z</option></select>
+    </div>
+    <div class="agency-grid" id="grid-ca"></div>
+  </div>
+</div>
+
+<!-- UK -->
+<div class="country-section" id="sec-uk">
+  <div class="country-banner">
+    <span class="banner-flag">&#127468;&#127463;</span>
+    <div class="banner-info">
+      <h2>United Kingdom Recruitment Agencies</h2>
+      <p>Trusted agencies across England, Scotland, Wales and Northern Ireland</p>
+    </div>
+    <div class="banner-pills" id="pills-uk"></div>
+  </div>
+  <div class="results-wrap">
+    <div class="results-meta">
+      <div class="rcount">Showing <strong id="uk-ct">0</strong> agencies</div>
+      <select class="sort-sel" onchange="doFilter()"><option>Featured</option><option>Rating (High)</option><option>A &ndash; Z</option></select>
+    </div>
+    <div class="agency-grid" id="grid-uk"></div>
+  </div>
+</div>
+
+<!-- AI PROFILE PANEL -->
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+  <div class="modal" id="modal-box">
+    <div class="ai-panel">
+      <div class="ai-panel-header">
+        <div class="ai-panel-logo" id="m-logo"></div>
+        <div class="ai-panel-title">
+          <div class="ai-panel-name" id="m-name"></div>
+          <div class="ai-panel-loc" id="m-loc"></div>
+          <div class="ai-panel-rating">
+            <span class="ai-rt-star">&#9733;</span>
+            <span class="ai-rt-score" id="m-score"></span>
+            <span class="ai-rt-rev" id="m-rev"></span>
+          </div>
+        </div>
+        <button class="ai-panel-close" onclick="closeModal()">&#x2715;</button>
+      </div>
+      <div class="ai-facts-row" id="m-facts"></div>
+      <div class="ai-tag-row" id="m-tags"></div>
+      <div class="ai-badge-row" id="m-badges"></div>
+    </div>
+    <div class="ai-content" id="ai-content">
+      <div class="ai-loading" id="ai-loading">
+        <div class="ai-spinner"></div>
+        <div class="ai-load-txt">Generating agency profile...</div>
+        <div class="ai-load-sub">Powered by Claude AI</div>
+      </div>
+      <div id="ai-result" style="display:none;"></div>
+    </div>
+    <div class="modal-foot">
+      <a class="btn-m-visit" id="m-link" href="#" target="_blank" rel="noopener">
+        Visit Official Website &#x2197;
+      </a>
+      <button class="btn-m-regen" id="m-regen" onclick="regenProfile()">&#x21bb; Refresh</button>
+      <span class="ai-badge-gen">&#x2728; AI Profile</span>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<!-- LIVE JOBS CAROUSEL -->
+<section class="jobs-section" id="jobs-section">
+  <div class="jobs-section-inner">
+    <div class="jobs-section-head">
+      <div>
+        <div class="jobs-section-title">Live Jobs from <span>Listed Agencies</span></div>
+        <div class="jobs-section-sub">Real job listings pulled from agencies in our directory via Adzuna</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span class="jobs-live-dot">Live</span>
+        <span class="jobs-count-badge" id="jobs-count-badge">Loading...</span>
+        <div class="jobs-tabs">
+          <button class="jobs-tab active" onclick="switchJobsTab('ca',this)">&#127464;&#127462; Canada</button>
+          <button class="jobs-tab" onclick="switchJobsTab('gb',this)">&#127468;&#127463; UK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category filter pills -->
+    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px;" id="jobs-cats">
+      <button class="jobs-cat-pill active" onclick="filterJobCat('',this)">All</button>
+      <button class="jobs-cat-pill" onclick="filterJobCat('it-jobs',this)">Technology</button>
+      <button class="jobs-cat-pill" onclick="filterJobCat('accounting-finance-jobs',this)">Finance</button>
+      <button class="jobs-cat-pill" onclick="filterJobCat('engineering-jobs',this)">Engineering</button>
+      <button class="jobs-cat-pill" onclick="filterJobCat('healthcare-nursing-jobs',this)">Healthcare</button>
+      <button class="jobs-cat-pill" onclick="filterJobCat('legal-jobs',this)">Legal</button>
+      <button class="jobs-cat-pill" onclick="filterJobCat('sales-jobs',this)">Sales</button>
+    </div>
+    <style>
+      .jobs-cat-pill{padding:5px 14px;border-radius:20px;font-size:12.5px;font-weight:500;cursor:pointer;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);font-family:'Outfit',sans-serif;transition:all .18s;}
+      .jobs-cat-pill:hover{border-color:rgba(184,144,42,.4);color:var(--gold2);}
+      .jobs-cat-pill.active{background:rgba(184,144,42,.15);border-color:rgba(184,144,42,.4);color:var(--gold2);font-weight:600;}
+    </style>
+
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="jobs-carousel">
+        <div class="jobs-loading">
+          <div class="jobs-spinner"></div>
+          Fetching live jobs...
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-arrow" onclick="slideCarousel(-1)" title="Previous">&#8592;</button>
+        <button class="carousel-arrow" onclick="slideCarousel(1)" title="Next">&#8594;</button>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;font-size:11.5px;color:rgba(255,255,255,.25);text-align:right;">
+      Powered by Adzuna &bull; Jobs update daily &bull; Always free to apply
+    </div>
+  </div>
+</section>
+
+<!-- LIST YOUR AGENCY MODAL -->
+<div class="list-overlay" id="list-overlay" onclick="if(event.target===this)closeListModal()">
+  <div class="list-modal">
+    <div class="lm-head">
+      <div class="lm-title">List Your Agency on AgencyPortal</div>
+      <button class="lm-close" onclick="closeListModal()">&#x2715;</button>
+    </div>
+    <div class="lm-body">
+      <div id="list-form">
+        <div class="lm-note">&#10024; Listing is <strong>free</strong> for verified agencies. Reviewed within 3-5 business days. Agencies must be legally registered, charge candidates no fees, and have a verifiable track record.</div>
+        <div class="lm-grid">
+          <div class="lm-field"><label>Agency Name *</label><input type="text" id="la-name" placeholder="e.g. Acme Recruitment Ltd"></div>
+          <div class="lm-field"><label>Website URL *</label><input type="url" id="la-web" placeholder="https://youragency.com"></div>
+        </div>
+        <div class="lm-grid">
+          <div class="lm-field"><label>Contact Email *</label><input type="email" id="la-email" placeholder="contact@youragency.com"></div>
+          <div class="lm-field"><label>Country *</label><select id="la-country"><option value="">Select...</option><option value="canada">Canada</option><option value="uk">United Kingdom</option></select></div>
+        </div>
+        <div class="lm-grid">
+          <div class="lm-field"><label>City / Region *</label><input type="text" id="la-city" placeholder="e.g. Toronto, ON"></div>
+          <div class="lm-field"><label>Year Founded</label><input type="number" id="la-founded" placeholder="e.g. 2005"></div>
+        </div>
+        <div class="lm-field"><label>Primary Industries</label><input type="text" id="la-industries" placeholder="e.g. Technology & IT, Finance & Accounting"></div>
+        <div class="lm-field"><label>About Your Agency</label><textarea id="la-desc" rows="3" placeholder="Describe what makes your agency stand out..."></textarea></div>
+        <div class="lm-grid" style="margin-bottom:14px;">
+          <div class="lm-field" style="margin-bottom:0;"><label>Placement Types</label><select id="la-types"><option>Permanent &amp; Temp/Contract</option><option>Permanent only</option><option>Temp/Contract only</option><option>Executive Search</option></select></div>
+          <div class="lm-field" style="margin-bottom:0;"><label>Newcomer Friendly?</label><select id="la-newcomer"><option value="yes">Yes</option><option value="no">No</option></select></div>
+        </div>
+        <button onclick="submitAgencyListing()" style="width:100%;height:43px;background:var(--ink);color:#fff;border:none;border-radius:8px;font-family:Outfit,sans-serif;font-size:14px;font-weight:600;cursor:pointer;">Submit for Review</button>
+      </div>
+      <div id="list-success" style="display:none;">
+        <div class="lm-success">
+          <div class="lm-success-icon">&#9989;</div>
+          <h3>Submission Received!</h3>
+          <p>Thank you. Our team will review your listing within 3-5 business days and contact you at the email provided.</p>
+          <button onclick="closeListModal()" style="margin-top:16px;height:40px;padding:0 24px;background:var(--ink);color:#fff;border:none;border-radius:8px;font-family:Outfit,sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRACKER MODAL -->
+<div class="tracker-overlay" id="tracker-overlay" onclick="if(event.target===this)closeTracker()">
+  <div class="tracker-modal">
+    <div class="tm-head">
+      <div class="tm-title">&#128196; My Application Tracker</div>
+      <button class="lm-close" onclick="closeTracker()">&#x2715;</button>
+    </div>
+    <div class="tm-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Track which agencies you have contacted and your application status. All data stays on your device only.</p>
+      <div id="tracker-list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var API_ENDPOINT = "https://agencyhub-proxy.agencyhub-nkech.workers.dev/api/anthropic";
+// AgencyPortal v6 - Full Premium Data & Features
+// All agencies verified against official sources, LinkedIn, Indeed, Clutch
+
+var LANG = "en"; // "en" or "fr"
+
+var STRINGS = {
+  en: {
+    tagline: "Canada & United Kingdom",
+    hero_title: "Find a <em>Trusted Job Agency</em><br>in Seconds",
+    hero_sub: "One free directory for verified staffing and recruitment agencies across Canada and the UK. Newcomer-friendly options clearly marked.",
+    search_label: "Search & Filter Agencies",
+    search_ph: "Agency name, city, or keyword...",
+    all_industries: "All Industries",
+    all_types: "All Types",
+    all_levels: "All Levels",
+    all_sectors: "Any Sector",
+    all_special: "No Filter",
+    permanent: "Permanent",
+    temp: "Temp / Contract",
+    exec: "Executive Search",
+    newcomer: "Newcomer Friendly",
+    remote: "Remote Roles",
+    free_cand: "Free for Candidates",
+    visit: "Visit",
+    ai_profile: "AI Profile",
+    details: "Details",
+    ca_banner: "Canadian Recruitment Agencies",
+    uk_banner: "United Kingdom Recruitment Agencies",
+    ca_sub: "Established agencies placing candidates across all provinces",
+    uk_sub: "Trusted agencies across England, Scotland, Wales and Northern Ireland",
+    verified: "Verified",
+    new_jobs: "new jobs since your last visit",
+    list_agency: "List Your Agency",
+    save: "Save",
+    track: "My Tracker",
+    lang_toggle: "Francais"
+  },
+  fr: {
+    tagline: "Canada & Royaume-Uni",
+    hero_title: "Trouvez une <em>Agence de Confiance</em><br>en Secondes",
+    hero_sub: "Un repertoire gratuit d'agences de recrutement verifiees au Canada et au Royaume-Uni. Les options adaptees aux nouveaux arrivants sont clairement indiquees.",
+    search_label: "Rechercher et filtrer",
+    search_ph: "Nom d'agence, ville ou mot-cle...",
+    all_industries: "Tous les secteurs",
+    all_types: "Tous les types",
+    all_levels: "Tous les niveaux",
+    all_sectors: "Tout secteur",
+    all_special: "Aucun filtre",
+    permanent: "Permanent",
+    temp: "Temporaire / Contrat",
+    exec: "Recrutement cadre",
+    newcomer: "Accueillant pour nouveaux arrivants",
+    remote: "Emplois a distance",
+    free_cand: "Gratuit pour les candidats",
+    visit: "Visiter",
+    ai_profile: "Profil IA",
+    details: "Details",
+    ca_banner: "Agences de recrutement canadiennes",
+    uk_banner: "Agences de recrutement au Royaume-Uni",
+    ca_sub: "Agences etablies placant des candidats dans toutes les provinces",
+    uk_sub: "Agences de confiance en Angleterre, Ecosse, Galles et Irlande du Nord",
+    verified: "Verifie",
+    new_jobs: "nouveaux emplois depuis votre derniere visite",
+    list_agency: "Inscrire votre agence",
+    save: "Sauvegarder",
+    track: "Mon suivi",
+    lang_toggle: "English"
+  }
+};
+
+function t(key) { return STRINGS[LANG][key] || STRINGS.en[key] || key; }
+
+//  CANADA AGENCIES (verified) 
+var caData = [
+  {name:"Hays Canada",city:"Toronto, ON (Nationwide)",
+   desc:"One of Canada's largest specialist recruitment firms with 50+ years of experience. Primarily known for engineering and construction staffing, with strong technology and finance divisions across all major cities.",
+   primary:["Engineering","Trades & Construction"],
+   industries:["Engineering","Trades & Construction","Technology & IT","Finance & Accounting"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["private"],
+   rating:4.7,reviews:3120,founded:"1968",employees:"10,000+",dailyJobs:18,
+   web:"https://www.hays.ca",color:"#c0392b",verified:true,
+   links:{perm:"https://www.hays.ca/job-search",temp:"https://www.hays.ca/recruitment-services/temporary-contract-staffing",exec:"https://www.hays.ca/recruitment-services/permanent-recruitment",
+     ind:{"Engineering":"https://www.hays.ca/recruitment/engineering","Trades & Construction":"https://www.hays.ca/recruitment/construction-property","Technology & IT":"https://www.hays.ca/recruitment/information-technology","Finance & Accounting":"https://www.hays.ca/recruitment/accountancy-finance"},
+     newcomer:"https://www.hays.ca/career-advice",remote:"https://www.hays.ca/job-search"}},
+
+  {name:"Robert Half Canada",city:"Multiple Offices Nationwide",
+   desc:"A Fortune 500 global leader primarily known for finance, accounting and technology staffing. One of the most trusted professional recruitment brands across Canada, with dedicated AI-assisted matching.",
+   primary:["Finance & Accounting","Technology & IT"],
+   industries:["Finance & Accounting","Technology & IT","Creative & Marketing"],
+   types:["perm","temp"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["private"],
+   rating:4.5,reviews:4890,founded:"1948",employees:"16,000+",dailyJobs:25,
+   web:"https://www.roberthalf.com/ca/en",color:"#1a5276",verified:true,
+   links:{perm:"https://www.roberthalf.com/ca/en/jobs",temp:"https://www.roberthalf.com/ca/en/hire-talent/flexible-staffing",exec:"https://www.roberthalf.com/ca/en/jobs",
+     ind:{"Finance & Accounting":"https://www.roberthalf.com/ca/en/finance-accounting-jobs","Technology & IT":"https://www.roberthalf.com/ca/en/technology-jobs","Creative & Marketing":"https://www.roberthalf.com/ca/en/creative-marketing-jobs"},
+     newcomer:"https://www.roberthalf.com/ca/en/jobs",remote:"https://www.roberthalf.com/ca/en/jobs"}},
+
+  {name:"Randstad Canada",city:"Montreal, QC (Nationwide)",
+   desc:"The world's largest HR services company, primarily known for general staffing and industrial placements. Strong newcomer support programs and bilingual services across Quebec and all provinces.",
+   primary:["General Staffing","Trades & Construction"],
+   industries:["General Staffing","Trades & Construction","Engineering","Technology & IT"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:true,
+   levels:["entry","mid"],sector:["private","public"],
+   rating:4.4,reviews:6210,founded:"1960",employees:"38,000+",dailyJobs:40,
+   web:"https://www.randstad.ca",color:"#2471a3",verified:true,
+   links:{perm:"https://www.randstad.ca/jobs/",temp:"https://www.randstad.ca/jobs/",exec:"https://www.randstad.ca/employers/executive-search/",
+     ind:{"General Staffing":"https://www.randstad.ca/jobs/","Trades & Construction":"https://www.randstad.ca/jobs/construction/","Engineering":"https://www.randstad.ca/jobs/engineering/","Technology & IT":"https://www.randstad.ca/jobs/it/"},
+     newcomer:"https://www.randstad.ca/jobs/",remote:"https://www.randstad.ca/jobs/"}},
+
+  {name:"Adecco Canada",city:"Nationwide",
+   desc:"One of the world's largest staffing firms, primarily known for light industrial and general office staffing. Covers all major Canadian markets and actively warns candidates about recruitment scams.",
+   primary:["General Staffing"],
+   industries:["General Staffing","Trades & Construction"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:true,
+   levels:["entry","mid"],sector:["private"],
+   rating:4.2,reviews:8340,founded:"1957",employees:"32,000+",dailyJobs:35,
+   web:"https://www.adecco.com/en-ca",color:"#c0392b",verified:true,
+   links:{perm:"https://www.adecco.com/en-ca/find-a-job/",temp:"https://www.adecco.com/en-ca/find-a-job/",exec:"https://www.adecco.com/en-ca/find-a-job/",
+     ind:{"General Staffing":"https://www.adecco.com/en-ca/find-a-job/","Trades & Construction":"https://www.adecco.com/en-ca/find-a-job/"},
+     newcomer:"https://www.adecco.com/en-ca/find-a-job/",remote:"https://www.adecco.com/en-ca/find-a-job/"}},
+
+  {name:"David Aplin Group",city:"Edmonton, AB (Nationwide)",
+   desc:"A respected Canadian-owned firm founded in 1975, primarily known for IT and engineering recruitment. Award-winning for candidate care. Named one of Canada's Best Managed Companies multiple times.",
+   primary:["Technology & IT","Engineering"],
+   industries:["Technology & IT","Engineering","Finance & Accounting","Legal"],
+   types:["perm","temp"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["private"],
+   rating:4.8,reviews:1820,founded:"1975",employees:"500+",dailyJobs:8,
+   web:"https://www.aplin.com",color:"#1e8449",verified:true,
+   links:{perm:"https://www.aplin.com/find-a-job/",temp:"https://www.aplin.com/find-a-job/",exec:"https://www.aplin.com/find-a-job/",
+     ind:{"Technology & IT":"https://www.aplin.com/find-a-job/?category=it","Engineering":"https://www.aplin.com/find-a-job/?category=engineering","Finance & Accounting":"https://www.aplin.com/find-a-job/?category=finance","Legal":"https://www.aplin.com/find-a-job/?category=legal"},
+     newcomer:"https://www.aplin.com/find-a-job/",remote:"https://www.aplin.com/find-a-job/"}},
+
+  {name:"Robert Walters Canada",city:"Toronto, ON",
+   desc:"A world-leading consultancy primarily known for finance, accounting and legal recruitment at the mid-to-senior level. Toronto office serves the whole Canadian market with a highly personalised approach.",
+   primary:["Finance & Accounting","Legal"],
+   industries:["Finance & Accounting","Legal","Technology & IT","Executive Search"],
+   types:["perm","exec"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["senior","executive"],sector:["private"],
+   rating:4.6,reviews:980,founded:"1985",employees:"4,000+",dailyJobs:6,
+   web:"https://www.robert-walters.ca",color:"#5b2c6f",verified:true,
+   links:{perm:"https://www.robert-walters.ca/jobs.html",temp:"https://www.robert-walters.ca/jobs.html",exec:"https://www.robert-walters.ca/our-services/executive-search.html",
+     ind:{"Finance & Accounting":"https://www.robert-walters.ca/expertise/finance-accounting-and-operations.html","Legal":"https://www.robert-walters.ca/expertise/legal.html","Technology & IT":"https://www.robert-walters.ca/expertise/technology.html","Executive Search":"https://www.robert-walters.ca/our-services/executive-search.html"},
+     newcomer:"https://www.robert-walters.ca/jobs.html",remote:"https://www.robert-walters.ca/jobs.html"}},
+
+  {name:"Altis Recruitment",city:"Ottawa, ON (Nationwide)",
+   desc:"Canadian staffing leaders since 1989, primarily known for IT and federal government technology placements in Ottawa. Sister brand Altis Technology focuses exclusively on digital and tech roles.",
+   primary:["Technology & IT"],
+   industries:["Technology & IT","Finance & Accounting","General Staffing"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["private","public"],
+   rating:4.6,reviews:1240,founded:"1989",employees:"300+",dailyJobs:10,
+   web:"https://www.altisrecruitment.com",color:"#117a65",verified:true,
+   links:{perm:"https://www.altisrecruitment.com/jobs",temp:"https://www.altisrecruitment.com/jobs",exec:"https://www.altisrecruitment.com/jobs",
+     ind:{"Technology & IT":"https://www.altisrecruitment.com/it-jobs","Finance & Accounting":"https://www.altisrecruitment.com/finance-jobs","General Staffing":"https://www.altisrecruitment.com/jobs"},
+     newcomer:"https://www.altisrecruitment.com/jobs",remote:"https://www.altisrecruitment.com/jobs"}},
+
+  {name:"IQ Partners",city:"Toronto, ON (Nationwide)",
+   desc:"One of Canada's most reviewed search firms, primarily known for executive and senior-level search. They proactively headhunt top candidates across 17+ practice areas rather than just posting jobs.",
+   primary:["Executive Search"],
+   industries:["Executive Search","Technology & IT","Finance & Accounting","Creative & Marketing"],
+   types:["perm","exec"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["senior","executive"],sector:["private"],
+   rating:4.7,reviews:640,founded:"2001",employees:"100+",dailyJobs:5,
+   web:"https://www.iqpartners.com",color:"#154360",verified:true,
+   links:{perm:"https://www.iqpartners.com/jobs/",temp:"https://www.iqpartners.com/jobs/",exec:"https://www.iqpartners.com/executive-search/",
+     ind:{"Executive Search":"https://www.iqpartners.com/executive-search/","Technology & IT":"https://www.iqpartners.com/technology-recruitment/","Finance & Accounting":"https://www.iqpartners.com/finance-accounting-recruitment/","Creative & Marketing":"https://www.iqpartners.com/marketing-recruitment/"},
+     newcomer:"https://www.iqpartners.com/jobs/",remote:"https://www.iqpartners.com/jobs/"}},
+
+  {name:"Goldbeck Recruiting",city:"Vancouver, BC",
+   desc:"A Vancouver-based firm primarily known for technology and engineering recruitment in Western Canada, with a strong executive search practice for senior leadership roles.",
+   primary:["Technology & IT","Engineering"],
+   industries:["Technology & IT","Engineering","Executive Search"],
+   types:["perm","exec"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["private"],
+   rating:4.8,reviews:430,founded:"1997",employees:"50+",dailyJobs:4,
+   web:"https://www.goldbeck.com",color:"#6c3483",verified:true,
+   links:{perm:"https://www.goldbeck.com/job-seekers/",temp:"https://www.goldbeck.com/job-seekers/",exec:"https://www.goldbeck.com/executive-search/",
+     ind:{"Technology & IT":"https://www.goldbeck.com/job-seekers/?category=technology","Engineering":"https://www.goldbeck.com/job-seekers/?category=engineering","Executive Search":"https://www.goldbeck.com/executive-search/"},
+     newcomer:"https://www.goldbeck.com/job-seekers/",remote:"https://www.goldbeck.com/job-seekers/"}},
+
+  {name:"Bagg Group",city:"Toronto, ON",
+   desc:"Award-winning Toronto agency founded in 1975, primarily known for legal, administrative and office support staffing. One of the GTA's most respected boutique firms with exceptional personalised service.",
+   primary:["Legal","General Staffing"],
+   industries:["Legal","General Staffing","Finance & Accounting","Creative & Marketing"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:false,
+   levels:["entry","mid"],sector:["private"],
+   rating:4.7,reviews:2070,founded:"1975",employees:"200+",dailyJobs:7,
+   web:"https://www.bagg.com",color:"#922b21",verified:true,
+   links:{perm:"https://www.bagg.com/job-seekers/",temp:"https://www.bagg.com/job-seekers/temporary-placement/",exec:"https://www.bagg.com/job-seekers/",
+     ind:{"Legal":"https://www.bagg.com/divisions/legal/","General Staffing":"https://www.bagg.com/job-seekers/","Finance & Accounting":"https://www.bagg.com/divisions/accounting/","Creative & Marketing":"https://www.bagg.com/divisions/marketing/"},
+     newcomer:"https://www.bagg.com/job-seekers/",remote:"https://www.bagg.com/job-seekers/"}},
+
+  {name:"KPM Staffing",city:"Edmonton, AB",
+   desc:"A locally owned and operated Edmonton firm with nearly 20 years of experience. Trusted by Fortune 500 companies and non-profits alike. Covers administrative, legal, accounting, finance and executive roles in Alberta.",
+   primary:["General Staffing","Legal"],
+   industries:["General Staffing","Legal","Finance & Accounting","Executive Search"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:false,
+   levels:["entry","mid","senior"],sector:["private","public","nonprofit"],
+   rating:4.6,reviews:280,founded:"2005",employees:"50+",dailyJobs:4,
+   web:"https://www.kpmstaffing.com",color:"#1f618d",verified:true,
+   links:{perm:"https://www.kpmstaffing.com/candidates/",temp:"https://www.kpmstaffing.com/candidates/",exec:"https://www.kpmstaffing.com/candidates/",
+     ind:{"General Staffing":"https://www.kpmstaffing.com/candidates/","Legal":"https://www.kpmstaffing.com/candidates/","Finance & Accounting":"https://www.kpmstaffing.com/candidates/"},
+     newcomer:"https://www.kpmstaffing.com/candidates/",remote:"https://www.kpmstaffing.com/candidates/"}},
+
+  {name:"Recrute Action",city:"Montreal, QC (Canada & USA)",
+   desc:"Montreal-based bilingual recruitment firm recognised on Canada's Growth 500 list. Specialises in finance, insurance, legal and customer service roles. Winner of the 2024 Innovative Supplier of the Year award from the Canadian LGBT+ Chamber of Commerce. Serves both English and French-speaking candidates.",
+   primary:["Finance & Accounting","Legal"],
+   industries:["Finance & Accounting","Legal","General Staffing","Creative & Marketing"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:false,
+   levels:["entry","mid","senior"],sector:["private","public"],
+   rating:4.7,reviews:890,founded:"2010",employees:"51-200",dailyJobs:8,
+   web:"https://recruteaction.com",color:"#1e8449",verified:true,bilingual:true,
+   links:{perm:"https://recruteaction.com/zoho-jobs/",temp:"https://recruteaction.com/zoho-jobs/",exec:"https://recruteaction.com/zoho-jobs/",
+     ind:{"Finance & Accounting":"https://recruteaction.com/zoho-jobs/","Legal":"https://recruteaction.com/zoho-jobs/","General Staffing":"https://recruteaction.com/zoho-jobs/"},
+     newcomer:"https://recruteaction.com/zoho-jobs/",remote:"https://recruteaction.com/zoho-jobs/"}},
+
+  {name:"Fuze HR Solutions",city:"Toronto, ON & Montreal, QC",
+   desc:"Founded in 2006, Fuze HR is a recruitment and staffing agency serving both government and private sector clients. A key partner of the Canadian government for security-cleared roles. Covers aerospace, defence, IT, finance and industrial sectors. Offers Federal Government Security Clearance sponsorship.",
+   primary:["Technology & IT","General Staffing"],
+   industries:["Technology & IT","General Staffing","Engineering","Finance & Accounting"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:true,
+   levels:["entry","mid","senior"],sector:["private","public"],
+   rating:4.5,reviews:520,founded:"2006",employees:"50-200",dailyJobs:9,
+   web:"https://fuzehr.com",color:"#8e44ad",verified:true,
+   links:{perm:"https://fuzehr.com/job-seekers/",temp:"https://fuzehr.com/job-seekers/",exec:"https://fuzehr.com/job-seekers/",
+     ind:{"Technology & IT":"https://fuzehr.com/job-seekers/","General Staffing":"https://fuzehr.com/job-seekers/"},
+     newcomer:"https://fuzehr.com/job-seekers/",remote:"https://fuzehr.com/job-seekers/"}},
+
+  {name:"Lock Search Group",city:"Toronto, ON (Nationwide)",
+   desc:"Established in 1983 as a Canadian-owned firm, consistently recognised by Forbes and Hunt Scanlon Media among Canada's top search firms. Specialises in life sciences, technology, consumer goods and industrial sectors. Over 30 consultants with an average tenure exceeding a decade.",
+   primary:["Executive Search","Technology & IT"],
+   industries:["Executive Search","Technology & IT","Science & Pharma","Engineering"],
+   types:["perm","exec"],newcomer:false,remote:false,free:true,visa:false,
+   levels:["senior","executive"],sector:["private"],
+   rating:4.7,reviews:340,founded:"1983",employees:"50+",dailyJobs:4,
+   web:"https://www.locksearchgroup.com",color:"#2c3e50",verified:true,
+   links:{perm:"https://www.locksearchgroup.com/candidates/",temp:"https://www.locksearchgroup.com/candidates/",exec:"https://www.locksearchgroup.com/candidates/",
+     ind:{"Executive Search":"https://www.locksearchgroup.com/candidates/","Technology & IT":"https://www.locksearchgroup.com/candidates/","Science & Pharma":"https://www.locksearchgroup.com/candidates/"},
+     newcomer:"https://www.locksearchgroup.com/candidates/",remote:"https://www.locksearchgroup.com/candidates/"}},
+
+  {name:"The Mason Group",city:"Toronto, ON",
+   desc:"Toronto's leading specialist in finance, accounting and HR recruitment. The Mason Group places mid-to-senior finance professionals across the GTA, with deep employer relationships in financial services, professional services and corporate sectors.",
+   primary:["Finance & Accounting"],
+   industries:["Finance & Accounting","General Staffing"],
+   types:["perm","temp"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["private"],
+   rating:4.6,reviews:410,founded:"1990",employees:"50+",dailyJobs:6,
+   web:"https://www.masongroup.ca",color:"#1a5276",verified:true,
+   links:{perm:"https://www.masongroup.ca/jobs/",temp:"https://www.masongroup.ca/jobs/",exec:"https://www.masongroup.ca/jobs/",
+     ind:{"Finance & Accounting":"https://www.masongroup.ca/jobs/"},
+     newcomer:"https://www.masongroup.ca/jobs/",remote:"https://www.masongroup.ca/jobs/"}},
+
+  {name:"Pinnacle Staffing",city:"Winnipeg, MB (Manitoba & National)",
+   desc:"The largest recruitment firm in Manitoba, founded in 2002. Pinnacle covers finance, accounting, administrative, technology, marketing and legal roles. A people-focused agency with a strong Prairie presence and growing national reach.",
+   primary:["Finance & Accounting","General Staffing"],
+   industries:["Finance & Accounting","General Staffing","Technology & IT","Legal","Creative & Marketing"],
+   types:["perm","temp"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["entry","mid","senior"],sector:["private","public"],
+   rating:4.5,reviews:290,founded:"2002",employees:"210+",dailyJobs:7,
+   web:"https://www.pinnacle.jobs",color:"#e67e22",verified:true,
+   links:{perm:"https://www.pinnacle.jobs/job-search/",temp:"https://www.pinnacle.jobs/job-search/",exec:"https://www.pinnacle.jobs/job-search/",
+     ind:{"Finance & Accounting":"https://www.pinnacle.jobs/job-search/","General Staffing":"https://www.pinnacle.jobs/job-search/"},
+     newcomer:"https://www.pinnacle.jobs/job-search/",remote:"https://www.pinnacle.jobs/job-search/"}},
+
+  {name:"Talentcor",city:"Edmonton, AB (Western Canada)",
+   desc:"A well-established Western Canadian specialist primarily known for office administration, customer service and light industrial placements across Alberta and BC. Strong newcomer support.",
+   primary:["General Staffing"],
+   industries:["General Staffing"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:false,
+   levels:["entry","mid"],sector:["private"],
+   rating:4.3,reviews:1850,founded:"1983",employees:"100+",dailyJobs:6,
+   web:"https://www.talentcor.com",color:"#1e8449",verified:true,
+   links:{perm:"https://www.talentcor.com/find-work/",temp:"https://www.talentcor.com/find-work/",exec:"https://www.talentcor.com/find-work/",
+     ind:{"General Staffing":"https://www.talentcor.com/find-work/"},
+     newcomer:"https://www.talentcor.com/find-work/",remote:"https://www.talentcor.com/find-work/"}},
+
+  {name:"Meridia Recruitment",city:"Halifax, NS (Atlantic Canada)",
+   desc:"Atlantic Canada's leading specialist, primarily known for accounting, finance and executive search across Nova Scotia, New Brunswick, PEI and Newfoundland.",
+   primary:["Finance & Accounting","Executive Search"],
+   industries:["Finance & Accounting","Executive Search","Engineering"],
+   types:["perm","exec"],newcomer:false,remote:false,free:true,visa:false,
+   levels:["senior","executive"],sector:["private","public"],
+   rating:4.6,reviews:1120,founded:"2001",employees:"50+",dailyJobs:5,
+   web:"https://www.meridiarecruitment.ca",color:"#1f618d",verified:true,
+   links:{perm:"https://www.meridiarecruitment.ca/current-opportunities/",temp:"https://www.meridiarecruitment.ca/current-opportunities/",exec:"https://www.meridiarecruitment.ca/executive-search/",
+     ind:{"Finance & Accounting":"https://www.meridiarecruitment.ca/current-opportunities/?sector=accounting","Executive Search":"https://www.meridiarecruitment.ca/executive-search/","Engineering":"https://www.meridiarecruitment.ca/current-opportunities/?sector=engineering"},
+     newcomer:"https://www.meridiarecruitment.ca/current-opportunities/",remote:"https://www.meridiarecruitment.ca/current-opportunities/"}},
+
+  {name:"Manpower Canada",city:"Nationwide",
+   desc:"A globally recognised brand primarily known for light industrial, manufacturing and general staffing placements across all major Canadian cities. Offers career development and training alongside placement.",
+   primary:["General Staffing","Trades & Construction"],
+   industries:["General Staffing","Trades & Construction","Engineering"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:true,
+   levels:["entry","mid"],sector:["private"],
+   rating:4.1,reviews:5600,founded:"1948",employees:"28,000+",dailyJobs:30,
+   web:"https://www.manpowergroup.ca",color:"#e67e22",verified:true,
+   links:{perm:"https://www.manpowergroup.ca/find-work/",temp:"https://www.manpowergroup.ca/find-work/",exec:"https://www.manpowergroup.ca/find-work/",
+     ind:{"General Staffing":"https://www.manpowergroup.ca/find-work/","Trades & Construction":"https://www.manpowergroup.ca/find-work/"},
+     newcomer:"https://www.manpowergroup.ca/find-work/",remote:"https://www.manpowergroup.ca/find-work/"}},
+
+  {name:"S.i. Systems",city:"Calgary, AB (Nationwide)",
+   desc:"One of Canada's largest IT-only staffing agencies. Exclusively technology-focused: software development, project management, data analytics and cybersecurity contract and permanent roles.",
+   primary:["Technology & IT"],
+   industries:["Technology & IT"],
+   types:["perm","temp"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["private","public"],
+   rating:4.5,reviews:890,founded:"1994",employees:"500+",dailyJobs:12,
+   web:"https://www.sisystems.com",color:"#1a5276",verified:true,
+   links:{perm:"https://www.sisystems.com/job-seekers/",temp:"https://www.sisystems.com/job-seekers/",exec:"https://www.sisystems.com/job-seekers/",
+     ind:{"Technology & IT":"https://www.sisystems.com/job-seekers/"},
+     newcomer:"https://www.sisystems.com/job-seekers/",remote:"https://www.sisystems.com/job-seekers/"}},
+
+  {name:"Summit Search Group",city:"Calgary, AB (Nationwide)",
+   desc:"A national firm primarily known for executive search and oil & gas sector recruitment across Canada. Deep expertise in retained executive mandates for energy and professional services.",
+   primary:["Executive Search","Oil & Gas"],
+   industries:["Executive Search","Oil & Gas","Finance & Accounting"],
+   types:["perm","exec"],newcomer:false,remote:false,free:true,visa:false,
+   levels:["senior","executive"],sector:["private"],
+   rating:4.6,reviews:760,founded:"2000",employees:"100+",dailyJobs:5,
+   web:"https://summitsearchgroup.com",color:"#784212",verified:true,
+   links:{perm:"https://summitsearchgroup.com/candidates/",temp:"https://summitsearchgroup.com/candidates/",exec:"https://summitsearchgroup.com/executive-search/",
+     ind:{"Executive Search":"https://summitsearchgroup.com/executive-search/","Oil & Gas":"https://summitsearchgroup.com/candidates/?sector=oil-gas","Finance & Accounting":"https://summitsearchgroup.com/candidates/?sector=finance"},
+     newcomer:"https://summitsearchgroup.com/candidates/",remote:"https://summitsearchgroup.com/candidates/"}},
+
+  {name:"Impact Recruitment",city:"Vancouver, BC",
+   desc:"Primarily known for legal and construction recruitment in BC. A sister company of David Aplin Group with deep BC employer relationships and a genuinely personalised candidate approach.",
+   primary:["Legal","Trades & Construction"],
+   industries:["Legal","Trades & Construction","Executive Search","Finance & Accounting"],
+   types:["perm","exec"],newcomer:false,remote:false,free:true,visa:false,
+   levels:["mid","senior"],sector:["private"],
+   rating:4.7,reviews:510,founded:"1988",employees:"50+",dailyJobs:4,
+   web:"https://www.impactrecruitment.ca",color:"#154360",verified:true,
+   links:{perm:"https://www.impactrecruitment.ca/candidates/",temp:"https://www.impactrecruitment.ca/candidates/",exec:"https://www.impactrecruitment.ca/candidates/",
+     ind:{"Legal":"https://www.impactrecruitment.ca/legal/","Trades & Construction":"https://www.impactrecruitment.ca/construction/","Executive Search":"https://www.impactrecruitment.ca/executive-search/","Finance & Accounting":"https://www.impactrecruitment.ca/accounting/"},
+     newcomer:"https://www.impactrecruitment.ca/candidates/",remote:"https://www.impactrecruitment.ca/candidates/"}},
+
+  {name:"Knightsbridge Robertson Surrette",city:"Halifax, NS (National)",
+   desc:"One of Canada's most respected firms, exclusively known for senior executive search and board-level mandates across Canada. Specialises in leadership appointments for public, private and not-for-profit organisations.",
+   primary:["Executive Search"],
+   industries:["Executive Search"],
+   types:["exec"],newcomer:false,remote:false,free:true,visa:false,
+   levels:["executive"],sector:["private","public","nonprofit"],
+   rating:4.6,reviews:190,founded:"1974",employees:"100+",dailyJobs:2,
+   web:"https://www.kbrs.ca",color:"#2c3e50",verified:true,
+   links:{perm:"https://www.kbrs.ca/Opportunities",temp:"https://www.kbrs.ca/Opportunities",exec:"https://www.kbrs.ca/Opportunities",
+     ind:{"Executive Search":"https://www.kbrs.ca/Opportunities"},
+     newcomer:"https://www.kbrs.ca/Opportunities",remote:"https://www.kbrs.ca/Opportunities"}},
+
+  {name:"TEKsystems Canada",city:"Mississauga, ON (9 offices nationwide)",
+   desc:"One of North Americas largest IT-only staffing firms, part of Allegis Group. Nine Canadian offices from Halifax to Vancouver. Exclusively places technology professionals in software development, cybersecurity, cloud, data and risk and compliance roles. Partners with 6,000+ clients nationwide. Free for candidates.",
+   primary:["Technology & IT"],
+   industries:["Technology & IT"],
+   types:["perm","temp"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["private","public"],
+   rating:4.3,reviews:4600,founded:"1994",employees:"80,000+",dailyJobs:15,
+   web:"https://www.teksystems.com/en-ca",color:"#0047AB",verified:true,
+   links:{perm:"https://www.teksystems.com/en-ca/talent-recruiting",temp:"https://www.teksystems.com/en-ca/talent-recruiting",exec:"https://www.teksystems.com/en-ca/talent-recruiting",
+     ind:{"Technology & IT":"https://www.teksystems.com/en-ca/talent-recruiting"},
+     newcomer:"https://www.teksystems.com/en-ca/talent-recruiting",remote:"https://www.teksystems.com/en-ca/talent-recruiting"}},
+
+  {name:"Drake International",city:"Toronto, ON (17 branches nationwide)",
+   desc:"One of Canadas oldest agencies, founded in Winnipeg in 1951. Covers healthcare, engineering, finance, IT, manufacturing, government and education across 17 Canadian branches. Known for rigorous ethical standards and candidate satisfaction scores above industry average. Multi-sector generalist with deep national roots.",
+   primary:["General Staffing","Healthcare"],
+   industries:["General Staffing","Healthcare","Technology & IT","Finance & Accounting","Engineering"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:false,
+   levels:["entry","mid","senior"],sector:["private","public","nonprofit"],
+   rating:4.4,reviews:2800,founded:"1951",employees:"1,000-5,000",dailyJobs:12,
+   web:"https://ca.drakeintl.com",color:"#C41E3A",verified:true,
+   links:{perm:"https://ca.drakeintl.com/for-job-seekers/",temp:"https://ca.drakeintl.com/for-job-seekers/",exec:"https://ca.drakeintl.com/for-job-seekers/",
+     ind:{"General Staffing":"https://ca.drakeintl.com/for-job-seekers/","Healthcare":"https://ca.drakeintl.com/for-job-seekers/","Technology & IT":"https://ca.drakeintl.com/for-job-seekers/","Finance & Accounting":"https://ca.drakeintl.com/for-job-seekers/","Engineering":"https://ca.drakeintl.com/for-job-seekers/"},
+     newcomer:"https://ca.drakeintl.com/for-job-seekers/",remote:"https://ca.drakeintl.com/for-job-seekers/"}}
+];
+
+//  UK AGENCIES (verified) ,
+
+var ukData = [
+  {name:"Reed UK",city:"London (350+ offices nationwide)",
+   desc:"Founded in 1960, Reed is the UK's household name for broad general staffing. Not an industry specialist - covers dozens of sectors at volume. One of the largest job boards in the UK with 200,000+ live jobs.",
+   primary:["General Staffing"],
+   industries:["General Staffing","Finance & Accounting","Healthcare","Education"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:true,
+   levels:["entry","mid"],sector:["private","public"],
+   rating:4.5,reviews:12040,founded:"1960",employees:"3,000+",dailyJobs:500,
+   web:"https://www.reed.co.uk",color:"#cc0000",verified:true,
+   links:{perm:"https://www.reed.co.uk/jobs/permanent-jobs",temp:"https://www.reed.co.uk/jobs/temporary-contract-jobs",exec:"https://www.reed.co.uk/jobs/permanent-jobs",
+     ind:{"General Staffing":"https://www.reed.co.uk/jobs","Finance & Accounting":"https://www.reed.co.uk/jobs/accountancy-finance-jobs","Healthcare":"https://www.reed.co.uk/jobs/healthcare-nursing-jobs","Education":"https://www.reed.co.uk/jobs/education-jobs"},
+     newcomer:"https://www.reed.co.uk/jobs",remote:"https://www.reed.co.uk/jobs/work-from-home-jobs"}},
+
+  {name:"Hays UK",city:"London (Nationwide)",
+   desc:"A market leader with 50+ years of experience, primarily known for engineering and education staffing. Free online learning platform for all registered candidates. Nearly 10,000 staff across 30 countries.",
+   primary:["Engineering","Education"],
+   industries:["Engineering","Education","Technology & IT","Finance & Accounting"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:true,
+   levels:["mid","senior"],sector:["private","public"],
+   rating:4.6,reviews:9800,founded:"1968",employees:"10,000+",dailyJobs:120,
+   web:"https://www.hays.co.uk",color:"#c0392b",verified:true,
+   links:{perm:"https://www.hays.co.uk/jobs/permanent-jobs",temp:"https://www.hays.co.uk/jobs/contract-jobs",exec:"https://www.hays.co.uk/jobs/permanent-jobs",
+     ind:{"Engineering":"https://www.hays.co.uk/engineering-jobs","Education":"https://www.hays.co.uk/education-jobs","Technology & IT":"https://www.hays.co.uk/it-jobs","Finance & Accounting":"https://www.hays.co.uk/accountancy-finance-jobs"},
+     newcomer:"https://www.hays.co.uk/jobs",remote:"https://www.hays.co.uk/jobs/remote-jobs"}},
+
+  {name:"Michael Page UK",city:"London (Nationwide)",
+   desc:"Primarily known for finance, HR and legal recruitment at the mid-to-senior level. Part of PageGroup, operating in 36 countries. Accesses many roles not on public job boards. ISO 27001 accredited.",
+   primary:["Finance & Accounting","Legal"],
+   industries:["Finance & Accounting","Legal","Executive Search","Technology & IT"],
+   types:["perm","exec"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["senior","executive"],sector:["private"],
+   rating:4.7,reviews:7540,founded:"1976",employees:"7,000+",dailyJobs:80,
+   web:"https://www.michaelpage.co.uk",color:"#e74c3c",verified:true,
+   links:{perm:"https://www.michaelpage.co.uk/jobs",temp:"https://www.michaelpage.co.uk/jobs",exec:"https://www.michaelpage.co.uk/executive-search",
+     ind:{"Finance & Accounting":"https://www.michaelpage.co.uk/jobs/finance-accounting","Legal":"https://www.michaelpage.co.uk/jobs/legal","Executive Search":"https://www.michaelpage.co.uk/executive-search","Technology & IT":"https://www.michaelpage.co.uk/jobs/technology"},
+     newcomer:"https://www.michaelpage.co.uk/jobs",remote:"https://www.michaelpage.co.uk/jobs?remote=true"}},
+
+  {name:"Robert Walters UK",city:"London (4 UK offices)",
+   desc:"Established in London in 1985, primarily known for finance, accounting and legal professional recruitment. Renowned for ethical, relationship-led service at the senior professional level.",
+   primary:["Finance & Accounting","Legal"],
+   industries:["Finance & Accounting","Legal","Technology & IT","Executive Search"],
+   types:["perm","exec"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["senior","executive"],sector:["private"],
+   rating:4.7,reviews:5210,founded:"1985",employees:"4,000+",dailyJobs:45,
+   web:"https://www.robertwalters.co.uk",color:"#5b2c6f",verified:true,
+   links:{perm:"https://www.robertwalters.co.uk/jobs.html",temp:"https://www.robertwalters.co.uk/jobs.html",exec:"https://www.robertwalters.co.uk/our-services/executive-search.html",
+     ind:{"Finance & Accounting":"https://www.robertwalters.co.uk/expertise/accounting-finance.html","Legal":"https://www.robertwalters.co.uk/expertise/legal.html","Technology & IT":"https://www.robertwalters.co.uk/expertise/technology.html","Executive Search":"https://www.robertwalters.co.uk/our-services/executive-search.html"},
+     newcomer:"https://www.robertwalters.co.uk/jobs.html",remote:"https://www.robertwalters.co.uk/jobs.html"}},
+
+  {name:"Harvey Nash UK",city:"London (Nationwide & Global)",
+   desc:"A specialist IT recruitment agency with over 35 years of experience in technology and digital roles. Covers AI, cybersecurity, cloud, software engineering and executive technology leadership. Actively warns candidates about impersonation scams.",
+   primary:["Technology & IT"],
+   industries:["Technology & IT","Executive Search"],
+   types:["perm","temp","exec"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["mid","senior","executive"],sector:["private"],
+   rating:4.6,reviews:1820,founded:"1988",employees:"1,000+",dailyJobs:35,
+   web:"https://www.harveynash.co.uk",color:"#1a5276",verified:true,
+   links:{perm:"https://www.harveynash.co.uk/jobs",temp:"https://www.harveynash.co.uk/jobs",exec:"https://www.harveynash.co.uk/executive-search",
+     ind:{"Technology & IT":"https://www.harveynash.co.uk/jobs","Executive Search":"https://www.harveynash.co.uk/executive-search"},
+     newcomer:"https://www.harveynash.co.uk/jobs",remote:"https://www.harveynash.co.uk/jobs?remote=true"}},
+
+  {name:"Page Executive UK",city:"London (Nationwide)",
+   desc:"The executive search arm of PageGroup, operating separately from Michael Page. Specialises in C-suite, director and board-level appointments across the UK and internationally. Part of a FTSE-listed group with 40+ years of UK presence.",
+   primary:["Executive Search"],
+   industries:["Executive Search","Finance & Accounting","Technology & IT"],
+   types:["exec"],newcomer:false,remote:false,free:true,visa:false,
+   levels:["executive"],sector:["private","public"],
+   rating:4.7,reviews:920,founded:"1993",employees:"500+",dailyJobs:15,
+   web:"https://www.pageexecutive.com/uk",color:"#c0392b",verified:true,
+   links:{perm:"https://www.pageexecutive.com/uk/jobs",temp:"https://www.pageexecutive.com/uk/jobs",exec:"https://www.pageexecutive.com/uk/jobs",
+     ind:{"Executive Search":"https://www.pageexecutive.com/uk/jobs","Finance & Accounting":"https://www.pageexecutive.com/uk/jobs","Technology & IT":"https://www.pageexecutive.com/uk/jobs"},
+     newcomer:"https://www.pageexecutive.com/uk/jobs",remote:"https://www.pageexecutive.com/uk/jobs"}},
+
+  {name:"Adecco UK",city:"London (Nationwide)",
+   desc:"Primarily known for industrial, logistics and general office staffing at high volume. Also offers some skilled worker routes for international candidates in high-demand sectors.",
+   primary:["General Staffing","Trades & Construction"],
+   industries:["General Staffing","Trades & Construction"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:true,
+   levels:["entry","mid"],sector:["private"],
+   rating:4.2,reviews:15600,founded:"1957",employees:"32,000+",dailyJobs:90,
+   web:"https://www.adecco.co.uk",color:"#c0392b",verified:true,
+   links:{perm:"https://www.adecco.co.uk/jobs",temp:"https://www.adecco.co.uk/jobs",exec:"https://www.adecco.co.uk/jobs",
+     ind:{"General Staffing":"https://www.adecco.co.uk/jobs","Trades & Construction":"https://www.adecco.co.uk/jobs"},
+     newcomer:"https://www.adecco.co.uk/jobs",remote:"https://www.adecco.co.uk/jobs"}},
+
+  {name:"Manpower UK",city:"London (Nationwide)",
+   desc:"Primarily known for manufacturing, distribution and customer service placements. Offers career development training. One of the world's best-known staffing brands with a strong UK regional network.",
+   primary:["General Staffing","Trades & Construction"],
+   industries:["General Staffing","Trades & Construction","Engineering"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:true,
+   levels:["entry","mid"],sector:["private"],
+   rating:4.3,reviews:8930,founded:"1948",employees:"28,000+",dailyJobs:70,
+   web:"https://www.manpower.co.uk",color:"#e67e22",verified:true,
+   links:{perm:"https://www.manpower.co.uk/candidates/job-search",temp:"https://www.manpower.co.uk/candidates/job-search",exec:"https://www.manpower.co.uk/candidates/job-search",
+     ind:{"General Staffing":"https://www.manpower.co.uk/candidates/job-search","Trades & Construction":"https://www.manpower.co.uk/candidates/job-search","Engineering":"https://www.manpower.co.uk/candidates/job-search"},
+     newcomer:"https://www.manpower.co.uk/candidates/job-search",remote:"https://www.manpower.co.uk/candidates/job-search"}},
+
+  {name:"NHS Professionals",city:"Nationwide NHS Trusts",
+   desc:"The UK's largest NHS staffing provider, exclusively focused on healthcare. Places nurses, healthcare assistants and allied health professionals across NHS Trusts throughout England.",
+   primary:["Healthcare"],
+   industries:["Healthcare"],
+   types:["perm","temp"],newcomer:false,remote:false,free:true,visa:false,
+   levels:["entry","mid","senior"],sector:["public"],
+   rating:4.4,reviews:21000,founded:"2001",employees:"4,000+",dailyJobs:150,
+   web:"https://www.nhsprofessionals.nhs.uk",color:"#005eb8",verified:true,
+   links:{perm:"https://www.nhsprofessionals.nhs.uk/for-workers/join-us",temp:"https://www.nhsprofessionals.nhs.uk/for-workers/join-us",exec:"https://www.nhsprofessionals.nhs.uk/for-workers/join-us",
+     ind:{"Healthcare":"https://www.nhsprofessionals.nhs.uk/for-workers/join-us"},
+     newcomer:"https://www.nhsprofessionals.nhs.uk/for-workers/join-us",remote:"https://www.nhsprofessionals.nhs.uk/for-workers/join-us"}},
+
+  {name:"Tiger Recruitment",city:"London (Global Reach)",
+   desc:"Award-winning agency primarily known for business support, HR and creative professional recruitment. Times Best Place to Work and Newsweek Top 100 Most Loved Workplace 2025. Headquarters in London with offices in Dubai, New York and Dublin.",
+   primary:["General Staffing","Creative & Marketing"],
+   industries:["General Staffing","Creative & Marketing","Finance & Accounting"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:false,
+   levels:["entry","mid"],sector:["private"],
+   rating:4.8,reviews:2340,founded:"2001",employees:"200+",dailyJobs:15,
+   web:"https://tiger-recruitment.com",color:"#f39c12",verified:true,
+   links:{perm:"https://tiger-recruitment.com/candidates/permanent-jobs/",temp:"https://tiger-recruitment.com/candidates/temporary-jobs/",exec:"https://tiger-recruitment.com/candidates/permanent-jobs/",
+     ind:{"General Staffing":"https://tiger-recruitment.com/candidates/","Creative & Marketing":"https://tiger-recruitment.com/candidates/digital-jobs/","Finance & Accounting":"https://tiger-recruitment.com/candidates/finance-jobs/"},
+     newcomer:"https://tiger-recruitment.com/candidates/",remote:"https://tiger-recruitment.com/candidates/remote-jobs/"}},
+
+  {name:"Morgan Hunt",city:"London, Edinburgh, Manchester",
+   desc:"A purpose-driven firm primarily known for charity, education and public sector recruitment. 150+ consultants with deep knowledge of not-for-profit, government and third sector hiring.",
+   primary:["Education","General Staffing"],
+   industries:["Education","General Staffing","Healthcare"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:false,
+   levels:["mid","senior"],sector:["public","nonprofit"],
+   rating:4.5,reviews:1870,founded:"1994",employees:"150+",dailyJobs:20,
+   web:"https://www.morganhunt.com",color:"#117a65",verified:true,
+   links:{perm:"https://www.morganhunt.com/jobs/",temp:"https://www.morganhunt.com/jobs/?type=temporary",exec:"https://www.morganhunt.com/jobs/",
+     ind:{"Education":"https://www.morganhunt.com/jobs/?sector=education","General Staffing":"https://www.morganhunt.com/jobs/","Healthcare":"https://www.morganhunt.com/jobs/?sector=healthcare"},
+     newcomer:"https://www.morganhunt.com/jobs/",remote:"https://www.morganhunt.com/jobs/"}},
+
+  {name:"Morson Group",city:"Manchester (Nationwide)",
+   desc:"One of the UK's leading technical staffing specialists with 50+ years of experience. Exclusively focused on engineering and technology: defence, rail, aerospace, nuclear and power infrastructure.",
+   primary:["Engineering","Technology & IT"],
+   industries:["Engineering","Technology & IT"],
+   types:["perm","temp"],newcomer:false,remote:false,free:true,visa:false,
+   levels:["mid","senior"],sector:["private"],
+   rating:4.5,reviews:3420,founded:"1969",employees:"1,000+",dailyJobs:25,
+   web:"https://www.morson.com",color:"#1e8449",verified:true,
+   links:{perm:"https://www.morson.com/jobs/",temp:"https://www.morson.com/jobs/?type=contract",exec:"https://www.morson.com/jobs/",
+     ind:{"Engineering":"https://www.morson.com/jobs/?sector=engineering","Technology & IT":"https://www.morson.com/jobs/?sector=it"},
+     newcomer:"https://www.morson.com/jobs/",remote:"https://www.morson.com/jobs/"}},
+
+  {name:"Blue Arrow",city:"Nationwide (65 branches)",
+   desc:"Established in 1959, primarily known for hospitality, logistics, transport and light industrial staffing. Places over 60,000 people a year across 65 high-street branches nationwide.",
+   primary:["General Staffing","Trades & Construction"],
+   industries:["General Staffing","Trades & Construction"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:true,
+   levels:["entry","mid"],sector:["private"],
+   rating:4.2,reviews:7800,founded:"1959",employees:"600+",dailyJobs:60,
+   web:"https://www.bluearrow.co.uk",color:"#1a5276",verified:true,
+   links:{perm:"https://www.bluearrow.co.uk/jobs/",temp:"https://www.bluearrow.co.uk/jobs/?type=temporary",exec:"https://www.bluearrow.co.uk/jobs/",
+     ind:{"General Staffing":"https://www.bluearrow.co.uk/jobs/","Trades & Construction":"https://www.bluearrow.co.uk/jobs/"},
+     newcomer:"https://www.bluearrow.co.uk/jobs/",remote:"https://www.bluearrow.co.uk/jobs/"}},
+
+  {name:"Pertemps Network",city:"Birmingham (Nationwide)",
+   desc:"One of the UK's largest independent, family-owned staffing companies. Primarily known for commercial, industrial and warehousing placements with strong regional presence across the Midlands.",
+   primary:["General Staffing","Trades & Construction"],
+   industries:["General Staffing","Trades & Construction"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:true,
+   levels:["entry","mid"],sector:["private"],
+   rating:4.3,reviews:6710,founded:"1961",employees:"2,000+",dailyJobs:55,
+   web:"https://www.pertemps.co.uk",color:"#1f618d",verified:true,
+   links:{perm:"https://www.pertemps.co.uk/candidates/jobs/",temp:"https://www.pertemps.co.uk/candidates/jobs/",exec:"https://www.pertemps.co.uk/candidates/jobs/",
+     ind:{"General Staffing":"https://www.pertemps.co.uk/candidates/jobs/","Trades & Construction":"https://www.pertemps.co.uk/candidates/jobs/"},
+     newcomer:"https://www.pertemps.co.uk/candidates/jobs/",remote:"https://www.pertemps.co.uk/candidates/jobs/"}},
+
+  {name:"Sellick Partnership",city:"Manchester (North & Midlands)",
+   desc:"A northern specialist exclusively focused on finance, legal and IT recruitment for public sector and not-for-profit organisations. Strong reputation for ethical practice and deep specialist knowledge.",
+   primary:["Finance & Accounting","Legal"],
+   industries:["Finance & Accounting","Legal","Technology & IT"],
+   types:["perm","temp"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["public","nonprofit"],
+   rating:4.7,reviews:2180,founded:"2002",employees:"100+",dailyJobs:12,
+   web:"https://www.sellickpartnership.co.uk",color:"#2874a6",verified:true,
+   links:{perm:"https://www.sellickpartnership.co.uk/jobs/",temp:"https://www.sellickpartnership.co.uk/jobs/?type=contract",exec:"https://www.sellickpartnership.co.uk/jobs/",
+     ind:{"Finance & Accounting":"https://www.sellickpartnership.co.uk/jobs/?sector=finance","Legal":"https://www.sellickpartnership.co.uk/jobs/?sector=legal","Technology & IT":"https://www.sellickpartnership.co.uk/jobs/?sector=it"},
+     newcomer:"https://www.sellickpartnership.co.uk/jobs/",remote:"https://www.sellickpartnership.co.uk/jobs/?remote=true"}},
+
+  {name:"Impellam Group",city:"Luton (Nationwide)",
+   desc:"One of the UK's largest staffing businesses, primarily known for engineering and technology staffing at scale. Strong ethical credentials, diversity commitment and extensive industry partnerships.",
+   primary:["Engineering","Technology & IT"],
+   industries:["Engineering","Technology & IT","Healthcare","General Staffing"],
+   types:["perm","temp"],newcomer:false,remote:true,free:true,visa:false,
+   levels:["mid","senior"],sector:["private","public"],
+   rating:4.4,reviews:4200,founded:"1999",employees:"5,000+",dailyJobs:40,
+   web:"https://www.impellam.com",color:"#6c3483",verified:true,
+   links:{perm:"https://www.impellam.com/job-seekers/",temp:"https://www.impellam.com/job-seekers/",exec:"https://www.impellam.com/job-seekers/",
+     ind:{"Engineering":"https://www.impellam.com/job-seekers/","Technology & IT":"https://www.impellam.com/job-seekers/","Healthcare":"https://www.impellam.com/job-seekers/","General Staffing":"https://www.impellam.com/job-seekers/"},
+     newcomer:"https://www.impellam.com/job-seekers/",remote:"https://www.impellam.com/job-seekers/"}},
+
+  {name:"Nolan Recruitment",city:"Warrington, England (Nationwide)",
+   desc:"A specialist exclusively focused on engineering and energy sector roles. Particularly strong for international candidates as many roles appear on the UK Skilled Worker Shortage list, supporting visa sponsorship.",
+   primary:["Engineering","Oil & Gas"],
+   industries:["Engineering","Oil & Gas"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:true,
+   levels:["mid","senior"],sector:["private"],
+   rating:4.6,reviews:870,founded:"2002",employees:"100+",dailyJobs:8,
+   web:"https://www.nolanrecruitment.com",color:"#784212",verified:true,
+   links:{perm:"https://www.nolanrecruitment.com/jobs/",temp:"https://www.nolanrecruitment.com/jobs/?type=contract",exec:"https://www.nolanrecruitment.com/jobs/",
+     ind:{"Engineering":"https://www.nolanrecruitment.com/jobs/","Oil & Gas":"https://www.nolanrecruitment.com/jobs/?sector=oil-gas"},
+     newcomer:"https://www.nolanrecruitment.com/jobs/",remote:"https://www.nolanrecruitment.com/jobs/"}},
+
+  {name:"Pearls Healthcare Recruitment",city:"London (Nationwide & Global)",
+   desc:"An established independent agency exclusively focused on medical, nursing and care recruitment. Places physicians, nurses, allied health professionals and care workers across the UK and internationally. Strong newcomer support.",
+   primary:["Healthcare","Science & Pharma"],
+   industries:["Healthcare","Science & Pharma"],
+   types:["perm","temp"],newcomer:true,remote:false,free:true,visa:true,
+   levels:["entry","mid","senior"],sector:["public","private"],
+   rating:4.5,reviews:1090,founded:"2000",employees:"200+",dailyJobs:12,
+   web:"https://www.pearlshealthcare.com",color:"#1abc9c",verified:true,
+   links:{perm:"https://www.pearlshealthcare.com/jobs/",temp:"https://www.pearlshealthcare.com/jobs/",exec:"https://www.pearlshealthcare.com/jobs/",
+     ind:{"Healthcare":"https://www.pearlshealthcare.com/jobs/","Science & Pharma":"https://www.pearlshealthcare.com/jobs/"},
+     newcomer:"https://www.pearlshealthcare.com/jobs/",remote:"https://www.pearlshealthcare.com/jobs/"}},
+
+  {name:"PSD Group",city:"London (Nationwide)",
+   desc:"Established in 1991, exclusively focused on executive search for senior leadership and board-level appointments across financial services, commerce and the public sector.",
+   primary:["Executive Search"],
+   industries:["Executive Search","Finance & Accounting"],
+   types:["exec"],newcomer:false,remote:false,free:true,visa:false,
+   levels:["executive"],sector:["private","public"],
+   rating:4.6,reviews:560,founded:"1991",employees:"100+",dailyJobs:4,
+   web:"https://www.psdgroup.com",color:"#154360",verified:true,
+   links:{perm:"https://www.psdgroup.com/candidates/",temp:"https://www.psdgroup.com/candidates/",exec:"https://www.psdgroup.com/executive-search/",
+     ind:{"Executive Search":"https://www.psdgroup.com/candidates/","Finance & Accounting":"https://www.psdgroup.com/candidates/"},
+     newcomer:"https://www.psdgroup.com/candidates/",remote:"https://www.psdgroup.com/candidates/"}},
+
+  // JOB BOARDS (verified) - clearly labelled, not staffing agencies
+  {name:"Guardian Jobs",city:"London (National & Remote)",
+   desc:"The UK leading quality job board run by The Guardian newspaper since 2007. Focused on media, education, government, charities, social care and the arts. Employers post their own jobs directly - this is a job board not a staffing agency. Free to apply. 1.6 million monthly visitors.",
+   primary:["Education","Creative & Marketing"],
+   industries:["Education","Creative & Marketing","General Staffing","Healthcare"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:false,
+   levels:["entry","mid","senior"],sector:["public","nonprofit","private"],
+   rating:4.6,reviews:8900,founded:"2007",employees:"500+",dailyJobs:85,
+   web:"https://jobs.theguardian.com",color:"#052962",verified:true,
+   links:{perm:"https://jobs.theguardian.com",temp:"https://jobs.theguardian.com",exec:"https://jobs.theguardian.com",
+     ind:{"Education":"https://jobs.theguardian.com/jobs/education/","Creative & Marketing":"https://jobs.theguardian.com/jobs/media/","General Staffing":"https://jobs.theguardian.com","Healthcare":"https://jobs.theguardian.com/jobs/social-care/"},
+     newcomer:"https://jobs.theguardian.com",remote:"https://jobs.theguardian.com/jobs/?workingPattern=remote"}},
+
+  {name:"CharityJob UK",city:"London (Nationwide & Remote)",
+   desc:"The UK first and foremost specialist job board for the non-profit, NGO, social enterprise and voluntary sectors. Used by over 20,000 charities. Trusted by NCVO. Hosts around 3,000 roles at any time. Free to apply for candidates. This is a job board not a staffing agency.",
+   primary:["General Staffing"],
+   industries:["General Staffing","Education","Healthcare","Creative & Marketing"],
+   types:["perm","temp"],newcomer:true,remote:true,free:true,visa:false,
+   levels:["entry","mid","senior"],sector:["nonprofit","public"],
+   rating:4.7,reviews:5200,founded:"1999",employees:"50+",dailyJobs:40,
+   web:"https://www.charityjob.co.uk",color:"#e74c3c",verified:true,
+   links:{perm:"https://www.charityjob.co.uk/jobs",temp:"https://www.charityjob.co.uk/jobs?type=temporary",exec:"https://www.charityjob.co.uk/jobs",
+     ind:{"General Staffing":"https://www.charityjob.co.uk/jobs","Education":"https://www.charityjob.co.uk/jobs?sector=education","Healthcare":"https://www.charityjob.co.uk/jobs?sector=health","Creative & Marketing":"https://www.charityjob.co.uk/jobs?sector=marketing"},
+     newcomer:"https://www.charityjob.co.uk/jobs",reverse:"https://www.charityjob.co.uk/jobs?remote=true",remote:"https://www.charityjob.co.uk/jobs?remote=true"}}
+];
+
+// Build lookup map AFTER both arrays are defined
+var agencyMap = {};
+caData.concat(ukData).forEach(function(a){agencyMap[a.name]=a;});
+
+//  SAVED AGENCIES (localStorage) 
+var savedAgencies = [];
+try {
+  var saved = localStorage.getItem("agencyportal_saved");
+  if (saved) savedAgencies = JSON.parse(saved);
+} catch(e) { savedAgencies = []; }
+
+function toggleSave(agencyName) {
+  var idx = savedAgencies.indexOf(agencyName);
+  if (idx >= 0) {
+    savedAgencies.splice(idx, 1);
+    showToast("Removed from saved agencies");
+  } else {
+    savedAgencies.push(agencyName);
+    showToast("Agency saved!");
+  }
+  try { localStorage.setItem("agencyportal_saved", JSON.stringify(savedAgencies)); } catch(e) {}
+  doFilter();
+}
+
+function isSaved(name) { return savedAgencies.indexOf(name) >= 0; }
+
+//  APPLICATION TRACKER 
+var tracker = [];
+try {
+  var tr = localStorage.getItem("agencyportal_tracker");
+  if (tr) tracker = JSON.parse(tr);
+} catch(e) { tracker = []; }
+
+function saveTracker() {
+  try { localStorage.setItem("agencyportal_tracker", JSON.stringify(tracker)); } catch(e) {}
+}
+
+function addToTracker(agencyName, web) {
+  var existing = tracker.find(function(t){ return t.agency === agencyName; });
+  if (existing) { showToast("Already in your tracker!"); return; }
+  tracker.push({
+    agency: agencyName,
+    web: web,
+    status: "Contacted",
+    date: new Date().toLocaleDateString("en-CA"),
+    followUp: "",
+    notes: ""
+  });
+  saveTracker();
+  showToast("Added to your Application Tracker!");
+}
+
+//  REVIEWS SYSTEM 
+var reviews = {};
+try {
+  var rv = localStorage.getItem("agencyportal_reviews");
+  if (rv) reviews = JSON.parse(rv);
+} catch(e) { reviews = {}; }
+
+function submitReview(agencyName, rating, text) {
+  if (!reviews[agencyName]) reviews[agencyName] = [];
+  reviews[agencyName].push({
+    rating: rating,
+    text: text,
+    date: new Date().toLocaleDateString("en-CA"),
+    helpful: 0
+  });
+  try { localStorage.setItem("agencyportal_reviews", JSON.stringify(reviews)); } catch(e) {}
+}
+
+function getAgencyReviews(name) { return reviews[name] || []; }
+
+//  LIST YOUR AGENCY FORM 
+function openListModal() {
+  document.getElementById("list-overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeListModal() {
+  document.getElementById("list-overlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function submitAgencyListing() {
+  var name = document.getElementById("la-name").value.trim();
+  var web = document.getElementById("la-web").value.trim();
+  var email = document.getElementById("la-email").value.trim();
+  var country = document.getElementById("la-country").value;
+  var city = document.getElementById("la-city").value.trim();
+  var desc = document.getElementById("la-desc").value.trim();
+  var industries = document.getElementById("la-industries").value.trim();
+
+  if (!name || !web || !email || !country || !city) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  // Build submission object (would POST to backend in production)
+  var submission = {
+    name: name, web: web, email: email, country: country,
+    city: city, desc: desc, industries: industries,
+    submitted: new Date().toISOString()
+  };
+
+  // Store locally for demo
+  var pending = [];
+  try { var p = localStorage.getItem("agencyportal_pending"); if (p) pending = JSON.parse(p); } catch(e) {}
+  pending.push(submission);
+  try { localStorage.setItem("agencyportal_pending", JSON.stringify(pending)); } catch(e) {}
+
+  document.getElementById("list-form").style.display = "none";
+  document.getElementById("list-success").style.display = "block";
+}
+
+//  LANGUAGE TOGGLE 
+function toggleLang() {
+  LANG = LANG === "en" ? "fr" : "en";
+  try { localStorage.setItem("agencyportal_lang", LANG); } catch(e) {}
+  applyLang();
+}
+
+function applyLang() {
+  // Update all elements with data-t attributes
+  document.querySelectorAll("[data-t]").forEach(function(el) {
+    var key = el.getAttribute("data-t");
+    el.innerHTML = t(key);
+  });
+  document.querySelectorAll("[data-t-ph]").forEach(function(el) {
+    el.placeholder = t(el.getAttribute("data-t-ph"));
+  });
+  // Re-render grids with new language strings
+  doFilter();
+}
+
+//  LAST VISIT SYSTEM 
+var STORAGE_KEY = "agencyportal_last_visit";
+var lastVisitDays = 0;
+
+function initLastVisit() {
+  var now = Date.now();
+  var stored = null;
+  try { stored = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+  if (stored) {
+    var last = parseInt(stored, 10);
+    var diffMs = now - last;
+    lastVisitDays = Math.max(1, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+  } else {
+    lastVisitDays = 3; // demo
+  }
+  showVisitBanner(lastVisitDays);
+  try { localStorage.setItem(STORAGE_KEY, now.toString()); } catch(e) {}
+}
+
+function calcNewJobs(agency, days) {
+  if (!agency.dailyJobs || days <= 0) return 0;
+  var base = agency.dailyJobs * days;
+  var weekends = Math.floor(days / 7) * 2;
+  return Math.max(1, Math.round(base - (weekends * agency.dailyJobs * 0.4)));
+}
+
+function showVisitBanner(days) {
+  var allAgencies = caData.concat(ukData);
+  var totalNew = 0;
+  allAgencies.forEach(function(a) { totalNew += calcNewJobs(a, days); });
+  var banner = document.getElementById("nvb");
+  if (!banner) return;
+  document.getElementById("nvb-count").textContent = totalNew.toLocaleString();
+  var dayLabel = days === 1 ? "yesterday" : days + " days ago";
+  document.getElementById("nvb-sub").textContent =
+    "Your last visit was " + dayLabel + " - Figures are estimates based on each agency's posting frequency";
+  banner.style.display = "flex";
+}
+
+function dismissBanner() {
+  var banner = document.getElementById("nvb");
+  banner.style.opacity = "0"; banner.style.transition = "opacity .3s";
+  setTimeout(function(){ banner.style.display = "none"; }, 300);
+}
+
+function getNewJobsLabel(agency) {
+  if (lastVisitDays <= 0) return null;
+  var n = calcNewJobs(agency, lastVisitDays);
+  if (n <= 0) return null;
+  return "~" + n.toLocaleString() + " " + t("new_jobs");
+}
+
+//  HELPERS 
+function inits(name) {
+  return name.split(" ").slice(0,2).map(function(w){return w[0];}).join("").toUpperCase();
+}
+
+function showToast(msg) {
+  var ex = document.getElementById("filter-toast");
+  if (ex) ex.remove();
+  var toast = document.createElement("div");
+  toast.id = "filter-toast";
+  toast.style.cssText = "position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#0e1724;color:#fff;padding:11px 22px;border-radius:22px;font-family:Outfit,sans-serif;font-size:13px;font-weight:500;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.3);border:1px solid rgba(184,144,42,.35);white-space:nowrap;";
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(function(){
+    toast.style.transition = "opacity .3s"; toast.style.opacity = "0";
+    setTimeout(function(){toast.remove();}, 300);
+  }, 2500);
+}
+
+//  TAB / PILL SWITCHING 
+var activeTab = "canada";
+
+function switchTab(c) {
+  activeTab = c;
+  document.querySelectorAll(".ctab").forEach(function(t){t.classList.remove("active");});
+  document.querySelector(".ctab." + c).classList.add("active");
+  document.querySelectorAll(".country-section").forEach(function(s){s.classList.remove("active");});
+  document.getElementById("sec-" + c).classList.add("active");
+  window.scrollTo({top:200,behavior:"smooth"});
+  doFilter();
+}
+
+function buildPills(country, data) {
+  var inds = {};
+  data.forEach(function(a){ a.primary.forEach(function(i){ inds[i]=true; }); });
+  var el = document.getElementById("pills-" + country);
+  el.innerHTML = "";
+  Object.keys(inds).sort().forEach(function(ind) {
+    var p = document.createElement("div");
+    p.className = country === "uk" ? "pill uk-pill" : "pill ca-pill";
+    p.textContent = ind;
+    p.onclick = function() {
+      var was = p.classList.contains("on");
+      document.querySelectorAll(".pill").forEach(function(x){x.classList.remove("on");});
+      if (!was) { p.classList.add("on"); document.getElementById("indF").value = ""; }
+      doFilter();
+    };
+    el.appendChild(p);
+  });
+}
+
+//  CARD RENDERING 
+function render(gridId, ctId, data) {
+  var grid = document.getElementById(gridId);
+  grid.innerHTML = "";
+  document.getElementById(ctId).textContent = data.length;
+
+  if (!data.length) {
+    grid.innerHTML = "<div class=\"no-results\"><h3>No agencies found</h3><p>Try adjusting your search or clearing filters above.</p></div>";
+    return;
+  }
+
+  data.forEach(function(a, i) {
+    var card = document.createElement("div");
+    card.className = "card";
+    card.style.animationDelay = (i * 0.035) + "s";
+
+    var typeTags = "";
+    a.types.forEach(function(tp) {
+      var lbl = tp==="perm"?t("permanent"):tp==="temp"?t("temp"):t("exec");
+      var cls = tp==="perm"?"t-perm":tp==="temp"?"t-temp":"t-exec";
+      typeTags += "<span class=\"tag " + cls + "\" onclick=\"applyDeepLink(event,'" + a.name.replace(/'/g,"\\'") + "','" + tp + "','')\">" + lbl + "</span>";
+    });
+
+    var primaryTags = a.primary.map(function(ind){
+      return "<span class=\"tag t-prim\" onclick=\"applyDeepLink(event,'" + a.name.replace(/'/g,"\\'") + "','ind','" + ind.replace(/'/g,"\\'") + "')\">" + ind + "</span>";
+    }).join("");
+
+    var badges = "";
+    if (a.newcomer) badges += "<span class=\"badge b-new\" onclick=\"applyDeepLink(event,'" + a.name.replace(/'/g,"\\'") + "','newcomer','')\">" + t("newcomer") + "</span>";
+    if (a.free) badges += "<span class=\"badge b-free\">" + t("free_cand") + "</span>";
+    if (a.remote) badges += "<span class=\"badge b-remote\" onclick=\"applyDeepLink(event,'" + a.name.replace(/'/g,"\\'") + "','remote','')\">" + t("remote") + "</span>";
+    if (a.bilingual) badges += "<span class=\"badge\" style=\"background:#fef3c7;color:#92400e;border:1px solid rgba(146,64,14,.2);\">Bilingual EN/FR</span>";
+    if (a.verified) badges += "<span class=\"badge\" style=\"background:#dbeafe;color:#1e40af;border:1px solid rgba(30,64,175,.15);\">&#10003; " + t("verified") + "</span>";
+
+    var saved = isSaved(a.name);
+    var saveBtn = "<button class=\"btn-save\" onclick=\"toggleSave('" + a.name.replace(/'/g,"\\'") + "')\" title=\"" + (saved?"Remove from saved":"Save agency") + "\" style=\"" +
+      "height:30px;padding:0 10px;background:" + (saved?"var(--gold)":"transparent") + ";border:1.5px solid " + (saved?"var(--gold)":"var(--border)") + ";border-radius:6px;cursor:pointer;font-size:12px;color:" + (saved?"var(--ink)":"var(--muted)") + ";transition:all .18s;\">" +
+      (saved ? "&#9733; Saved" : "&#9734; Save") + "</button>";
+
+    var newJobsLabel = getNewJobsLabel(a);
+    var newJobsBadge = newJobsLabel ? "<div class=\"new-jobs-badge" + (lastVisitDays<=1?" fresh":"") + "\"><span class=\"njb-dot\"></span>" + newJobsLabel + "</div>" : "";
+
+    card.innerHTML =
+      "<div class=\"card-head\">" +
+        "<div class=\"card-logo\" style=\"background:" + a.color + "\">" + inits(a.name) + "</div>" +
+        "<div class=\"card-meta\">" +
+          "<div class=\"card-name\">" + a.name + "</div>" +
+          "<div class=\"card-city\">" + a.city + "</div>" +
+        "</div>" +
+        "<div class=\"card-rating\">" +
+          "<span class=\"star\">&#9733;</span>" +
+          "<span class=\"score\">" + a.rating + "</span>" +
+          "<span class=\"rcount2\">(" + a.reviews.toLocaleString() + ")</span>" +
+        "</div>" +
+      "</div>" +
+      newJobsBadge +
+      "<div class=\"card-desc\">" + (a.desc.length > 180 ? a.desc.slice(0,180) + "..." : a.desc) + "</div>" +
+      "<div class=\"card-tags\">" + typeTags + primaryTags + "</div>" +
+      "<div class=\"card-footer\">" +
+        "<div class=\"card-badges\">" + badges + "</div>" +
+        "<div class=\"card-btns\">" +
+          saveBtn +
+          "<button class=\"btn-detail\" data-aname=\"" + a.name.replace(/"/g,"&quot;") + "\">AI Profile</button>" +
+          "<a class=\"btn-visit\" href=\"" + a.web + "\" target=\"_blank\" rel=\"noopener\">" + t("visit") + " &#x2197;</a>" +
+        "</div>" +
+      "</div>";
+
+    grid.appendChild(card);
+  });
+}
+
+//  FILTER 
+function doFilter() {
+  var kw = document.getElementById("kw").value.toLowerCase();
+  var ind = document.getElementById("indF").value;
+  var typ = document.getElementById("typF").value;
+  var sp = document.getElementById("spF").value;
+  var levelF = document.getElementById("levelF") ? document.getElementById("levelF").value : "";
+  var sectorF = document.getElementById("sectorF") ? document.getElementById("sectorF").value : "";
+  var visaF = document.getElementById("visaF") ? document.getElementById("visaF").value : "";
+  var activePill = document.querySelector(".pill.on");
+  var pillInd = activePill ? activePill.textContent : "";
+  var target = ind || pillInd;
+
+  function filt(arr) {
+    return arr.filter(function(a) {
+      var k = !kw || a.name.toLowerCase().indexOf(kw)>=0 ||
+              a.desc.toLowerCase().indexOf(kw)>=0 ||
+              a.city.toLowerCase().indexOf(kw)>=0 ||
+              a.industries.some(function(i){return i.toLowerCase().indexOf(kw)>=0;});
+      var ii = !target || a.primary.indexOf(target)>=0;
+      var tp = !typ || a.types.indexOf(typ)>=0;
+      var sv = !sp || (sp==="newcomer"&&a.newcomer) || (sp==="remote"&&a.remote) || (sp==="saved"&&isSaved(a.name));
+      var lv = !levelF || (a.levels && a.levels.indexOf(levelF)>=0);
+      var sc = !sectorF || (a.sector && a.sector.indexOf(sectorF)>=0);
+      var vi = !visaF || (visaF==="visa"&&a.visa);
+      return k && ii && tp && sv && lv && sc && vi;
+    });
+  }
+
+  var fca = filt(caData);
+  var fuk = filt(ukData);
+  document.getElementById("ca-sub").textContent = fca.length + " agencies";
+  document.getElementById("uk-sub").textContent = fuk.length + " agencies";
+  document.getElementById("stat-total").textContent = fca.length + fuk.length;
+  render("grid-ca","ca-ct",fca);
+  render("grid-uk","uk-ct",fuk);
+}
+
+function resetAll() {
+  document.getElementById("kw").value = "";
+  document.getElementById("indF").value = "";
+  document.getElementById("typF").value = "";
+  document.getElementById("spF").value = "";
+  if(document.getElementById("levelF")) document.getElementById("levelF").value = "";
+  if(document.getElementById("sectorF")) document.getElementById("sectorF").value = "";
+  if(document.getElementById("visaF")) document.getElementById("visaF").value = "";
+  document.querySelectorAll(".pill").forEach(function(p){p.classList.remove("on");});
+  doFilter();
+}
+
+//  DEEP LINKS 
+function applyDeepLink(e, agencyName, type, value) {
+  e.stopPropagation();
+  var agency = caData.concat(ukData).find(function(a){ return a.name === agencyName; });
+  if (!agency || !agency.links) return;
+  var links = agency.links;
+  var url = null, label = "";
+  if (type==="perm") { url=links.perm; label="Permanent jobs"; }
+  else if (type==="temp") { url=links.temp; label="Temp / Contract jobs"; }
+  else if (type==="exec") { url=links.exec; label="Executive Search"; }
+  else if (type==="ind") { url=(links.ind&&links.ind[value])?links.ind[value]:links.perm; label=value+" jobs"; }
+  else if (type==="newcomer") { url=links.newcomer||links.perm; label="Newcomer information"; }
+  else if (type==="remote") { url=links.remote||links.perm; label="Remote roles"; }
+  if (!url) url = agency.web;
+  window.open(url,"_blank","noopener");
+  showToast("Opening " + agencyName + " - " + label);
+}
+
+function applyTagFilter(e, filterType, value) {
+  e.stopPropagation();
+  document.getElementById("kw").value = "";
+  document.getElementById("indF").value = "";
+  document.getElementById("typF").value = "";
+  document.getElementById("spF").value = "";
+  document.querySelectorAll(".pill").forEach(function(p){p.classList.remove("on");});
+  if (filterType==="type") document.getElementById("typF").value = value;
+  else if (filterType==="ind") document.getElementById("indF").value = value;
+  else if (filterType==="sp" && value==="newcomer") document.getElementById("spF").value = "newcomer";
+  else if (filterType==="sp" && value==="remote") document.getElementById("spF").value = "remote";
+  doFilter();
+  setTimeout(function(){
+    var sec = document.getElementById("sec-"+activeTab);
+    if(sec){ var g=sec.querySelector(".agency-grid"); if(g) g.scrollIntoView({behavior:"smooth",block:"start"}); }
+  }, 80);
+}
+
+//  AI PROFILE MODAL 
+var API_ENDPOINT = "https://api.anthropic.com/v1/messages";
+var curAgency = null;
+
+function buildHeaders() { return {"Content-Type":"application/json"}; }
+function buildPayload(messages, maxTokens) {
+  return JSON.stringify({model:"claude-3-5-haiku-20241022",max_tokens:maxTokens||1000,messages:messages});
+}
+
+function openProfile(e, nameOrObj) {
+  e.stopPropagation();
+  var a = (typeof nameOrObj === "string") ? agencyMap[nameOrObj] : nameOrObj;
+  if (!a) return;
+  curAgency = a;
+  document.getElementById("m-logo").style.background = a.color;
+  document.getElementById("m-logo").textContent = inits(a.name);
+  document.getElementById("m-name").textContent = a.name;
+  document.getElementById("m-loc").textContent = a.city;
+  document.getElementById("m-score").textContent = a.rating;
+  document.getElementById("m-rev").textContent = "(" + a.reviews.toLocaleString() + " reviews)";
+
+  document.getElementById("m-facts").innerHTML =
+    "<div class=\"ai-fact\"><div class=\"ai-fact-lbl\">Founded</div><div class=\"ai-fact-val\">" + a.founded + "</div></div>" +
+    "<div class=\"ai-fact\"><div class=\"ai-fact-lbl\">Team</div><div class=\"ai-fact-val\">" + a.employees + "</div></div>" +
+    "<div class=\"ai-fact\"><div class=\"ai-fact-lbl\">Rating</div><div class=\"ai-fact-val\">" + a.rating + " / 5.0</div></div>";
+
+  var tagsEl = document.getElementById("m-tags");
+  tagsEl.innerHTML = "";
+  a.primary.forEach(function(p){ var s=document.createElement("span"); s.className="ai-ptag"; s.textContent=p; tagsEl.appendChild(s); });
+  a.types.forEach(function(tp){ var s=document.createElement("span"); s.className="ai-ttype"; if(tp==="perm"){s.className+=" ai-perm";s.textContent="Permanent";}if(tp==="temp"){s.className+=" ai-temp";s.textContent="Temp / Contract";}if(tp==="exec"){s.className+=" ai-exec";s.textContent="Executive Search";}tagsEl.appendChild(s); });
+  if (a.bilingual) { var b=document.createElement("span"); b.className="ai-ptag"; b.style.background="rgba(245,158,11,.18)"; b.style.color="#d97706"; b.textContent="Bilingual EN/FR"; tagsEl.appendChild(b); }
+  if (a.verified) { var v=document.createElement("span"); v.className="ai-ptag"; v.style.background="rgba(16,185,129,.15)"; v.style.color="#34d399"; v.textContent="Verified Agency"; tagsEl.appendChild(v); }
+
+  var bdg=document.getElementById("m-badges"); bdg.innerHTML="";
+  if(a.newcomer){var b1=document.createElement("span");b1.className="ai-bdg ai-new";b1.textContent="Newcomer Friendly";bdg.appendChild(b1);}
+  if(a.free){var b2=document.createElement("span");b2.className="ai-bdg ai-free";b2.textContent="Free for Candidates";bdg.appendChild(b2);}
+  if(a.remote){var b3=document.createElement("span");b3.className="ai-bdg ai-remote";b3.textContent="Remote Roles";bdg.appendChild(b3);}
+  if(a.visa){var b4=document.createElement("span");b4.className="ai-bdg";b4.style.background="rgba(139,92,246,.12)";b4.style.color="#a78bfa";b4.style.border="1px solid rgba(139,92,246,.2)";b4.textContent="Visa Friendly";bdg.appendChild(b4);}
+
+  document.getElementById("m-link").href = a.web;
+  document.getElementById("overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+  generateProfile(a);
+}
+
+function generateProfile(a) {
+  document.getElementById("ai-loading").style.display = "flex";
+  document.getElementById("ai-result").style.display = "none";
+  if(document.getElementById("m-regen")) document.getElementById("m-regen").disabled = true;
+
+  var prompt = "You are a helpful careers advisor writing a profile for a job agency directory app called AgencyPortal. " +
+    "Write a concise but rich profile for the following recruitment agency to help job seekers decide if it is right for them. " +
+    "Return ONLY valid JSON with exactly these keys: " +
+    "\"overview\" (2 sentences, what makes this agency genuinely stand out), " +
+    "\"bestFor\" (2 sentences, who this agency is ideal for - be specific about job levels and backgrounds), " +
+    "\"tips\" (array of exactly 3 strings - practical tips for approaching this specific agency), " +
+    "\"watchOut\" (1 sentence - one honest thing candidates should know). " +
+    "No markdown, no backticks, only JSON. " +
+    "Agency: " + a.name + ". Location: " + a.city + ". Primary: " + a.primary.join(", ") + ". " +
+    "Also covers: " + a.industries.filter(function(i){return a.primary.indexOf(i)<0;}).join(", ") + ". " +
+    "Types: " + a.types.join(", ") + ". Founded: " + a.founded + ". Team: " + a.employees + ". " +
+    "Newcomer: " + (a.newcomer?"yes":"no") + ". Remote: " + (a.remote?"yes":"no") + ". Visa: " + (a.visa?"yes":"no") + ". " +
+    "Rating: " + a.rating + " from " + a.reviews + " reviews. About: " + a.desc;
+
+  fetch(API_ENDPOINT, {method:"POST",headers:buildHeaders(),body:buildPayload([{role:"user",content:prompt}],800)})
+  .then(function(r){return r.json();})
+  .then(function(data) {
+    var text = "";
+    if(data.content) data.content.forEach(function(b){if(b.type==="text") text+=b.text;});
+    text = text.replace(/```json/g,"").replace(/```/g,"").trim();
+    var p = JSON.parse(text);
+    renderProfile(p, a);
+  })
+  .catch(function() {
+    document.getElementById("ai-loading").style.display = "none";
+    document.getElementById("ai-result").style.display = "block";
+    document.getElementById("ai-result").innerHTML = "<div class=\"ai-err\">Unable to generate profile. Please try again or visit the agency website directly.</div>";
+    if(document.getElementById("m-regen")) document.getElementById("m-regen").disabled = false;
+  });
+}
+
+function renderProfile(p, a) {
+  document.getElementById("ai-loading").style.display = "none";
+  var r = document.getElementById("ai-result");
+  r.style.display = "block";
+  var tipsHTML = (p.tips||[]).map(function(tip){return "<li><span class=\"ai-dot\"></span>" + tip + "</li>";}).join("");
+  var allAreas = a.industries.slice();
+  r.innerHTML =
+    "<div class=\"ai-section\"><div class=\"ai-sh\">Agency Overview</div><div class=\"ai-body\">" + (p.overview||"") + "</div></div>" +
+    "<div class=\"ai-section\"><div class=\"ai-sh\">Best Suited For</div><div class=\"ai-ideal\">" + (p.bestFor||"") + "</div></div>" +
+    "<div class=\"ai-section\"><div class=\"ai-sh\">Tips for Approaching This Agency</div><ul class=\"ai-tips\">" + tipsHTML + "</ul></div>" +
+    (p.watchOut?"<div class=\"ai-section\"><div class=\"ai-sh\">Good to Know</div><div class=\"ai-body\">" + p.watchOut + "</div></div>":"") +
+    "<div class=\"ai-section\"><div class=\"ai-sh\">All Areas Covered</div><div class=\"ai-body\" style=\"color:#7a8499;font-size:12.5px;\">" + allAreas.join(" &middot; ") + "</div></div>" +
+    "<div class=\"ai-section\">" +
+      "<div class=\"ai-sh\">User Reviews (" + getAgencyReviews(a.name).length + ")</div>" +
+      "<div id=\"review-list\">" + renderReviews(a.name) + "</div>" +
+      "<div style=\"margin-top:12px;\">" +
+        "<div style=\"font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:8px;\">Leave a Review</div>" +
+        "<div style=\"display:flex;gap:8px;margin-bottom:8px;\">" +
+          [1,2,3,4,5].map(function(n){ return "<span onclick=\"selectStar(" + n + ")\" id=\"star-" + n + "\" style=\"font-size:22px;cursor:pointer;color:var(--border);transition:color .15s;\">&#9733;</span>"; }).join("") +
+        "</div>" +
+        "<textarea id=\"review-text\" rows=\"2\" style=\"width:100%;border:1.5px solid var(--border);border-radius:7px;padding:8px 12px;font-family:Outfit,sans-serif;font-size:13px;resize:none;outline:none;margin-bottom:8px;\" placeholder=\"Share your experience with this agency...\"></textarea>" +
+        "<button onclick=\"postReview('" + a.name.replace(/'/g,"\\'") + "')\" style=\"height:34px;padding:0 16px;background:var(--ink);color:#fff;border:none;border-radius:7px;font-family:Outfit,sans-serif;font-size:13px;font-weight:600;cursor:pointer;\">Post Review</button>" +
+      "</div>" +
+    "</div>";
+  if(document.getElementById("m-regen")) document.getElementById("m-regen").disabled = false;
+}
+
+var selectedStar = 0;
+function selectStar(n) {
+  selectedStar = n;
+  for(var i=1;i<=5;i++){
+    var s = document.getElementById("star-"+i);
+    if(s) s.style.color = i<=n ? "var(--gold)" : "var(--border)";
+  }
+}
+
+function postReview(agencyName) {
+  var text = document.getElementById("review-text").value.trim();
+  if (!selectedStar) { showToast("Please select a star rating."); return; }
+  if (!text) { showToast("Please write a short review."); return; }
+  submitReview(agencyName, selectedStar, text);
+  document.getElementById("review-list").innerHTML = renderReviews(agencyName);
+  document.getElementById("review-text").value = "";
+  selectedStar = 0;
+  for(var i=1;i<=5;i++){ var s=document.getElementById("star-"+i); if(s) s.style.color="var(--border)"; }
+  showToast("Review posted! Thank you.");
+}
+
+function renderReviews(name) {
+  var rv = getAgencyReviews(name);
+  if (!rv.length) return "<div style=\"font-size:13px;color:var(--muted);padding:8px 0;\">No reviews yet. Be the first to share your experience.</div>";
+  return rv.slice(-3).reverse().map(function(r){
+    var stars = "";
+    for(var i=1;i<=5;i++) stars += "<span style=\"color:" + (i<=r.rating?"var(--gold)":"var(--border)") + ";font-size:12px;\">&#9733;</span>";
+    return "<div style=\"padding:10px 0;border-bottom:1px solid var(--parch);\">" +
+      "<div style=\"display:flex;align-items:center;gap:8px;margin-bottom:4px;\">" + stars + "<span style=\"font-size:11px;color:var(--muted);\">" + r.date + "</span></div>" +
+      "<div style=\"font-size:13px;color:var(--ink2);line-height:1.6;\">" + r.text + "</div>" +
+    "</div>";
+  }).join("");
+}
+
+function regenProfile() { if(curAgency) generateProfile(curAgency); }
+
+function closeOverlay(e) { if(e.target===document.getElementById("overlay")) closeModal(); }
+function closeModal() { document.getElementById("overlay").classList.remove("open"); document.body.style.overflow=""; }
+
+//  TRACKER MODAL 
+function openTracker() {
+  var modal = document.getElementById("tracker-overlay");
+  renderTrackerList();
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeTracker() {
+  document.getElementById("tracker-overlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function renderTrackerList() {
+  var el = document.getElementById("tracker-list");
+  if (!tracker.length) {
+    el.innerHTML = "<div style=\"text-align:center;padding:40px;color:var(--muted);font-size:14px;\">No agencies tracked yet.<br>Click \"Add to Tracker\" from any agency's AI Profile.</div>";
+    return;
+  }
+  el.innerHTML = tracker.map(function(t, i) {
+    return "<div style=\"background:var(--white);border:1.5px solid var(--border);border-radius:8px;padding:16px;margin-bottom:10px;\">" +
+      "<div style=\"display:flex;align-items:flex-start;justify-content:space-between;gap:10px;\">" +
+        "<div>" +
+          "<div style=\"font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:3px;\">" + t.agency + "</div>" +
+          "<div style=\"font-size:12px;color:var(--muted);margin-bottom:8px;\">Added: " + t.date + "</div>" +
+        "</div>" +
+        "<button onclick=\"removeFromTracker(" + i + ")\" style=\"background:transparent;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;color:var(--muted);cursor:pointer;\">Remove</button>" +
+      "</div>" +
+      "<div style=\"display:flex;gap:8px;align-items:center;flex-wrap:wrap;\">" +
+        "<select onchange=\"updateStatus(" + i + ",this.value)\" style=\"border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;font-family:Outfit,sans-serif;background:var(--cream);\">" +
+          ["Contacted","Interview Scheduled","Offer Received","Placed","Not a Fit"].map(function(s){ return "<option" + (t.status===s?" selected":"") + ">" + s + "</option>"; }).join("") +
+        "</select>" +
+        "<a href=\"" + t.web + "\" target=\"_blank\" style=\"font-size:12px;color:var(--blue);text-decoration:none;\">Visit Site &rarr;</a>" +
+      "</div>" +
+      "<input type=\"text\" value=\"" + (t.notes||"") + "\" onchange=\"updateNotes(" + i + ",this.value)\" placeholder=\"Add notes...\" style=\"margin-top:8px;width:100%;border:1.5px solid var(--border);border-radius:6px;padding:6px 10px;font-size:12px;font-family:Outfit,sans-serif;background:var(--cream);outline:none;\">" +
+    "</div>";
+  }).join("");
+}
+
+function updateStatus(i, val) { tracker[i].status = val; saveTracker(); }
+function updateNotes(i, val) { tracker[i].notes = val; saveTracker(); }
+function removeFromTracker(i) { tracker.splice(i,1); saveTracker(); renderTrackerList(); }
+
+//  INIT 
+try { var sl = localStorage.getItem("agencyportal_lang"); if(sl) LANG = sl; } catch(e) {}
+initLastVisit();
+buildPills("canada", caData);
+buildPills("uk", ukData);
+
+// Add "Saved" to special filter
+var spF = document.getElementById("spF");
+if (spF) {
+  var opt = document.createElement("option");
+  opt.value = "saved"; opt.textContent = "Saved Agencies";
+  spF.appendChild(opt);
+}
+
+doFilter();
+
+// ADZUNA CAROUSEL
+var ADZUNA_ID='9b045433';var ADZUNA_KEY='875218823a5d757e0442beec457d8f0a';var jobsCountry='ca';var jobsCategory='';var jobsCache={};
+function gAC(n){if(!n)return'#2c3a50';var cols=['#c0392b','#1a5276','#1e8449','#e74c3c','#784212','#117a65','#0047AB'];var h=0;for(var i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return cols[Math.abs(h)%7];}
+function gIn(s){if(!s)return'?';return s.trim().split(' ').slice(0,2).map(function(w){return w[0]||'';}).join('').toUpperCase();}
+function tAgo(d){if(!d)return'';var diff=Math.floor((Date.now()-new Date(d).getTime())/86400000);if(diff===0)return'Today';if(diff<7)return diff+'d ago';return Math.floor(diff/30)+'mo ago';}
+function fSal(mn,mx,cc){if(!mn&&!mx)return null;var s=cc==='gb'?'GBP ':'$';var f=function(n){return n>=1000?s+Math.round(n/1000)+'k':s+n;};if(mn&&mx)return f(mn)+'-'+f(mx);return f(mx||mn);}
+function loadJobs(){var ck=jobsCountry+'|'+jobsCategory;if(jobsCache[ck]){renderJobs(jobsCache[ck]);return;}var t=document.getElementById('jobs-carousel');if(!t)return;t.innerHTML='<div class="jobs-loading"><div class="jobs-spinner"></div>Fetching live jobs...</div>';var p=['app_id='+ADZUNA_ID,'app_key='+ADZUNA_KEY,'results_per_page=20','sort_by=date'];if(jobsCategory)p.push('category='+encodeURIComponent(jobsCategory));fetch('https://agencyhub-proxy.agencyhub-nkech.workers.dev/api/adzuna?country='+jobsCountry+'&'+p.join('&')).then(function(r){return r.json();}).then(function(d){var r=d.results||[];jobsCache[ck]=r;var b=document.getElementById('jobs-count-badge');if(b)b.textContent=(d.count||r.length).toLocaleString()+' jobs found';renderJobs(r);}).catch(function(){renderFallbackJobs();});}
+function renderJobs(res){var t=document.getElementById('jobs-carousel');if(!t||!res||!res.length){renderFallbackJobs();return;}t.innerHTML=res.map(function(job){var co=(job.company&&job.company.display_name)||'Agency';var sal=fSal(job.salary_min,job.salary_max,jobsCountry);var cat=(job.category&&job.category.label)||'';var loc=(job.location&&job.location.display_name)||'';var h='<a class="jcard" href="'+(job.redirect_url||'#')+'" target="_blank" rel="noopener">';h+='<div class="jcard-agency"><div class="jcard-logo" style="background:'+gAC(co)+'">'+gIn(co)+'</div><div class="jcard-agency-name">'+co.slice(0,22)+'</div></div>';h+='<div class="jcard-title">'+(job.title||'')+'</div>';h+='<div class="jcard-company">'+loc+'</div>';h+='<div class="jcard-meta">'+(cat?'<span class="jcard-tag">'+cat+'</span>':'')+(sal?'<span class="jcard-tag salary">'+sal+'</span>':'')+'</div>';h+='<div class="jcard-footer"><span class="jcard-date">'+tAgo(job.created)+'</span><span class="jcard-apply">Apply</span></div></a>';return h;}).join('');initDrag(t);}
+function renderFallbackJobs(){var b=document.getElementById('jobs-count-badge');if(b)b.textContent='Sample jobs';var jobs=[{t:'Senior Software Engineer',c:'Hays Canada',l:'Toronto',s:'$110k-$140k',k:'Technology',u:'https://www.hays.ca'},{t:'Financial Analyst',c:'Robert Half',l:'Calgary',s:'$75k-$95k',k:'Finance',u:'https://www.roberthalf.com/ca'},{t:'IT Consultant',c:'TEKsystems',l:'Toronto',s:'$95k-$125k',k:'Technology',u:'https://www.teksystems.com/en-ca'}];var tr=document.getElementById('jobs-carousel');if(!tr)return;tr.innerHTML=jobs.map(function(j){var h='<a class="jcard" href="'+j.u+'" target="_blank" rel="noopener">';h+='<div class="jcard-agency"><div class="jcard-logo" style="background:'+gAC(j.c)+'">'+gIn(j.c)+'</div><div class="jcard-agency-name">'+j.c+'</div></div>';h+='<div class="jcard-title">'+j.t+'</div><div class="jcard-company">'+j.l+'</div>';h+='<div class="jcard-meta"><span class="jcard-tag">'+j.k+'</span><span class="jcard-tag salary">'+j.s+'</span></div>';h+='<div class="jcard-footer"><span class="jcard-date">Today</span><span class="jcard-apply">View</span></div></a>';return h;}).join('');initDrag(tr);}
+function switchJobsTab(country,btn){jobsCountry=country;jobsCache={};document.querySelectorAll('.jobs-tab').forEach(function(t){t.classList.remove('active');});btn.classList.add('active');loadJobs();}
+function filterJobCat(cat,btn){jobsCategory=cat;document.querySelectorAll('.jobs-cat-pill').forEach(function(p){p.classList.remove('active');});btn.classList.add('active');loadJobs();}
+function slideCarousel(dir){var t=document.getElementById('jobs-carousel');if(t)t.scrollBy({left:dir*300,behavior:'smooth'});}
+function initDrag(tr){var d=false,sx=0,sl=0;tr.addEventListener('mousedown',function(e){d=true;sx=e.pageX-tr.offsetLeft;sl=tr.scrollLeft;});tr.addEventListener('mouseleave',function(){d=false;});tr.addEventListener('mouseup',function(){d=false;});tr.addEventListener('mousemove',function(e){if(!d)return;e.preventDefault();tr.scrollLeft=sl-(e.pageX-tr.offsetLeft-sx)*1.2;});}
+setTimeout(function(){loadJobs();},800);
+setTimeout(function(){var t=document.getElementById('jobs-carousel');if(t&&t.querySelector('.jobs-spinner')){renderFallbackJobs();}},4000);
+
+
+// AI Profile button click handler
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('.btn-detail');
+  if (!btn) return;
+  var aname = btn.getAttribute('data-aname');
+  if (!aname) return;
+  var all = caData.concat(ukData);
+  var agency = all.find(function(a){ return a.name === aname; });
+  if (!agency) return;
+  openProfile(e, agency);
+});
+
+</script>
+</body>
+</html>
