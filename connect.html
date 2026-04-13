@@ -1422,38 +1422,8 @@ function sendAlertEmail(alert) {
   var countryLabel = alert.country==="canada"?"Canada":alert.country==="uk"?"United Kingdom":"Canada & UK";
   var jobLinks = buildJobLinks(alert.country, alert.field);
 
-  // Load EmailJS SDK if not loaded
-  if (!window.emailjs) {
-    var script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js";
-    script.onload = function() {
-      window.emailjs.init(PUBLIC_KEY);
-      window.emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-        to_name:   alert.name,
-        to_email:  alert.email,
-        country:   countryLabel,
-        field:     fieldLabel,
-        level:     alert.level || "Any Level",
-        job_links: jobLinks,
-        hub_link:  buildHubLink(alert.country, alert.field, alert.level),
-        freq:      alert.freq
-      }).then(function(){
-        showStatus("Confirmation email sent to "+alert.email,"ok");
-      }).catch(function(){
-        showStatus("Alert saved. Email delivery requires EmailJS setup.","warn");
-      });
-    };
-    document.head.appendChild(script);
-  } else {
-    window.emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      to_name:  alert.name,
-      to_email: alert.email,
-      country:  countryLabel,
-      field:    fieldLabel,
-      hub_link: buildHubLink(alert.country, alert.field, alert.level)
-    });
-  }
-}
+ window.emailjs.init(PUBLIC_KEY);window.emailjs.send(SERVICE_ID,TEMPLATE_ID,{to_name:alert.name,to_email:alert.email,country:countryLabel,field:fieldLabel,level:alert.level||"Any Level",job_links:jobLinks,hub_link:buildHubLink(alert.country,alert.field,alert.level),freq:alert.freq}).then(function(){showStatus("Email sent to "+alert.email,"ok");}).catch(function(e){showStatus("Error: "+e.text,"warn");}); 
+  
 
 function buildHubLink(country, field, level) {
   // Deep link back to AgencyHub with filters pre-applied
