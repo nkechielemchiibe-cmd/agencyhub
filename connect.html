@@ -1450,7 +1450,7 @@ function sendAlertEmail(alert) {
 
 function buildHubLink(country, field, level) {
   // Deep link back to AgencyPortal with filters pre-applied
-  var base = "https://nkechielemchiibe-cmd.github.io/agencyhub/agency-hub-v6.html";
+  var base = "https://agencyportal.ca/index.html";
   var params = [];
   if (country && country !== "both") params.push("country="+country);
   if (field) params.push("field="+encodeURIComponent(field));
@@ -1530,7 +1530,7 @@ function checkMobile() {
 }
 checkMobile();
 window.addEventListener('resize', checkMobile);
-
+var _ap = new URLSearchParams(window.location.search).get('agency'); if (_ap) { setTimeout(function(){ renderAgencyList(AGENCIES); var _el = document.querySelector('[data-name="'+decodeURIComponent(_ap)+'"]'); if(_el){ selectAgency(_el, decodeURIComponent(_ap)); document.getElementById('new-chat-modal').classList.add('open'); } }, 600); }
 handleDeepLinks();
 loadConversations();
 loadExistingAlerts();
