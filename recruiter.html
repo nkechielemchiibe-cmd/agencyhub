@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgencyPortal | Recruiter Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<style>
+:root {
+  --ink: #0d1117; --surface: #161b22; --surface2: #1c2128;
+  --border: #30363d; --text: #e6edf3; --text2: #8b949e;
+  --gold: #d4a93a; --gold2: #f0c040; --gold-dim: rgba(212,169,58,.15);
+  --green: #3fb950; --red: #f85149; --blue: #58a6ff; --r: 10px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; background:var(--ink); color:var(--text); min-height:100vh; }
+
+/* NAV */
+.nav { height:52px; background:var(--ink); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 24px; gap:12px; }
+.nav-logo { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; color:var(--text); text-decoration:none; }
+.nav-logo span { color:var(--gold); }
+.nav-badge { background:var(--gold-dim); border:1px solid rgba(212,169,58,.3); color:var(--gold); font-size:11px; padding:2px 8px; border-radius:10px; font-weight:600; }
+.nav-right { margin-left:auto; display:flex; align-items:center; gap:12px; }
+.btn-logout { background:transparent; border:1px solid var(--border); border-radius:6px; padding:5px 12px; color:var(--text2); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:13px; transition:all .18s; }
+.btn-logout:hover { border-color:var(--red); color:var(--red); }
+.nav-agency { font-size:13px; color:var(--text2); }
+
+/* LOGIN PAGE */
+.login-wrap { min-height:calc(100vh - 52px); display:flex; align-items:center; justify-content:center; padding:24px; }
+.login-box { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:36px; width:100%; max-width:420px; }
+.login-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.login-title span { color:var(--gold); font-style:italic; }
+.login-sub { font-size:13.5px; color:var(--text2); margin-bottom:28px; line-height:1.6; }
+.field { margin-bottom:16px; }
+.field label { display:block; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.7px; color:var(--text2); margin-bottom:6px; }
+.field input { width:100%; background:var(--surface2); border:1px solid var(--border); border-radius:7px; padding:10px 13px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:13.5px; outline:none; transition:border-color .18s; }
+.field input:focus { border-color:var(--gold); }
+.field input::placeholder { color:#444c56; }
+.btn-login { width:100%; height:44px; background:linear-gradient(135deg,var(--gold),var(--gold2)); border:none; border-radius:8px; color:var(--ink); font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:opacity .18s; margin-top:8px; }
+.btn-login:hover { opacity:.88; }
+.btn-login:disabled { opacity:.45; cursor:not-allowed; }
+.login-err { background:rgba(248,81,73,.1); border:1px solid rgba(248,81,73,.3); border-radius:8px; padding:10px 14px; font-size:13px; color:var(--red); margin-top:12px; display:none; }
+.login-note { font-size:12px; color:var(--text2); text-align:center; margin-top:16px; line-height:1.6; }
+.login-note a { color:var(--gold); text-decoration:none; }
+
+/* DASHBOARD */
+.dashboard { display:none; flex-direction:column; height:100%; }
+.dash-head { background:var(--surface); border-bottom:1px solid var(--border); padding:20px 24px; }
+.dash-title { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:700; color:var(--text); margin-bottom:4px; }
+.dash-sub { font-size:13px; color:var(--text2); }
+.dash-stats { display:flex; gap:16px; margin-top:16px; flex-wrap:wrap; }
+.stat-card { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:14px 18px; min-width:120px; }
+.stat-num { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:700; color:var(--gold); }
+.stat-label { font-size:12px; color:var(--text2); margin-top:2px; }
+.dash-body { display:flex; height:calc(100vh - 200px); }
+
+/* CONVERSATION LIST */
+.conv-panel { width:320px; flex-shrink:0; border-right:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; }
+.conv-panel-head { padding:14px 16px; border-bottom:1px solid var(--border); font-size:13px; font-weight:600; color:var(--text2); text-transform:uppercase; letter-spacing:.6px; }
+.conv-list { flex:1; overflow-y:auto; }
+.conv-list::-webkit-scrollbar { width:4px; }
+.conv-list::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+.conv-item { padding:14px 16px; border-bottom:1px solid rgba(48,54,61,.5); cursor:pointer; transition:background .15s; }
+.conv-item:hover { background:var(--surface2); }
+.conv-item.active { background:var(--surface2); border-left:2px solid var(--gold); }
+.conv-item.unread .conv-item-name { color:var(--gold); }
+.conv-item-name { font-size:13.5px; font-weight:600; color:var(--text); margin-bottom:3px; }
+.conv-item-preview { font-size:12px; color:var(--text2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.conv-item-time { font-size:11px; color:#444c56; margin-top:4px; }
+.conv-empty { padding:40px 20px; text-align:center; color:var(--text2); font-size:13px; line-height:1.7; }
+
+/* CHAT WINDOW */
+.chat-panel { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+.chat-placeholder { flex:1; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; color:var(--text2); }
+.chat-placeholder-icon { font-size:48px; }
+.chat-placeholder-text { font-size:14px; }
+.chat-head { padding:12px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.chat-head-name { font-size:14px; font-weight:600; color:var(--text); }
+.chat-head-sub { font-size:12px; color:var(--text2); }
+.messages { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:8px; }
+.messages::-webkit-scrollbar { width:4px; }
+.messages::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+.msg { max-width:70%; }
+.msg.candidate { align-self:flex-start; }
+.msg.recruiter { align-self:flex-end; }
+.msg-bubble { padding:9px 13px; border-radius:14px; font-size:13.5px; line-height:1.55; word-break:break-word; }
+.msg.candidate .msg-bubble { background:var(--surface2); border:1px solid var(--border); border-bottom-left-radius:4px; }
+.msg.recruiter .msg-bubble { background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--ink); font-weight:500; border-bottom-right-radius:4px; }
+.msg-time { font-size:10px; color:var(--text2); margin-top:3px; padding:0 4px; }
+.msg.recruiter .msg-time { text-align:right; }
+.msg-date-div { text-align:center; color:var(--text2); font-size:11px; margin:8px 0; display:flex; align-items:center; gap:8px; }
+.msg-date-div::before,.msg-date-div::after { content:''; flex:1; height:1px; background:var(--border); }
+.reply-area { padding:12px 14px; border-top:1px solid var(--border); display:flex; gap:8px; align-items:flex-end; flex-shrink:0; }
+.reply-input { flex:1; background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:10px 14px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:13.5px; outline:none; resize:none; max-height:120px; line-height:1.5; transition:border-color .18s; }
+.reply-input:focus { border-color:var(--gold); }
+.reply-input::placeholder { color:#444c56; }
+.reply-btn { width:38px; height:38px; border-radius:9px; background:linear-gradient(135deg,var(--gold),var(--gold2)); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--ink); font-weight:700; flex-shrink:0; }
+.reply-btn:hover { opacity:.85; }
+
+/* TOAST */
+.toast { position:fixed; bottom:20px; right:20px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 16px; font-size:13px; color:var(--text); transform:translateY(80px); transition:transform .3s; z-index:999; }
+.toast.show { transform:translateY(0); }
+.toast.ok { border-color:rgba(63,185,80,.4); color:var(--green); }
+
+/* ── CANDIDATE SEARCH ── */
+.dash-tabs {
+  display:flex; border-bottom:1px solid var(--border);
+  background:var(--surface); padding:0 24px;
+}
+.dash-tab {
+  padding:14px 18px; font-size:13.5px; font-weight:500;
+  color:var(--text2); cursor:pointer; border-bottom:2px solid transparent;
+  transition:all .18s; display:flex; align-items:center; gap:7px;
+  font-family:'DM Sans',sans-serif;
+}
+.dash-tab:hover { color:var(--text); }
+.dash-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.dash-panel { display:none; }
+.dash-panel.active { display:block; }
+
+/* Search filters */
+.search-wrap { padding:20px 24px; max-width:1100px; overflow-y:auto; max-height:calc(100vh - 200px); }
+.search-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--text); margin-bottom:4px; }
+.search-sub { font-size:13px; color:var(--text2); margin-bottom:20px; }
+.filter-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:12px; margin-bottom:16px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r); padding:20px;
+}
+.filter-group { display:flex; flex-direction:column; gap:6px; }
+.filter-label { font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:var(--text2); }
+.filter-select {
+  height:38px; background:var(--surface2); border:1px solid var(--border);
+  border-radius:7px; padding:0 12px; color:var(--text);
+  font-family:'DM Sans',sans-serif; font-size:13px; outline:none;
+  appearance:none; cursor:pointer; transition:border-color .18s;
+}
+.filter-select:focus { border-color:var(--gold); }
+.filter-input {
+  height:38px; background:var(--surface2); border:1px solid var(--border);
+  border-radius:7px; padding:0 12px; color:var(--text);
+  font-family:'DM Sans',sans-serif; font-size:13px; outline:none;
+  transition:border-color .18s;
+}
+.filter-input:focus { border-color:var(--gold); }
+.filter-input::placeholder { color:var(--text3,#6e7681); }
+.filter-actions { display:flex; gap:10px; margin-bottom:20px; }
+.btn-search {
+  height:42px; padding:0 28px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:none; border-radius:8px; color:var(--ink);
+  font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700;
+  cursor:pointer; transition:opacity .18s;
+}
+.btn-search:hover { opacity:.88; }
+.btn-clear-filters {
+  height:42px; padding:0 20px; background:transparent;
+  border:1px solid var(--border); border-radius:8px; color:var(--text2);
+  font-family:'DM Sans',sans-serif; font-size:13.5px; cursor:pointer;
+  transition:all .18s;
+}
+.btn-clear-filters:hover { border-color:var(--text); color:var(--text); }
+
+/* Candidate results */
+.results-meta { font-size:13px; color:var(--text2); margin-bottom:14px; }
+.results-meta span { color:var(--gold); font-weight:700; }
+.candidates-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:14px;
+}
+.candidate-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r); padding:20px; position:relative;
+  transition:all .2s; overflow:hidden;
+}
+.candidate-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transform:scaleX(0); transform-origin:left; transition:transform .3s;
+}
+.candidate-card:hover { border-color:rgba(212,169,58,.35); transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.3); }
+.candidate-card:hover::before { transform:scaleX(1); }
+.cc-head { display:flex; gap:12px; align-items:center; margin-bottom:14px; }
+.cc-avatar {
+  width:46px; height:46px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-weight:700; font-size:18px; color:#fff;
+}
+.cc-name { font-size:15px; font-weight:700; color:var(--text); margin-bottom:2px; }
+.cc-role { font-size:12.5px; color:var(--text2); }
+.cc-spec { font-size:12px; color:var(--gold); margin-top:2px; font-weight:600; }
+.cc-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px; }
+.cc-tag { padding:3px 10px; border-radius:10px; font-size:11px; font-weight:600; }
+.cc-tag.field { background:rgba(88,166,255,.12); color:var(--blue); border:1px solid rgba(88,166,255,.2); }
+.cc-tag.level { background:rgba(63,185,80,.12); color:var(--green); border:1px solid rgba(63,185,80,.2); }
+.cc-tag.country { background:var(--gold-dim); color:var(--gold); border:1px solid rgba(212,169,58,.2); }
+.cc-tag.cert { background:rgba(188,140,255,.12); color:#bc8cff; border:1px solid rgba(188,140,255,.2); }
+.cc-bio { font-size:13px; color:var(--text2); line-height:1.55; margin-bottom:14px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.cc-salary { font-size:12.5px; color:var(--green); margin-bottom:12px; font-weight:600; }
+.cc-foot { display:flex; gap:8px; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--border); }
+.cc-active { font-size:11px; color:var(--text3,#6e7681); }
+.btn-msg-candidate {
+  height:34px; padding:0 16px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:none; border-radius:7px; color:var(--ink);
+  font-family:'DM Sans',sans-serif; font-size:12.5px; font-weight:700;
+  cursor:pointer; transition:opacity .18s; display:flex; align-items:center; gap:6px;
+}
+.btn-msg-candidate:hover { opacity:.88; }
+.btn-view-profile {
+  height:34px; padding:0 14px; background:transparent;
+  border:1px solid var(--border); border-radius:7px; color:var(--text2);
+  font-family:'DM Sans',sans-serif; font-size:12px; cursor:pointer;
+  transition:all .18s;
+}
+.btn-view-profile:hover { border-color:var(--gold); color:var(--gold); }
+.no-results-search {
+  grid-column:1/-1; text-align:center; padding:60px 20px;
+  color:var(--text2); font-size:14px; line-height:1.7;
+}
+.no-results-search .nr-icon { font-size:44px; margin-bottom:16px; }
+.no-results-search .nr-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--text); margin-bottom:8px; }
+
+/* Spec sub-filter */
+.spec-filter-wrap { display:none; }
+.spec-filter-wrap.show { display:block; }
+
+/* Loading */
+.search-loading {
+  grid-column:1/-1; display:flex; flex-direction:column; align-items:center;
+  padding:60px 20px; gap:14px;
+}
+.search-spinner {
+  width:32px; height:32px; border-radius:50%;
+  border:3px solid var(--border); border-top-color:var(--gold);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="https://agencyportal.ca">Agency<span>Portal</span></a>
+  <span class="nav-badge">Recruiter Portal</span>
+  <div class="nav-right">
+    <span class="nav-agency" id="nav-agency-name"></span>
+    <button class="btn-change-pwd" id="btn-change-pwd" onclick="showChangePwd()" style="display:none;background:transparent;border:1px solid var(--border);border-radius:6px;padding:5px 12px;color:var(--text2);cursor:pointer;font-family:DM Sans,sans-serif;font-size:13px;margin-right:4px;">Change Password</button><button class="btn-logout" id="btn-logout" onclick="logout()" style="display:none;">Sign Out</button>
+  </div>
+</nav>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-page">
+  <div class="login-box">
+    <div class="login-title">Recruiter <span>Sign In</span></div>
+    <div class="login-sub">Sign in to access your agency's candidate messages and respond to enquiries from AgencyPortal.</div>
+    <div class="field">
+      <label>Email Address</label>
+      <input type="email" id="login-email" placeholder="you@youragency.com">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="Your password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn-login" id="btn-login" onclick="doLogin()">Sign In</button>
+    <div class="login-err" id="login-err"></div>
+    <div class="login-note">
+      Don't have an account? <a href="mailto:hello@agencyportal.ca">Contact AgencyPortal</a> to get set up.<br>
+      Your login is provided by AgencyPortal admin.
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+  <div class="dash-head">
+    <div class="dash-title" id="dash-agency-title">Agency Dashboard</div>
+    <div class="dash-sub">Manage candidate messages and enquiries from AgencyPortal</div>
+    <div class="dash-stats">
+      <div class="stat-card"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Total Conversations</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-unread">0</div><div class="stat-label">Unread Messages</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-today">0</div><div class="stat-label">New Today</div></div>
+    </div>
+  </div>
+  <div class="dash-tabs">
+    <div class="dash-tab active" onclick="switchDashTab('messages',this)" id="dtab-messages">&#128172; Messages</div>
+    <div class="dash-tab" onclick="switchDashTab('search',this)" id="dtab-search">&#128269; Candidate Search</div>
+  </div>
+  <div class="dash-panel active" id="dpanel-messages">
+  <div class="dash-body">
+    <div class="conv-panel">
+      <div class="conv-panel-head">Candidate Messages</div>
+      <div class="conv-list" id="conv-list">
+        <div class="conv-empty">Loading conversations...</div>
+      </div>
+    </div>
+    <div class="chat-panel" id="chat-panel">
+      <div class="chat-placeholder" id="chat-placeholder">
+        <div class="chat-placeholder-icon">💬</div>
+        <div class="chat-placeholder-text">Select a conversation to reply</div>
+      </div>
+      <div id="active-chat" style="display:none;flex-direction:column;height:100%;">
+        <div class="chat-head">
+          <div>
+            <div class="chat-head-name" id="chat-cand-name">Candidate</div>
+            <div class="chat-head-sub" id="chat-cand-sub">AgencyPortal candidate</div>
+          </div>
+        </div>
+        <div class="messages" id="messages-area"></div>
+        <div class="reply-area">
+          <textarea class="reply-input" id="reply-input" placeholder="Type your reply..." rows="1"
+            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendReply();}"
+            oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
+          <button class="reply-btn" onclick="sendReply()">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- CANDIDATE SEARCH PANEL -->
+  <div class="dash-panel" id="dpanel-search">
+    <div class="search-wrap">
+      <div class="search-title">Candidate Search</div>
+      <div class="search-sub">Filter candidates by field, role, certifications and more to find your ideal hire.</div>
+
+      <div class="filter-grid">
+        <div class="filter-group">
+          <div class="filter-label">Field</div>
+          <select class="filter-select" id="sf-field" onchange="updateSpecFilter()">
+            <option value="">All Fields</option>
+            <option>Technology &amp; IT</option>
+            <option>Finance &amp; Accounting</option>
+            <option>Engineering</option>
+            <option>Healthcare</option>
+            <option>Legal</option>
+            <option>General Staffing</option>
+            <option>Creative &amp; Marketing</option>
+            <option>Education</option>
+            <option>Oil &amp; Gas</option>
+            <option>Trades &amp; Construction</option>
+          </select>
+        </div>
+        <div class="filter-group spec-filter-wrap" id="sf-spec-wrap">
+          <div class="filter-label">Role Specialisation</div>
+          <select class="filter-select" id="sf-specialisation">
+            <option value="">All Roles</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <div class="filter-label">Custom Role Search</div>
+          <input class="filter-input" type="text" id="sf-role-keyword" placeholder="e.g. ICU Nurse, DevOps...">
+        </div>
+        <div class="filter-group">
+          <div class="filter-label">Experience Level</div>
+          <select class="filter-select" id="sf-level">
+            <option value="">Any Level</option>
+            <option value="Entry Level (0-2 yrs)">Entry Level</option>
+            <option value="Mid Level (3-6 yrs)">Mid Level</option>
+            <option value="Senior (7-12 yrs)">Senior</option>
+            <option value="Executive (12+ yrs)">Executive</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <div class="filter-label">Country</div>
+          <select class="filter-select" id="sf-country">
+            <option value="">Canada &amp; UK</option>
+            <option value="canada">Canada only</option>
+            <option value="uk">UK only</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <div class="filter-label">Certification / Keyword</div>
+          <input class="filter-input" type="text" id="sf-cert" placeholder="e.g. PMP, CPA, NMC...">
+        </div>
+        <div class="filter-group">
+          <div class="filter-label">Work Preference</div>
+          <select class="filter-select" id="sf-remote">
+            <option value="">Any</option>
+            <option value="remote">Remote / Hybrid only</option>
+            <option value="onsite">On-site only</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <div class="filter-label">Candidate Type</div>
+          <select class="filter-select" id="sf-newcomer">
+            <option value="">All Candidates</option>
+            <option value="true">Newcomers / International</option>
+            <option value="false">Local candidates</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <div class="filter-label">Availability</div>
+          <select class="filter-select" id="sf-open">
+            <option value="true">Open to work only</option>
+            <option value="">All (including passive)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <button class="btn-search" onclick="runCandidateSearch()">&#128269; Search Candidates</button>
+        <button class="btn-clear-filters" onclick="clearSearchFilters()">Clear Filters</button>
+      </div>
+
+      <div class="results-meta" id="search-results-meta" style="display:none;">
+        Found <span id="results-count">0</span> candidates matching your criteria
+      </div>
+      <div class="candidates-grid" id="candidates-grid">
+        <div class="no-results-search">
+          <div class="nr-icon">&#128269;</div>
+          <div class="nr-title">Search for Candidates</div>
+          <div>Use the filters above to find candidates that match your open roles. All candidates have opted in to be contacted by recruiters.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Firebase config
+var FC = {
+  apiKey: "AIzaSyAnY7A5vz5KMHlm2JDTJIAhpZkt3zV23ok",
+  authDomain: "agencyhub-b673f.firebaseapp.com",
+  databaseURL: "https://agencyhub-b673f-default-rtdb.firebaseio.com",
+  projectId: "agencyhub-b673f",
+  messagingSenderId: "589031532949",
+  appId: "1:589031532949:web:0583fc4d1dd95e31f92e9c"
+};
+
+firebase.initializeApp(FC);
+var db = firebase.database();
+var auth = firebase.auth();
+
+var currentUser = null;
+var currentAgency = null;
+var currentConvId = null;
+var msgListener = null;
+
+// Recruiter agency map - add agencies here as you create accounts
+var RECRUITER_AGENCIES = {
+  "hays@agencyportal.ca": "Hays Canada",
+  "roberthalf@agencyportal.ca": "Robert Half Canada",
+  "randstad@agencyportal.ca": "Randstad Canada",
+  "adecco@agencyportal.ca": "Adecco Canada",
+  "reed@agencyportal.ca": "Reed UK",
+  "haysuk@agencyportal.ca": "Hays UK",
+  "michaelpage@agencyportal.ca": "Michael Page UK",
+  "admin@agencyportal.ca": "AgencyPortal Admin",
+  "nkechielemchiibe@gmail.com": "AgencyPortal Admin"
+};
+
+// Auth state
+auth.onAuthStateChanged(function(user) {
+  if (user && user.email) {
+    currentUser = user;
+    currentAgency = RECRUITER_AGENCIES[user.email] || user.email.split("@")[0];
+    document.getElementById("login-page").style.display = "none";
+    document.getElementById("dashboard").style.display = "flex";
+    document.getElementById("btn-logout").style.display = "block";
+    document.getElementById("nav-agency-name").textContent = currentAgency || "";
+    document.getElementById("dash-agency-title").textContent = (currentAgency || "Recruiter") + " Dashboard";
+    loadConversations();
+  } else {
+    currentUser = null;
+    document.getElementById("login-page").style.display = "flex";
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("btn-logout").style.display = "none";
+    document.getElementById("nav-agency-name").textContent = "";
+  }
+});
+
+function doLogin() {
+  var email = document.getElementById("login-email").value.trim();
+  var pass = document.getElementById("login-password").value;
+  var err = document.getElementById("login-err");
+  var btn = document.getElementById("btn-login");
+  if (!email || !pass) { showErr("Please enter your email and password."); return; }
+  btn.disabled = true;
+  btn.textContent = "Signing in...";
+  err.style.display = "none";
+  auth.signInWithEmailAndPassword(email, pass)
+    .catch(function(e) {
+      showErr("Invalid email or password. Contact hello@agencyportal.ca if you need access.");
+      btn.disabled = false;
+      btn.textContent = "Sign In";
+    });
+}
+
+function logout() {
+  auth.signOut();
+}
+
+function showErr(msg) {
+  var err = document.getElementById("login-err");
+  err.textContent = msg;
+  err.style.display = "block";
+}
+
+function loadConversations() {
+  if (!currentAgency) return;
+  var convRef = db.ref("conversations");
+  convRef.on("value", function(snap) {
+    var all = snap.val() || {};
+    var myConvs = [];
+    Object.keys(all).forEach(function(cid) {
+      var c = all[cid];
+      if (c.agencyName === currentAgency) {
+        myConvs.push({ id: cid, data: c });
+      }
+    });
+    myConvs.sort(function(a,b){ return (b.data.lastTs||0)-(a.data.lastTs||0); });
+    renderConvList(myConvs);
+    updateStats(myConvs);
+  });
+}
+
+function updateStats(convs) {
+  document.getElementById("stat-total").textContent = convs.length;
+  var unread = convs.filter(function(c){ return c.data.recruiterUnread && c.data.recruiterUnread > (c.data.recruiterRead||0); }).length;
+  document.getElementById("stat-unread").textContent = unread;
+  var today = convs.filter(function(c){
+    var d = new Date(c.data.lastTs||0);
+    return d.toDateString() === new Date().toDateString();
+  }).length;
+  document.getElementById("stat-today").textContent = today;
+}
+
+function renderConvList(convs) {
+  var el = document.getElementById("conv-list");
+  if (!convs.length) {
+    el.innerHTML = '<div class="conv-empty">No candidate messages yet.<br>Share agencyportal.ca to attract candidates.</div>';
+    return;
+  }
+  el.innerHTML = convs.map(function(c) {
+    var d = c.data;
+    var unread = d.recruiterUnread > 0 ? " unread" : "";
+    var active = c.id === currentConvId ? " active" : "";
+    var time = d.lastTs ? new Date(d.lastTs).toLocaleDateString("en-CA",{month:"short",day:"numeric"}) : "";
+    return '<div class="conv-item'+unread+active+'" onclick="openConv(\''+c.id+'\',\''+encodeURIComponent(d.candidateName||"Candidate")+'\')">' +
+      '<div class="conv-item-name">'+(d.candidateName||"Candidate")+'</div>' +
+      '<div class="conv-item-preview">'+(d.lastMsg||"")+'</div>' +
+      '<div class="conv-item-time">'+time+'</div>' +
+    '</div>';
+  }).join("");
+}
+
+function openConv(convId, candidateName) {
+  currentConvId = convId;
+  var name = decodeURIComponent(candidateName);
+  document.getElementById("chat-cand-name").textContent = name;
+  document.getElementById("chat-cand-sub").textContent = "AgencyPortal candidate";
+  document.getElementById("chat-placeholder").style.display = "none";
+  var ac = document.getElementById("active-chat");
+  ac.style.display = "flex";
+  ac.style.flexDirection = "column";
+  ac.style.height = "100%";
+  // Update active state
+  document.querySelectorAll(".conv-item").forEach(function(el){ el.classList.remove("active"); });
+  event.currentTarget.classList.add("active");
+  // Mark as read
+  db.ref("conversations/"+convId+"/recruiterRead").set(Date.now());
+  // Load messages
+  if (msgListener) msgListener();
+  var msgsRef = db.ref("messages/"+convId).orderByChild("ts").limitToLast(100);
+  msgListener = function(){ msgsRef.off(); };
+  msgsRef.on("value", function(snap) {
+    var msgs = [];
+    snap.forEach(function(c){ msgs.push(Object.assign({id:c.key}, c.val())); });
+    renderMessages(msgs);
+  });
+}
+
+function renderMessages(msgs) {
+  var area = document.getElementById("messages-area");
+  var html = "";
+  var lastDate = "";
+  msgs.forEach(function(m) {
+    var d = m.ts ? new Date(m.ts).toDateString() : "";
+    if (d && d !== lastDate) {
+      lastDate = d;
+      html += '<div class="msg-date-div">'+(d===new Date().toDateString()?"Today":new Date(m.ts).toLocaleDateString("en-CA",{weekday:"short",month:"short",day:"numeric"}))+'</div>';
+    }
+    var isRecruiter = m.isRecruiter;
+    html += '<div class="msg '+(isRecruiter?"recruiter":"candidate")+'">' +
+      '<div class="msg-bubble">'+(m.text||"").replace(/</g,"&lt;").replace(/\n/g,"<br>")+'</div>' +
+      '<div class="msg-time">'+fullTime(m.ts)+(isRecruiter?" · You":"")+'</div>' +
+    '</div>';
+  });
+  area.innerHTML = html || '<div style="text-align:center;color:#444c56;padding:30px;font-size:13px;">No messages yet.</div>';
+  area.scrollTop = area.scrollHeight;
+}
+
+function sendReply() {
+  var input = document.getElementById("reply-input");
+  var text = input.value.trim();
+  if (!text || !currentConvId) return;
+  var msg = {
+    uid: currentUser.uid,
+    sender: currentAgency,
+    text: text,
+    ts: firebase.database.ServerValue.TIMESTAMP,
+    isRecruiter: true
+  };
+  db.ref("messages/"+currentConvId).push(msg);
+  db.ref("conversations/"+currentConvId).update({
+    lastMsg: text.slice(0,80),
+    lastTs: Date.now(),
+    lastSender: currentAgency,
+    candidateUnread: (Date.now())
+  });
+  input.value = "";
+  input.style.height = "auto";
+  showToast("Reply sent!", "ok");
+}
+
+function fullTime(ts) {
+  if (!ts) return "";
+  return new Date(ts).toLocaleTimeString("en-CA",{hour:"2-digit",minute:"2-digit",hour12:true});
+}
+
+function showToast(msg, type) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "toast show " + (type||"");
+  setTimeout(function(){ t.classList.remove("show"); }, 3000);
+}
+</script>
+
+<!-- CHANGE PASSWORD MODAL -->
+<div id="pwd-modal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(13,17,23,.85);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;width:100%;max-width:380px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:6px;">Change Password</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:20px;">Enter your new password below.</div>
+    <div class="field">
+      <label>New Password</label>
+      <input type="password" id="new-pwd" placeholder="At least 8 characters">
+    </div>
+    <div class="field">
+      <label>Confirm New Password</label>
+      <input type="password" id="confirm-pwd" placeholder="Repeat new password">
+    </div>
+    <div id="pwd-err" style="background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--red);margin-bottom:12px;display:none;"></div>
+    <div style="display:flex;gap:8px;margin-top:8px;">
+      <button onclick="hidePwdModal()" style="flex:1;height:40px;background:transparent;border:1px solid var(--border);border-radius:7px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;">Cancel</button>
+      <button onclick="doChangePwd()" style="flex:1;height:40px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:7px;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Update Password</button>
+    </div>
+  </div>
+</div>
+<script>
+function showChangePwd() {
+  document.getElementById('pwd-modal').style.display = 'flex';
+  document.getElementById('new-pwd').value = '';
+  document.getElementById('confirm-pwd').value = '';
+  document.getElementById('pwd-err').style.display = 'none';
+}
+function hidePwdModal() {
+  document.getElementById('pwd-modal').style.display = 'none';
+}
+function doChangePwd() {
+  var newPwd = document.getElementById('new-pwd').value;
+  var confirmPwd = document.getElementById('confirm-pwd').value;
+  var err = document.getElementById('pwd-err');
+  if (newPwd.length < 8) { err.textContent = 'Password must be at least 8 characters.'; err.style.display='block'; return; }
+  if (newPwd !== confirmPwd) { err.textContent = 'Passwords do not match.'; err.style.display='block'; return; }
+  currentUser.updatePassword(newPwd)
+    .then(function() {
+      hidePwdModal();
+      showToast('Password updated successfully!', 'ok');
+    })
+    .catch(function(e) {
+      err.textContent = 'Error: ' + e.message;
+      err.style.display = 'block';
+    });
+}
+
+// SPECIALISATIONS
+// SPECIALISATION DATA
+var SPEC_DATA = {
+  "Technology & IT": [
+    "Software Developer / Engineer","Frontend Developer","Backend Developer","Full-Stack Developer",
+    "Mobile Developer (iOS/Android)","Embedded Systems Developer","Game Developer",
+    "Data Analyst","Data Scientist","Data Engineer","Business Intelligence Analyst",
+    "Machine Learning / AI Engineer","NLP Engineer","Computer Vision Engineer",
+    "DevOps Engineer","Cloud Engineer (AWS/Azure/GCP)","Site Reliability Engineer (SRE)",
+    "Cybersecurity Analyst","Penetration Tester","Security Engineer","SOC Analyst",
+    "IT Project Manager","Scrum Master / Agile Coach","Product Manager (Tech)",
+    "Business Analyst","Systems Analyst","ERP Consultant","Salesforce Developer",
+    "QA / Test Engineer","Automation Test Engineer","Performance Test Engineer",
+    "IT Support Engineer","Systems Administrator","Network Engineer","Network Administrator",
+    "Database Administrator (DBA)","Database Developer","Data Warehouse Engineer",
+    "UI/UX Designer","UX Researcher","Product Designer",
+    "IT Manager","CTO","VP of Engineering","Director of Technology",
+    "Blockchain Developer","Web3 Developer","AR/VR Developer",
+    "Technical Writer","IT Trainer","IT Auditor","GIS Analyst",
+    "Other — please specify"
+  ],
+  "Finance & Accounting": [
+    "Bookkeeper","Accounts Payable Clerk","Accounts Receivable Clerk",
+    "Payroll Administrator","Payroll Specialist","Payroll Manager",
+    "Staff Accountant","Junior Accountant","Senior Accountant","Accounting Manager",
+    "Management Accountant","Cost Accountant","Project Accountant","Fund Accountant",
+    "CPA / Chartered Accountant","CA / ACA / ACCA","CMA","CGA",
+    "Financial Analyst","Senior Financial Analyst","FP&A Analyst","FP&A Manager",
+    "Budget Analyst","Treasury Analyst","Treasury Manager",
+    "Credit Analyst","Credit Risk Analyst","Loan Officer",
+    "Investment Analyst","Portfolio Analyst","Equity Research Analyst",
+    "Audit Associate","Internal Auditor","External Auditor","IT Auditor",
+    "Tax Accountant","Tax Analyst","Tax Manager","International Tax Specialist",
+    "Compliance Officer","Regulatory Affairs Specialist","AML Analyst",
+    "Controller","Assistant Controller","VP Finance","CFO","Chief Accounting Officer",
+    "Finance Manager","Finance Director","Head of Finance",
+    "Insurance Analyst","Actuary","Underwriter","Claims Adjuster",
+    "Mortgage Specialist","Financial Advisor","Wealth Manager","Investment Banker",
+    "Other — please specify"
+  ],
+  "Engineering": [
+    "Civil Engineer","Structural Engineer","Geotechnical Engineer","Transportation Engineer",
+    "Highway / Road Engineer","Bridge Engineer","Water Resources Engineer",
+    "Environmental Engineer","Sustainability Engineer","Waste Management Engineer",
+    "Mechanical Engineer","Manufacturing Engineer","Product Design Engineer",
+    "HVAC Engineer","Piping Engineer","Pressure Vessel Engineer",
+    "Electrical Engineer","Power Systems Engineer","Control Systems Engineer",
+    "Instrumentation & Controls Engineer","PLC Programmer","SCADA Engineer",
+    "Chemical Engineer","Process Engineer","Refinery Engineer","Polymer Engineer",
+    "Project Engineer","Project Manager (Engineering)","Construction Manager",
+    "Site Engineer","Site Supervisor","Field Engineer",
+    "Mining Engineer","Metallurgical Engineer","Geological Engineer",
+    "Oil & Gas Engineer","Petroleum Engineer","Drilling Engineer","Reservoir Engineer",
+    "Completions Engineer","Pipeline Engineer","Subsea Engineer",
+    "Aerospace Engineer","Defence Engineer","Naval Architect",
+    "Quality Engineer","Quality Assurance Manager","Reliability Engineer",
+    "HSE Officer","Safety Engineer","Industrial Hygienist",
+    "Estimator","Cost Engineer","Quantity Surveyor",
+    "BIM Coordinator","CAD Technician / Drafter","Surveyor",
+    "Other — please specify"
+  ],
+  "Healthcare": [
+    "Registered Nurse (RN)","Registered Practical Nurse (RPN)","Licensed Practical Nurse (LPN)",
+    "Nurse Practitioner (NP)","Clinical Nurse Specialist","Charge Nurse","Head Nurse","Director of Nursing",
+    "Healthcare Assistant (HCA)","Personal Support Worker (PSW)","Care Aide","Home Support Worker",
+    "Support Worker","Community Support Worker","Disability Support Worker","Mental Health Support Worker",
+    "Physiotherapist (PT)","Physiotherapy Assistant","Occupational Therapist (OT)","OT Assistant",
+    "Speech-Language Pathologist","Audiologist","Respiratory Therapist","Perfusionist",
+    "Pharmacist","Pharmacy Technician","Pharmacy Assistant",
+    "Medical Laboratory Technologist (MLT)","Medical Laboratory Assistant","Pathologist Assistant",
+    "Diagnostic Medical Sonographer","Radiologic Technologist","MRI Technologist","CT Technologist","Nuclear Medicine Technologist",
+    "Paramedic","Emergency Medical Technician (EMT)","First Responder",
+    "Dentist","Dental Hygienist","Dental Assistant","Dental Therapist",
+    "Optometrist","Ophthalmic Technician",
+    "Dietitian / Nutritionist","Kinesiologist",
+    "Social Worker (BSW/MSW)","Child and Youth Worker","Addictions Counsellor",
+    "Psychologist","Psychiatrist","Mental Health Counsellor","Behaviour Analyst (BCBA)",
+    "Doctor / Physician (GP)","Specialist / Consultant","Hospitalist","Locum Physician",
+    "Surgeon","Anesthesiologist","Radiologist","Pathologist",
+    "Medical Office Assistant","Health Unit Coordinator","Medical Receptionist",
+    "Health Information Manager","Medical Coder","Medical Transcriptionist",
+    "Infection Control Practitioner","Wound Care Nurse","Dialysis Nurse","ICU Nurse","OR Nurse",
+    "Public Health Inspector","Health Educator","Epidemiologist",
+    "Other — please specify"
+  ],
+  "Legal": [
+    "Legal Assistant","Legal Secretary","Legal Administrative Assistant",
+    "Paralegal","Senior Paralegal","Paralegal Supervisor",
+    "Law Clerk","Court Clerk","Litigation Support Specialist",
+    "Legal Researcher","Law Student / Articling Student","Junior Associate",
+    "Associate Lawyer","Senior Associate","Partner","Of Counsel",
+    "In-house Counsel","Corporate Counsel","General Counsel (GC)",
+    "Compliance Officer","Regulatory Affairs Specialist","Privacy Officer (CIPP)",
+    "Contract Specialist","Contract Manager","Procurement Lawyer",
+    "Corporate Lawyer","M&A Lawyer","Securities Lawyer","Banking Lawyer",
+    "Litigation Lawyer","Trial Lawyer","Appellate Lawyer",
+    "Family Law Lawyer","Divorce Mediator",
+    "Criminal Defence Lawyer","Crown Attorney / Prosecutor",
+    "Immigration Lawyer","Immigration Consultant (RCIC)",
+    "Real Estate Lawyer","Conveyancer / Solicitor","Title Examiner",
+    "Employment / Labour Lawyer","Workers Compensation Specialist",
+    "Intellectual Property Lawyer","Patent Agent","Trademark Agent",
+    "Environmental Lawyer","Tax Lawyer","Wills & Estates Lawyer",
+    "Personal Injury Lawyer","Insurance Defence Lawyer",
+    "Human Rights Lawyer","Indigenous Law Specialist",
+    "Legal Operations Manager","Director of Legal","Chief Legal Officer (CLO)",
+    "Other — please specify"
+  ],
+  "General Staffing": [
+    "Receptionist","Front Desk Administrator","Office Assistant","Administrative Assistant",
+    "Senior Administrative Assistant","Executive Assistant","Personal Assistant",
+    "Office Manager","Office Coordinator","Administrative Manager",
+    "Data Entry Clerk","Records Clerk","Filing Clerk","Mail Room Clerk",
+    "Customer Service Representative","Customer Service Supervisor","Call Centre Agent",
+    "Call Centre Team Lead","Contact Centre Manager",
+    "Sales Associate","Retail Associate","Cashier","Merchandiser","Store Manager",
+    "Warehouse Associate","Warehouse Supervisor","Inventory Coordinator","Shipping & Receiving Clerk",
+    "Forklift Operator","Cherry Picker Operator","Reach Truck Operator",
+    "Delivery Driver (Car/Van)","Truck Driver (AZ/DZ)","Courier","Dispatcher",
+    "General Labourer","Landscape Labourer","Janitorial / Cleaning Staff","Housekeeper",
+    "Food Service Worker","Kitchen Helper","Line Cook","Chef","Catering Staff",
+    "Security Guard","Loss Prevention Officer",
+    "Event Staff","Trade Show Representative",
+    "HR Coordinator","HR Generalist","HR Manager","Recruiter / Talent Acquisition",
+    "Payroll Administrator","Training Coordinator","Learning & Development Specialist",
+    "Operations Coordinator","Operations Manager","Logistics Coordinator",
+    "Procurement Coordinator","Purchasing Agent","Buyer",
+    "Project Coordinator","Project Administrator","PMO Analyst",
+    "Other — please specify"
+  ],
+  "Creative & Marketing": [
+    "Graphic Designer","Junior Graphic Designer","Senior Graphic Designer","Art Director",
+    "Brand Designer","Visual Identity Designer","Packaging Designer","Print Designer",
+    "UI Designer","UX Designer","UI/UX Designer","Product Designer","Interaction Designer",
+    "Web Designer","Digital Designer","Motion Graphics Designer","Video Editor",
+    "Animator (2D/3D)","3D Modeller","VFX Artist","Illustrator",
+    "Photographer","Videographer","Content Creator","Podcast Producer",
+    "Copywriter","Content Writer","Technical Writer","UX Writer","SEO Content Specialist",
+    "Editor","Proofreader","Journalist","Communications Specialist",
+    "Social Media Manager","Social Media Coordinator","Community Manager",
+    "Digital Marketing Specialist","Digital Marketing Manager",
+    "SEO Specialist","SEM / PPC Specialist","Paid Media Manager",
+    "Email Marketing Specialist","CRM Manager","Marketing Automation Specialist",
+    "Brand Manager","Brand Strategist","Marketing Manager","Head of Marketing","CMO",
+    "Campaign Manager","Events Manager","PR Specialist","Public Affairs Manager",
+    "Market Research Analyst","Consumer Insights Analyst",
+    "E-commerce Manager","Growth Hacker","Conversion Rate Optimiser",
+    "Other — please specify"
+  ],
+  "Education": [
+    "Early Childhood Educator (ECE)","Infant/Toddler Educator","Preschool Teacher","Kindergarten Teacher",
+    "Primary / Elementary Teacher","Middle School Teacher","Secondary / High School Teacher",
+    "Special Education Teacher","Resource Teacher","Learning Support Teacher",
+    "ESL / EFL Teacher","FSL Teacher (French as Second Language)","Language Tutor",
+    "Educational Assistant (EA)","Teacher's Aide","Classroom Support Worker",
+    "School Counsellor","Guidance Counsellor","Student Success Counsellor",
+    "Child and Youth Worker (School Setting)","Social Worker (Education)",
+    "Principal","Vice-Principal","School Administrator","Superintendent",
+    "Curriculum Developer","Instructional Designer","Learning Designer",
+    "University / College Lecturer","Professor","Sessional Instructor","Adjunct Faculty",
+    "Academic Advisor","Student Affairs Officer","Registrar","Admissions Officer",
+    "Library Technician","Librarian","School Librarian",
+    "Trainer / Facilitator (Corporate)","Learning & Development Specialist",
+    "Education Technology Specialist","Online Learning Developer",
+    "Coach / Athletic Director","Physical Education Teacher","Arts Teacher","Music Teacher",
+    "Other — please specify"
+  ],
+  "Oil & Gas": [
+    "Petroleum Engineer","Drilling Engineer","Reservoir Engineer","Production Engineer",
+    "Completions Engineer","Well Integrity Engineer","Stimulation Engineer",
+    "Pipeline Engineer","Pipeline Technician","Pipeline Inspector","Integrity Engineer",
+    "Process Engineer","Facility Engineer","Commissioning Engineer",
+    "Instrument Technician","Electrical Technician","Mechanical Technician","Millwright",
+    "Field Operator","Control Room Operator","Plant Operator","Production Operator",
+    "Subsea Engineer","Offshore Installation Manager (OIM)","Offshore Technician",
+    "Geologist","Geophysicist","Petrophysicist","Seismic Interpreter",
+    "HSE Advisor","Safety Technician","Environmental Technician",
+    "Project Manager (Oil & Gas)","Construction Manager","Turnaround Manager",
+    "Procurement Specialist","Supply Chain Coordinator","Contracts Administrator",
+    "Estimator (Oil & Gas)","Cost Controller","Project Controls Analyst",
+    "Corrosion Engineer","Materials Engineer","Metallurgist",
+    "Tank Inspector","NDT Technician","Pressure Vessel Inspector","API Inspector",
+    "Regulatory Compliance Specialist","Land Administrator","Landman",
+    "Refinery Operator","Chemical Operator","Utilities Operator",
+    "Other — please specify"
+  ],
+  "Trades & Construction": [
+    "Electrician (Journeyman)","Electrician (Apprentice)","Master Electrician","Industrial Electrician",
+    "Plumber (Journeyman)","Plumber (Apprentice)","Gas Fitter","Steamfitter / Pipefitter",
+    "Carpenter","Finish Carpenter","Cabinet Maker","Framer",
+    "Welder (CWB Certified)","Welder (Apprentice)","Pipefitter Welder","Coded Welder",
+    "HVAC Technician","Refrigeration Mechanic","Sheet Metal Worker",
+    "Ironworker","Structural Ironworker","Reinforcing Ironworker",
+    "Boilermaker","Pressure Welder","Vessel Fabricator",
+    "Millwright","Industrial Mechanic","Maintenance Millwright",
+    "Heavy Equipment Operator","Crane Operator","Excavator Operator","Dozer Operator",
+    "Tower Crane Operator","Mobile Crane Operator","Rigging Specialist",
+    "Concrete Finisher","Cement Mason","Shotcrete Nozzleman",
+    "Bricklayer / Mason","Stonemason","Tiler",
+    "Roofer","Drywall Installer","Plasterer","Insulator",
+    "Painter / Decorator","Sandblaster","Industrial Painter",
+    "Glazier","Window Installer","Caulker",
+    "Flooring Installer","Carpet Layer","Hardwood Floor Installer",
+    "General Contractor","Site Superintendent","Construction Supervisor","Foreman",
+    "Project Manager (Construction)","Construction Manager","Estimator",
+    "Quantity Surveyor","Safety Officer (Construction)","Site Safety Supervisor",
+    "Surveyor","Survey Technician","CAD Drafter (Trades)",
+    "Landscaper","Irrigation Technician","Hardscaper",
+    "Other — please specify"
+  ]
+};
+
+function switchDashTab(id, btn) {
+  document.querySelectorAll('.dash-tab').forEach(function(t){t.classList.remove('active');});
+  // Hide all panels explicitly
+  var panels = ['dpanel-messages','dpanel-search'];
+  panels.forEach(function(pid){
+    var el = document.getElementById(pid);
+    if(el) el.classList.remove('active');
+  });
+  btn.classList.add('active');
+  var target = document.getElementById('dpanel-'+id);
+  if(target) { target.classList.add('active'); }
+  else { console.warn('Panel not found: dpanel-'+id); }
+}
+
+function updateSpecFilter() {
+  var field = document.getElementById('sf-field').value;
+  var wrap = document.getElementById('sf-spec-wrap');
+  var sel = document.getElementById('sf-specialisation');
+  if (!field || !SPEC_DATA[field]) {
+    wrap.classList.remove('show');
+    return;
+  }
+  wrap.classList.add('show');
+  sel.innerHTML = '<option value="">All Roles</option>' +
+    SPEC_DATA[field].map(function(s){ return '<option value="'+s+'">'+s+'</option>'; }).join('');
+}
+
+function clearSearchFilters() {
+  ['sf-field','sf-specialisation','sf-level','sf-country','sf-remote','sf-newcomer'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  document.getElementById('sf-cert').value = '';
+  document.getElementById('sf-spec-wrap').classList.remove('show');
+  document.getElementById('search-results-meta').style.display = 'none';
+  document.getElementById('candidates-grid').innerHTML =
+    '<div class="no-results-search"><div class="nr-icon">&#128269;</div><div class="nr-title">Search for Candidates</div><div>Use the filters above to find candidates that match your open roles.</div></div>';
+}
+
+function runCandidateSearch() {
+  var grid = document.getElementById('candidates-grid');
+  grid.innerHTML = '<div class="search-loading"><div class="search-spinner"></div><div style="font-size:13.5px;color:var(--text2);">Searching candidates...</div></div>';
+  document.getElementById('search-results-meta').style.display = 'none';
+
+  var filters = {
+    field:          document.getElementById('sf-field').value,
+    specialisation: document.getElementById('sf-specialisation').value,
+    level:          document.getElementById('sf-level').value,
+    country:        document.getElementById('sf-country').value,
+    cert:           document.getElementById('sf-cert').value.trim().toLowerCase(),
+    roleKeyword:    document.getElementById('sf-role-keyword') ? document.getElementById('sf-role-keyword').value.trim().toLowerCase() : '',
+    remote:         document.getElementById('sf-remote').value,
+    newcomer:       document.getElementById('sf-newcomer').value,
+    open:           document.getElementById('sf-open').value
+  };
+
+  if (!db) {
+    grid.innerHTML = '<div class="no-results-search"><div class="nr-icon">&#9888;</div><div class="nr-title">Not Connected</div><div>Firebase connection required. Please sign in first.</div></div>';
+    return;
+  }
+
+  db.ref('talent_pool').once('value').then(function(snap) {
+    var pool = snap.val() || {};
+    var candidates = Object.keys(pool).map(function(k){ return Object.assign({uid:k}, pool[k]); });
+
+    // Apply filters
+    var results = candidates.filter(function(c) {
+      if (filters.open === 'true' && !c.open) return false;
+      if (filters.field && c.field !== filters.field) return false;
+      if (filters.specialisation && c.specialisation !== filters.specialisation) return false;
+      if (filters.level && c.level !== filters.level) return false;
+      if (filters.country && c.country !== filters.country && c.country !== 'both') return false;
+      if (filters.remote === 'remote' && !c.remote) return false;
+      if (filters.remote === 'onsite' && c.remote) return false;
+      if (filters.newcomer === 'true' && !c.newcomer) return false;
+      if (filters.newcomer === 'false' && c.newcomer) return false;
+      if (filters.cert) {
+        var certMatch = false;
+        var skillsLower = (c.skills||'').toLowerCase();
+        var certsArr = c.certifications || [];
+        if (skillsLower.indexOf(filters.cert) >= 0) certMatch = true;
+        if (certsArr.some(function(cert){ return cert.toLowerCase().indexOf(filters.cert) >= 0; })) certMatch = true;
+        if ((c.title||'').toLowerCase().indexOf(filters.cert) >= 0) certMatch = true;
+        if (!certMatch) return false;
+      }
+      if (filters.roleKeyword) {
+        var roleMatch = (c.specialisation||'').toLowerCase().indexOf(filters.roleKeyword) >= 0 ||
+                        (c.title||'').toLowerCase().indexOf(filters.roleKeyword) >= 0;
+        if (!roleMatch) return false;
+      }
+      return true;
+    });
+
+    renderCandidateResults(results);
+  }).catch(function(err) {
+    grid.innerHTML = '<div class="no-results-search"><div class="nr-icon">&#9888;</div><div class="nr-title">Error Loading Candidates</div><div>'+err.message+'</div></div>';
+  });
+}
+
+function renderCandidateResults(candidates) {
+  var grid = document.getElementById('candidates-grid');
+  var meta = document.getElementById('search-results-meta');
+  document.getElementById('results-count').textContent = candidates.length;
+  meta.style.display = 'block';
+
+  if (!candidates.length) {
+    grid.innerHTML = '<div class="no-results-search"><div class="nr-icon">&#128269;</div><div class="nr-title">No Candidates Found</div><div>Try adjusting your filters — fewer restrictions will return more results.</div></div>';
+    return;
+  }
+
+  var colors = ['#3fb950','#58a6ff','#bc8cff','#f0c040','#ff7b72','#79c0ff','#d4a93a','#fb8532'];
+  grid.innerHTML = candidates.map(function(c, i) {
+    var color = colors[i % colors.length];
+    var initials = (c.name||'?').trim().split(' ').slice(0,2).map(function(w){return w[0]||'';}).join('').toUpperCase();
+    var ago = c.lastSeen ? Math.floor((Date.now()-c.lastSeen)/3600000) : null;
+    var agoStr = ago!==null ? (ago<1?'Active now':ago<24?ago+'h ago':Math.floor(ago/24)+'d ago') : 'Recently active';
+    var countryFlag = c.country==='canada'?'&#127464;&#127462; Canada':c.country==='uk'?'&#127468;&#127463; UK':'&#127464;&#127462;&#127468;&#127463; Both';
+    var certsHTML = '';
+    if (c.certifications && c.certifications.length) {
+      certsHTML = c.certifications.slice(0,3).map(function(cert){
+        return '<span class="cc-tag cert">'+cert+'</span>';
+      }).join('');
+    }
+    return '<div class="candidate-card" data-uid="'+c.uid+'" data-name="'+(c.name||'Candidate').replace(/"/g,'')+'">' +
+      '<div class="cc-head">' +
+        '<div class="cc-avatar" style="background:'+color+'">'+initials+'</div>' +
+        '<div><div class="cc-name">'+(c.name||'Anonymous')+'</div>' +
+        '<div class="cc-role">'+(c.title||'')+'</div>' +
+        (c.specialisation ? '<div class="cc-spec">'+c.specialisation+'</div>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div class="cc-tags">' +
+        '<span class="cc-tag field">'+(c.field||'')+'</span>' +
+        '<span class="cc-tag level">'+(c.level||'').split(' ').slice(0,2).join(' ')+'</span>' +
+        '<span class="cc-tag country">'+countryFlag+'</span>' +
+        certsHTML +
+      '</div>' +
+      (c.bio ? '<div class="cc-bio">'+c.bio+'</div>' : '') +
+      (c.salary ? '<div class="cc-salary">&#128176; '+c.salary+'</div>' : '') +
+      '<div class="cc-foot">' +
+        '<div class="cc-active">'+agoStr+'</div>' +
+        '<div style="display:flex;gap:8px;">' +
+          '<button class="btn-msg-candidate" onclick="messageCandidate(this)">&#128172; Message</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function messageCandidate(btn) {
+  var card = btn.closest('[data-uid]');
+  var uid = card ? card.dataset.uid : '';
+  var name = card ? card.dataset.name : 'Candidate';
+  // Switch to messages tab and show status
+  switchDashTab('messages', document.getElementById('dtab-messages'));
+  showToast('To message '+name+', they must initiate contact first via AgencyPortal Connect.', 'info');
+}
+
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:999;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 18px;font-size:13px;color:var(--text);max-width:340px;box-shadow:0 4px 20px rgba(0,0,0,.3);transform:translateY(80px);transition:transform .3s;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.transform = 'translateY(0)';
+  if (type === 'ok') t.style.borderColor = 'rgba(63,185,80,.4)';
+  else if (type === 'info') t.style.borderColor = 'rgba(88,166,255,.4)';
+  setTimeout(function(){ t.style.transform = 'translateY(80px)'; }, 4000);
+}
+
+</script>
+</body>
+</html>
