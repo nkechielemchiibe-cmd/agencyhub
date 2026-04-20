@@ -353,6 +353,10 @@ body { font-family:'DM Sans',sans-serif; background:var(--ink); color:var(--text
           </select>
         </div>
         <div class="filter-group">
+          <div class="filter-label">Custom Role Search</div>
+          <input class="filter-input" type="text" id="sf-role-keyword" placeholder="e.g. ICU Nurse, DevOps...">
+        </div>
+        <div class="filter-group">
           <div class="filter-label">Experience Level</div>
           <select class="filter-select" id="sf-level">
             <option value="">Any Level</option>
@@ -678,17 +682,215 @@ function doChangePwd() {
 }
 
 // SPECIALISATIONS
+// SPECIALISATION DATA
 var SPEC_DATA = {
-  "Technology & IT": ["Software Developer / Engineer","Frontend Developer","Backend Developer","Full-Stack Developer","Data Analyst","Data Scientist","Machine Learning / AI Engineer","DevOps / Cloud Engineer","Cybersecurity Analyst","IT Project Manager","Business Analyst","QA / Test Engineer","IT Support / Systems Admin","Network Engineer","Database Administrator","UI/UX Designer"],
-  "Finance & Accounting": ["Staff Accountant","Senior Accountant","Financial Analyst","FP&A Analyst","Management Accountant","CPA / Chartered Accountant","Controller","CFO","Bookkeeper","Payroll Specialist","Audit & Compliance","Tax Specialist","Investment Analyst","Credit Analyst","Treasury Analyst","Finance Manager"],
-  "Engineering": ["Civil Engineer","Structural Engineer","Mechanical Engineer","Electrical Engineer","Project Engineer","Site Engineer","Environmental Engineer","Chemical Engineer","Industrial Engineer","Geotechnical Engineer","Transportation Engineer","Oil & Gas Engineer","Mining Engineer","Quality Engineer","HSE / Safety Officer"],
-  "Healthcare": ["Registered Nurse (RN)","Licensed Practical Nurse (LPN)","Nurse Practitioner","Healthcare Assistant / PSW","Physiotherapist","Occupational Therapist","Pharmacist","Pharmacy Technician","Medical Laboratory Technologist","Radiologic Technologist","Respiratory Therapist","Social Worker","Doctor / Physician","Specialist / Consultant","Paramedic / EMT","Dental Hygienist","Mental Health Counsellor","Support Worker"],
-  "Legal": ["Paralegal","Legal Assistant / Secretary","Associate Lawyer","Senior Lawyer","In-house Counsel","Compliance Officer","Contract Specialist","Litigation Support","Corporate Counsel","Family Law Specialist","Immigration Lawyer","Criminal Defence Lawyer","Conveyancer / Solicitor"],
-  "General Staffing": ["Administrative Assistant","Executive Assistant","Office Manager","Receptionist","Customer Service Representative","Call Centre Agent","Data Entry Clerk","Warehouse Associate","Forklift Operator","Delivery Driver","Retail Associate","Supervisor / Team Lead","Operations Coordinator","HR Coordinator","Recruiter"],
-  "Creative & Marketing": ["Graphic Designer","UX/UI Designer","Video Editor","Content Writer / Copywriter","Social Media Manager","Digital Marketing Specialist","SEO Specialist","Brand Manager","Marketing Manager","Campaign Manager","Art Director","Photographer / Videographer","Communications Specialist","PR Specialist"],
-  "Education": ["Early Childhood Educator (ECE)","Primary / Elementary Teacher","Secondary Teacher","Special Education Teacher","Educational Assistant","ESL / EFL Teacher","School Counsellor","Principal / Vice-Principal","Curriculum Developer","University Lecturer / Professor","Trainer / Facilitator","Librarian"],
-  "Oil & Gas": ["Petroleum Engineer","Drilling Engineer","Reservoir Engineer","Production Technician","Pipeline Technician","HSE Advisor","Geologist / Geophysicist","Completions Engineer","Field Operator","Instrument Technician","Project Manager"],
-  "Trades & Construction": ["Electrician","Plumber","Carpenter","Welder","Heavy Equipment Operator","HVAC Technician","Pipefitter","Ironworker","Boilermaker","Millwright","Site Supervisor","General Labourer","Estimator","Safety Officer"]
+  "Technology & IT": [
+    "Software Developer / Engineer","Frontend Developer","Backend Developer","Full-Stack Developer",
+    "Mobile Developer (iOS/Android)","Embedded Systems Developer","Game Developer",
+    "Data Analyst","Data Scientist","Data Engineer","Business Intelligence Analyst",
+    "Machine Learning / AI Engineer","NLP Engineer","Computer Vision Engineer",
+    "DevOps Engineer","Cloud Engineer (AWS/Azure/GCP)","Site Reliability Engineer (SRE)",
+    "Cybersecurity Analyst","Penetration Tester","Security Engineer","SOC Analyst",
+    "IT Project Manager","Scrum Master / Agile Coach","Product Manager (Tech)",
+    "Business Analyst","Systems Analyst","ERP Consultant","Salesforce Developer",
+    "QA / Test Engineer","Automation Test Engineer","Performance Test Engineer",
+    "IT Support Engineer","Systems Administrator","Network Engineer","Network Administrator",
+    "Database Administrator (DBA)","Database Developer","Data Warehouse Engineer",
+    "UI/UX Designer","UX Researcher","Product Designer",
+    "IT Manager","CTO","VP of Engineering","Director of Technology",
+    "Blockchain Developer","Web3 Developer","AR/VR Developer",
+    "Technical Writer","IT Trainer","IT Auditor","GIS Analyst",
+    "Other — please specify"
+  ],
+  "Finance & Accounting": [
+    "Bookkeeper","Accounts Payable Clerk","Accounts Receivable Clerk",
+    "Payroll Administrator","Payroll Specialist","Payroll Manager",
+    "Staff Accountant","Junior Accountant","Senior Accountant","Accounting Manager",
+    "Management Accountant","Cost Accountant","Project Accountant","Fund Accountant",
+    "CPA / Chartered Accountant","CA / ACA / ACCA","CMA","CGA",
+    "Financial Analyst","Senior Financial Analyst","FP&A Analyst","FP&A Manager",
+    "Budget Analyst","Treasury Analyst","Treasury Manager",
+    "Credit Analyst","Credit Risk Analyst","Loan Officer",
+    "Investment Analyst","Portfolio Analyst","Equity Research Analyst",
+    "Audit Associate","Internal Auditor","External Auditor","IT Auditor",
+    "Tax Accountant","Tax Analyst","Tax Manager","International Tax Specialist",
+    "Compliance Officer","Regulatory Affairs Specialist","AML Analyst",
+    "Controller","Assistant Controller","VP Finance","CFO","Chief Accounting Officer",
+    "Finance Manager","Finance Director","Head of Finance",
+    "Insurance Analyst","Actuary","Underwriter","Claims Adjuster",
+    "Mortgage Specialist","Financial Advisor","Wealth Manager","Investment Banker",
+    "Other — please specify"
+  ],
+  "Engineering": [
+    "Civil Engineer","Structural Engineer","Geotechnical Engineer","Transportation Engineer",
+    "Highway / Road Engineer","Bridge Engineer","Water Resources Engineer",
+    "Environmental Engineer","Sustainability Engineer","Waste Management Engineer",
+    "Mechanical Engineer","Manufacturing Engineer","Product Design Engineer",
+    "HVAC Engineer","Piping Engineer","Pressure Vessel Engineer",
+    "Electrical Engineer","Power Systems Engineer","Control Systems Engineer",
+    "Instrumentation & Controls Engineer","PLC Programmer","SCADA Engineer",
+    "Chemical Engineer","Process Engineer","Refinery Engineer","Polymer Engineer",
+    "Project Engineer","Project Manager (Engineering)","Construction Manager",
+    "Site Engineer","Site Supervisor","Field Engineer",
+    "Mining Engineer","Metallurgical Engineer","Geological Engineer",
+    "Oil & Gas Engineer","Petroleum Engineer","Drilling Engineer","Reservoir Engineer",
+    "Completions Engineer","Pipeline Engineer","Subsea Engineer",
+    "Aerospace Engineer","Defence Engineer","Naval Architect",
+    "Quality Engineer","Quality Assurance Manager","Reliability Engineer",
+    "HSE Officer","Safety Engineer","Industrial Hygienist",
+    "Estimator","Cost Engineer","Quantity Surveyor",
+    "BIM Coordinator","CAD Technician / Drafter","Surveyor",
+    "Other — please specify"
+  ],
+  "Healthcare": [
+    "Registered Nurse (RN)","Registered Practical Nurse (RPN)","Licensed Practical Nurse (LPN)",
+    "Nurse Practitioner (NP)","Clinical Nurse Specialist","Charge Nurse","Head Nurse","Director of Nursing",
+    "Healthcare Assistant (HCA)","Personal Support Worker (PSW)","Care Aide","Home Support Worker",
+    "Support Worker","Community Support Worker","Disability Support Worker","Mental Health Support Worker",
+    "Physiotherapist (PT)","Physiotherapy Assistant","Occupational Therapist (OT)","OT Assistant",
+    "Speech-Language Pathologist","Audiologist","Respiratory Therapist","Perfusionist",
+    "Pharmacist","Pharmacy Technician","Pharmacy Assistant",
+    "Medical Laboratory Technologist (MLT)","Medical Laboratory Assistant","Pathologist Assistant",
+    "Diagnostic Medical Sonographer","Radiologic Technologist","MRI Technologist","CT Technologist","Nuclear Medicine Technologist",
+    "Paramedic","Emergency Medical Technician (EMT)","First Responder",
+    "Dentist","Dental Hygienist","Dental Assistant","Dental Therapist",
+    "Optometrist","Ophthalmic Technician",
+    "Dietitian / Nutritionist","Kinesiologist",
+    "Social Worker (BSW/MSW)","Child and Youth Worker","Addictions Counsellor",
+    "Psychologist","Psychiatrist","Mental Health Counsellor","Behaviour Analyst (BCBA)",
+    "Doctor / Physician (GP)","Specialist / Consultant","Hospitalist","Locum Physician",
+    "Surgeon","Anesthesiologist","Radiologist","Pathologist",
+    "Medical Office Assistant","Health Unit Coordinator","Medical Receptionist",
+    "Health Information Manager","Medical Coder","Medical Transcriptionist",
+    "Infection Control Practitioner","Wound Care Nurse","Dialysis Nurse","ICU Nurse","OR Nurse",
+    "Public Health Inspector","Health Educator","Epidemiologist",
+    "Other — please specify"
+  ],
+  "Legal": [
+    "Legal Assistant","Legal Secretary","Legal Administrative Assistant",
+    "Paralegal","Senior Paralegal","Paralegal Supervisor",
+    "Law Clerk","Court Clerk","Litigation Support Specialist",
+    "Legal Researcher","Law Student / Articling Student","Junior Associate",
+    "Associate Lawyer","Senior Associate","Partner","Of Counsel",
+    "In-house Counsel","Corporate Counsel","General Counsel (GC)",
+    "Compliance Officer","Regulatory Affairs Specialist","Privacy Officer (CIPP)",
+    "Contract Specialist","Contract Manager","Procurement Lawyer",
+    "Corporate Lawyer","M&A Lawyer","Securities Lawyer","Banking Lawyer",
+    "Litigation Lawyer","Trial Lawyer","Appellate Lawyer",
+    "Family Law Lawyer","Divorce Mediator",
+    "Criminal Defence Lawyer","Crown Attorney / Prosecutor",
+    "Immigration Lawyer","Immigration Consultant (RCIC)",
+    "Real Estate Lawyer","Conveyancer / Solicitor","Title Examiner",
+    "Employment / Labour Lawyer","Workers Compensation Specialist",
+    "Intellectual Property Lawyer","Patent Agent","Trademark Agent",
+    "Environmental Lawyer","Tax Lawyer","Wills & Estates Lawyer",
+    "Personal Injury Lawyer","Insurance Defence Lawyer",
+    "Human Rights Lawyer","Indigenous Law Specialist",
+    "Legal Operations Manager","Director of Legal","Chief Legal Officer (CLO)",
+    "Other — please specify"
+  ],
+  "General Staffing": [
+    "Receptionist","Front Desk Administrator","Office Assistant","Administrative Assistant",
+    "Senior Administrative Assistant","Executive Assistant","Personal Assistant",
+    "Office Manager","Office Coordinator","Administrative Manager",
+    "Data Entry Clerk","Records Clerk","Filing Clerk","Mail Room Clerk",
+    "Customer Service Representative","Customer Service Supervisor","Call Centre Agent",
+    "Call Centre Team Lead","Contact Centre Manager",
+    "Sales Associate","Retail Associate","Cashier","Merchandiser","Store Manager",
+    "Warehouse Associate","Warehouse Supervisor","Inventory Coordinator","Shipping & Receiving Clerk",
+    "Forklift Operator","Cherry Picker Operator","Reach Truck Operator",
+    "Delivery Driver (Car/Van)","Truck Driver (AZ/DZ)","Courier","Dispatcher",
+    "General Labourer","Landscape Labourer","Janitorial / Cleaning Staff","Housekeeper",
+    "Food Service Worker","Kitchen Helper","Line Cook","Chef","Catering Staff",
+    "Security Guard","Loss Prevention Officer",
+    "Event Staff","Trade Show Representative",
+    "HR Coordinator","HR Generalist","HR Manager","Recruiter / Talent Acquisition",
+    "Payroll Administrator","Training Coordinator","Learning & Development Specialist",
+    "Operations Coordinator","Operations Manager","Logistics Coordinator",
+    "Procurement Coordinator","Purchasing Agent","Buyer",
+    "Project Coordinator","Project Administrator","PMO Analyst",
+    "Other — please specify"
+  ],
+  "Creative & Marketing": [
+    "Graphic Designer","Junior Graphic Designer","Senior Graphic Designer","Art Director",
+    "Brand Designer","Visual Identity Designer","Packaging Designer","Print Designer",
+    "UI Designer","UX Designer","UI/UX Designer","Product Designer","Interaction Designer",
+    "Web Designer","Digital Designer","Motion Graphics Designer","Video Editor",
+    "Animator (2D/3D)","3D Modeller","VFX Artist","Illustrator",
+    "Photographer","Videographer","Content Creator","Podcast Producer",
+    "Copywriter","Content Writer","Technical Writer","UX Writer","SEO Content Specialist",
+    "Editor","Proofreader","Journalist","Communications Specialist",
+    "Social Media Manager","Social Media Coordinator","Community Manager",
+    "Digital Marketing Specialist","Digital Marketing Manager",
+    "SEO Specialist","SEM / PPC Specialist","Paid Media Manager",
+    "Email Marketing Specialist","CRM Manager","Marketing Automation Specialist",
+    "Brand Manager","Brand Strategist","Marketing Manager","Head of Marketing","CMO",
+    "Campaign Manager","Events Manager","PR Specialist","Public Affairs Manager",
+    "Market Research Analyst","Consumer Insights Analyst",
+    "E-commerce Manager","Growth Hacker","Conversion Rate Optimiser",
+    "Other — please specify"
+  ],
+  "Education": [
+    "Early Childhood Educator (ECE)","Infant/Toddler Educator","Preschool Teacher","Kindergarten Teacher",
+    "Primary / Elementary Teacher","Middle School Teacher","Secondary / High School Teacher",
+    "Special Education Teacher","Resource Teacher","Learning Support Teacher",
+    "ESL / EFL Teacher","FSL Teacher (French as Second Language)","Language Tutor",
+    "Educational Assistant (EA)","Teacher's Aide","Classroom Support Worker",
+    "School Counsellor","Guidance Counsellor","Student Success Counsellor",
+    "Child and Youth Worker (School Setting)","Social Worker (Education)",
+    "Principal","Vice-Principal","School Administrator","Superintendent",
+    "Curriculum Developer","Instructional Designer","Learning Designer",
+    "University / College Lecturer","Professor","Sessional Instructor","Adjunct Faculty",
+    "Academic Advisor","Student Affairs Officer","Registrar","Admissions Officer",
+    "Library Technician","Librarian","School Librarian",
+    "Trainer / Facilitator (Corporate)","Learning & Development Specialist",
+    "Education Technology Specialist","Online Learning Developer",
+    "Coach / Athletic Director","Physical Education Teacher","Arts Teacher","Music Teacher",
+    "Other — please specify"
+  ],
+  "Oil & Gas": [
+    "Petroleum Engineer","Drilling Engineer","Reservoir Engineer","Production Engineer",
+    "Completions Engineer","Well Integrity Engineer","Stimulation Engineer",
+    "Pipeline Engineer","Pipeline Technician","Pipeline Inspector","Integrity Engineer",
+    "Process Engineer","Facility Engineer","Commissioning Engineer",
+    "Instrument Technician","Electrical Technician","Mechanical Technician","Millwright",
+    "Field Operator","Control Room Operator","Plant Operator","Production Operator",
+    "Subsea Engineer","Offshore Installation Manager (OIM)","Offshore Technician",
+    "Geologist","Geophysicist","Petrophysicist","Seismic Interpreter",
+    "HSE Advisor","Safety Technician","Environmental Technician",
+    "Project Manager (Oil & Gas)","Construction Manager","Turnaround Manager",
+    "Procurement Specialist","Supply Chain Coordinator","Contracts Administrator",
+    "Estimator (Oil & Gas)","Cost Controller","Project Controls Analyst",
+    "Corrosion Engineer","Materials Engineer","Metallurgist",
+    "Tank Inspector","NDT Technician","Pressure Vessel Inspector","API Inspector",
+    "Regulatory Compliance Specialist","Land Administrator","Landman",
+    "Refinery Operator","Chemical Operator","Utilities Operator",
+    "Other — please specify"
+  ],
+  "Trades & Construction": [
+    "Electrician (Journeyman)","Electrician (Apprentice)","Master Electrician","Industrial Electrician",
+    "Plumber (Journeyman)","Plumber (Apprentice)","Gas Fitter","Steamfitter / Pipefitter",
+    "Carpenter","Finish Carpenter","Cabinet Maker","Framer",
+    "Welder (CWB Certified)","Welder (Apprentice)","Pipefitter Welder","Coded Welder",
+    "HVAC Technician","Refrigeration Mechanic","Sheet Metal Worker",
+    "Ironworker","Structural Ironworker","Reinforcing Ironworker",
+    "Boilermaker","Pressure Welder","Vessel Fabricator",
+    "Millwright","Industrial Mechanic","Maintenance Millwright",
+    "Heavy Equipment Operator","Crane Operator","Excavator Operator","Dozer Operator",
+    "Tower Crane Operator","Mobile Crane Operator","Rigging Specialist",
+    "Concrete Finisher","Cement Mason","Shotcrete Nozzleman",
+    "Bricklayer / Mason","Stonemason","Tiler",
+    "Roofer","Drywall Installer","Plasterer","Insulator",
+    "Painter / Decorator","Sandblaster","Industrial Painter",
+    "Glazier","Window Installer","Caulker",
+    "Flooring Installer","Carpet Layer","Hardwood Floor Installer",
+    "General Contractor","Site Superintendent","Construction Supervisor","Foreman",
+    "Project Manager (Construction)","Construction Manager","Estimator",
+    "Quantity Surveyor","Safety Officer (Construction)","Site Safety Supervisor",
+    "Surveyor","Survey Technician","CAD Drafter (Trades)",
+    "Landscaper","Irrigation Technician","Hardscaper",
+    "Other — please specify"
+  ]
 };
 
 function switchDashTab(id, btn) {
@@ -734,6 +936,7 @@ function runCandidateSearch() {
     level:          document.getElementById('sf-level').value,
     country:        document.getElementById('sf-country').value,
     cert:           document.getElementById('sf-cert').value.trim().toLowerCase(),
+    roleKeyword:    document.getElementById('sf-role-keyword') ? document.getElementById('sf-role-keyword').value.trim().toLowerCase() : '',
     remote:         document.getElementById('sf-remote').value,
     newcomer:       document.getElementById('sf-newcomer').value,
     open:           document.getElementById('sf-open').value
@@ -768,6 +971,11 @@ function runCandidateSearch() {
         if (certsArr.some(function(cert){ return cert.toLowerCase().indexOf(filters.cert) >= 0; })) certMatch = true;
         if ((c.title||'').toLowerCase().indexOf(filters.cert) >= 0) certMatch = true;
         if (!certMatch) return false;
+      }
+      if (filters.roleKeyword) {
+        var roleMatch = (c.specialisation||'').toLowerCase().indexOf(filters.roleKeyword) >= 0 ||
+                        (c.title||'').toLowerCase().indexOf(filters.roleKeyword) >= 0;
+        if (!roleMatch) return false;
       }
       return true;
     });
