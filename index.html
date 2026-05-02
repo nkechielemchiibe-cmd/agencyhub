@@ -2519,9 +2519,9 @@ function render(gridId, ctId, data) {
     if (a.verified) badges += "<span class=\"badge\" style=\"background:#dbeafe;color:#1e40af;border:1px solid rgba(30,64,175,.15);\">&#10003; " + t("verified") + "</span>";
 
     var saved = isSaved(a.name);
-    var saveBtn = "<button class=\"btn-save\" onclick=\"toggleSave('" + a.name.replace(/'/g,"\\'") + "')\" title=\"" + (saved?"Remove from saved":"Save agency") + "\" style=\"" +
-      "height:30px;padding:0 10px;background:" + (saved?"var(--gold)":"transparent") + ";border:1.5px solid " + (saved?"var(--gold)":"var(--border)") + ";border-radius:6px;cursor:pointer;font-size:12px;color:" + (saved?"var(--ink)":"var(--muted)") + ";transition:all .18s;\">" +
-      (saved ? "&#9733; Saved" : "&#9734; Save") + "</button>";
+  var saveBtn = "<button class=\"btn-save" + (saved?" saved":"") + "\" onclick=\"toggleSave('" + a.name.replace(/'/g,"\\'") + "')\" title=\"" + (saved?"Remove from saved":"Save agency") + "\" style=\"" +
+      "background:" + (saved?"var(--gold)":"transparent") + ";border:1.5px solid " + (saved?"var(--gold)":"var(--border)") + ";color:" + (saved?"var(--ink)":"var(--muted)") + ";\">" +
+      (saved ? "&#9733;" : "&#9734;") + "<span class=\"save-text\"> " + (saved ? "Saved" : "Save") + "</span></button>";
     card.innerHTML =
       "<div class=\"card-head\">" +
         "<div class=\"card-logo\" style=\"background:" + (AGENCY_LOGOS[a.name] ? "#fff" : a.color) + ";padding:" + (AGENCY_LOGOS[a.name] ? "4px" : "0") + "\">" + getLogoHTML(a.name, a.color) + "</div>" +
