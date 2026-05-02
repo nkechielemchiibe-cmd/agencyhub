@@ -2526,7 +2526,7 @@ function render(gridId, ctId, data) {
       "<div class=\"card-head\">" +
         "<div class=\"card-logo\" style=\"background:" + (AGENCY_LOGOS[a.name] ? "#fff" : a.color) + ";padding:" + (AGENCY_LOGOS[a.name] ? "4px" : "0") + "\">" + getLogoHTML(a.name, a.color) + "</div>" +
         "<div class=\"card-meta\">" +
-          "<div class=\"card-name\">" + a.name + "</div>" +
+          "<a class=\"card-name card-name-link\" href=\"" + a.web + "\" target=\"_blank\" rel=\"noopener\" onclick=\"event.stopPropagation()\">" + a.name + " <span class=\"name-ext\">&#x2197;</span></a>" +
           "<div class=\"card-city\">" + a.city + "</div>" +
         "</div>" +
         "<div class=\"card-rating\">" +
