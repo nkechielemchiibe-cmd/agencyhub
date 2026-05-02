@@ -2856,7 +2856,27 @@ doFilter();
 
 document.addEventListener('click',function(e){var btn=e.target.closest('.btn-detail');if(!btn)return;var aname=btn.getAttribute('data-aname');if(!aname)return;var all=caData.concat(ukData);var agency=all.find(function(a){return a.name===aname;});if(!agency)return;openProfile(e,agency);});
 
-function toggleMobileMenu() {
+function showSavedOnly() {
+  if (!savedAgencies.length) {
+    showToast("You haven't saved any agencies yet. Click the star on any agency to save it.");
+    return;
+  }
+  document.getElementById("kw").value = "";
+  document.getElementById("indF").value = "";
+  document.getElementById("typF").value = "";
+  document.getElementById("spF").value = "saved";
+  if(document.getElementById("levelF")) document.getElementById("levelF").value = "";
+  if(document.getElementById("sectorF")) document.getElementById("sectorF").value = "";
+  if(document.getElementById("visaF")) document.getElementById("visaF").value = "";
+  document.querySelectorAll(".pill").forEach(function(p){p.classList.remove("on");});
+  doFilter();
+  showToast("Showing your saved agencies (" + savedAgencies.length + ")");
+  setTimeout(function(){
+    var sec = document.getElementById("sec-"+activeTab);
+    if(sec){ var g=sec.querySelector(".agency-grid"); if(g) g.scrollIntoView({behavior:"smooth",block:"start"}); }
+  }, 100);
+}
+  function toggleMobileMenu() {
   var m = document.getElementById('mobile-menu');
   m.classList.toggle('open');
 }
